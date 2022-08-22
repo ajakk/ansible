@@ -1,0 +1,20 @@
+---
+- name: install dnscrypt-proxy configuration
+  notify: restart dnscrypt-proxy
+  when: dnscryptproxy
+  block:
+    - name: install dnscrypt-proxy.toml
+      copy:
+        src: dnscrypt-proxy.toml
+        dest: /etc/dnscrypt-proxy/dnscrypt-proxy.toml
+        mode: 0644
+    - name: install cloaking-rules.txt
+      template:
+        src: cloaking-rules.txt.j2
+        dest: /etc/dnscrypt-proxy/cloaking-rules.txt
+- name: start and enable dnscrypt-proxy
+  when: dnscryptproxy
+  service:
+    name: dnscrypt-proxy
+    enabled: true
+    state: started

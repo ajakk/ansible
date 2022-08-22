@@ -1,0 +1,8 @@
+---
+- name: install python-exec.conf
+  copy:
+    src: python-exec.conf
+    dest: /etc/python-exec/python-exec.conf
+    mode: 0644
+    owner: root
+    group: root

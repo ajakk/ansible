@@ -1,0 +1,43 @@
+---
+this_repo: http://git.wg.home.arpa/ajak/ansible
+secrets_repo: http://git.wg.home.arpa/ajak/ansible-secrets
+node_exporter_port: 9100
+services:
+  - systemd-timesyncd
+my_domain: home.arpa
+my_email: jchelmert3@posteo.net
+gccarch: x86-64
+getpkg: true
+
+# TODO: surely a way to grab these straight out of repositories.xml
+gentoo_repos:
+  gentoo:
+    source: https://github.com/gentoo-mirror/gentoo
+    extra_lines: |
+     auto-sync = yes
+     sync-git-verify-commit-signature = yes
+     sync-depth = 1
+  ajak:
+    source: https://gitlab.com/ajak/ajak
+
+repos:
+  - gentoo
+
+# Some default-off's so I don't have to care if a var is defined
+ansible_pull: false
+dnscryptproxy: false
+dotsecrets: false
+filesystems: {}
+gitea: false
+network_mounts: []
+host_network_mounts: []
+host_repos: []
+host_services: []
+mervin: false
+nfsrepo: false
+nginx: false
+podman_gentoo: false
+portage_git: false
+postfix: false
+prometheus: false
+zfs: false

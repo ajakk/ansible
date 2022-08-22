@@ -1,0 +1,4 @@
+---
+- name: include ansible-pull
+  when: ansible_pull
+  include: ansible-pull.yml

@@ -1,0 +1,11 @@
+---
+# We need to do a block here to bring down the container and up it
+# again, but we can't seem use blocks in handlers. Instead just
+# include the tasks we need
+- name: restart mervin
+  docker_compose:
+    project_src: /etc/mervin
+    pull: true
+    build: true
+    state: present
+    restarted: true

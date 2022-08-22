@@ -1,0 +1,16 @@
+---
+- name: install smartd.conf
+  hosts: physical
+  copy:
+    src: smartd.conf
+    dest: /etc/smartd.conf
+    owner: root
+    group: root
+    mode: 0644
+    validate: smartd -q onecheck -c %s
+- name: start and enable smartd
+  hosts: physical
+  service:
+    name: smartd
+    state: started
+    enabled: true

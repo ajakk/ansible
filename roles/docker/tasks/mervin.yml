@@ -1,0 +1,9 @@
+---
+- name: create mervin's git repo
+  notify: restart mervin
+  git:
+    repo: git@git.wg.home.arpa:ajak/mervin.git
+    dest: /etc/mervin
+    clone: true
+    update: true
+    accept_newhostkey: true

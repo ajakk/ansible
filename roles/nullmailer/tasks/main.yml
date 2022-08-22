@@ -1,0 +1,27 @@
+---
+- name: install nullmailer configuration
+  notify: "restart nullmailer"
+  when: not postfix or postfix is not defined
+  block:
+    - name: install nullmailer remotes configuration
+      copy:
+        src: "remotes"
+        dest: "/etc/nullmailer/remotes"
+    - name: install nullmailer me configuration
+      copy:
+        content: "{{ ansible_hostname }}"
+        dest: "/etc/nullmailer/me"
+        mode: 0644
+    - name: install nullmailer defaultdomain configuration
+      copy:
+        content: "{{ ansible_domain }}"
+        dest: /etc/nullmailer/defaultdomain
+        mode: 0644
+
+
+- name: start and enable nullmailer
+  when: not postfix or postfix is not defined
+  service:
+    name: nullmailer
+    enabled: true
+    state: started

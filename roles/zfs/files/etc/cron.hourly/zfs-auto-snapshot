@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec zfs-auto-snapshot --default-exclude --quiet --label=hourly --keep=24 //

@@ -1,0 +1,20 @@
+---
+- name: install alertmanager config.yml
+  when: prometheus
+  notify: restart alertmanager
+  template:
+    src: config.yml.j2
+    dest: /etc/alertmanager/config.yml
+    validate: amtool check-config %s
+- name: create alertmanager template directory
+  when: prometheus
+  file:
+    path: /etc/alertmanager/template
+    state: directory
+    mode: 0755
+- name: install alertmanager plaintext email template
+  when: prometheus
+  copy:
+    src: plaintext-email.tmpl
+    dest: /etc/alertmanager/template/plaintext-email.tmpl
+    mode: 0644

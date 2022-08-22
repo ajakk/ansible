@@ -1,0 +1,4 @@
+---
+- name: do smartd configuration
+  include_tasks: smartd.yml
+  when: ansible_hostname in groups['physical']

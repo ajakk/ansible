@@ -1,0 +1,15 @@
+---
+- name: copy zfs cron jobs
+  when: zfs
+  copy:
+    src: etc/{{ item }}
+    dest: /etc
+    owner: root
+    group: root
+    mode: 0744
+  with_items:
+    - cron.d
+    - cron.hourly
+    - cron.daily
+    - cron.weekly
+    - cron.monthly

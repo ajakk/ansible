@@ -1,0 +1,9 @@
+---
+- name: install greetd's config.toml
+  when: "'desktop' in group_names"
+  copy:
+    src: config.toml
+    dest: /etc/greetd/config.toml
+    owner: root
+    group: root
+    mode: 0644

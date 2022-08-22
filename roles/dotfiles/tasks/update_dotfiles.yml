@@ -1,0 +1,41 @@
+---
+- name: check if key exists
+  stat:
+    path: /home/jake/.ssh/id_ed25519.pub
+  register: keyfile_info
+- name: generate ssh key
+  become_user: jake
+  when: not keyfile_info.stat.exists
+  openssh_keypair:
+    path: "~/.ssh/id_ed25519"
+    type: ed25519
+    size: 256
+    state: present
+    comment: "jake@{{ ansible_hostname }}"
+- name: pull {{ dotdir }}
+  become_user: jake
+  git:
+    repo: "git@sirius.home.arpa:ajak/{{ dotdir }}.git"
+    dest: "~/.{{ dotdir }}"
+    update: true
+    accept_newhostkey: true
+- name: find directories of dotfiles to stow
+  become_user: jake
+  vars:
+    user_home: /home/jake
+  ansible.builtin.find:
+    paths: ["{{ user_home }}/.{{ dotdir }}"]
+    recurse: false
+    file_type: directory
+  register: files
+- name: deploy dotfiles with stow
+  become_user: jake
+  loop: '{{ files.files }}'
+  vars:
+    user_home: /home/jake
+  environment:
+    STOW_DIR: "{{ user_home }}/.{{ dotdir }}"
+  ansible.builtin.shell: |
+    stow {{ item.path | basename }}
+  # TODO: yes, this is wrong, but stow is hard to talk to
+  changed_when: false

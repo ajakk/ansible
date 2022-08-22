@@ -1,0 +1,33 @@
+---
+- name: install prometheus configuration
+  when: prometheus
+  notify: restart prometheus
+  block:
+    - name: install prometheus.yml
+      template:
+        src: prometheus.yml.j2
+        dest: /etc/prometheus/prometheus.yml
+        mode: 0644
+        validate: promtool check config %s
+    - name: create alerts directory
+      when: prometheus
+      file:
+        path: /etc/prometheus/alerts
+        state: directory
+        mode: 0755
+    - name: install prometheus alerts
+      when: prometheus
+      notify: restart prometheus
+      with_fileglob:
+        - alerts/*
+      copy:
+        src: "{{ item }}"
+        dest: /etc/prometheus/alerts/{{ item | basename }}
+        mode: 0644
+        validate: promtool check config %s
+- name: start and enable prometheus
+  when: prometheus
+  service:
+    name: prometheus
+    state: started
+    enabled: true

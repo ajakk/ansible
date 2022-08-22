@@ -1,0 +1,12 @@
+#---
+#groups:
+#  - name: NodeTempHigh
+#    rules:
+#      - alert: NodeTempHigh
+#        expr: node_hwmon_temp_celsius{instance="raptor.wg.home.arpa:9100"} >= 80
+#        for: 0m
+#        labels:
+#          severity: critical
+#        annotations:
+#          summary: Node hwmon temperature very high (instance {{ $labels.instance }})
+#          description: "A node's temperature is very high. It might be overheating.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"

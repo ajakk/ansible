@@ -1,0 +1,9 @@
+---
+- name: allow users in wheel to sudo
+  lineinfile:
+    regex: "%wheel ALL=(ALL) ALL"
+    path: /etc/sudoers
+    line: "%wheel ALL=(ALL) ALL"
+    owner: root
+    group: root
+    mode: 0440

@@ -1,0 +1,47 @@
+---
+# TODO: somehow reorganize to not duplicate work between git and ansible
+# Only sometimes host stuff is in Git. Maybe automate?
+- name: register repository timestamp
+  shell: date -ud "$(cat /var/db/repos/gentoo/metadata/timestamp.chk)" +%s
+  register: repo_timestamp
+  changed_when: false
+- name: pull /etc/portage
+  when: portage_git
+  git:
+    repo: git@sirius.home.arpa:ajak/etc-portage.git
+    dest: /etc/portage
+    update: true
+- name: update repository
+  # Only run when the repo's timestamp is from more than an hour ago
+  when: not nfsrepo and
+    (((ansible_date_time['epoch'] | int) - (repo_timestamp['stdout'] | int))
+    > 3600)
+  portage:
+    sync: true
+- name: update world (usepkg)
+  when: not getpkg
+  portage:
+    package: "@world"
+    update: true
+    deep: true
+    newuse: true
+    usepkgonly: true
+    withbdeps: y
+- name: update world (getpkg)
+  when: getpkg
+  portage:
+    package: "@world"
+    update: true
+    deep: true
+    newuse: true
+    getbinpkgonly: true
+
+    # This should be necessary, but when the binpkgs are generated
+    # from both unstable and stable environments, sometimes Portage
+    # unreasonably latches on to a package built with an unstable dep
+    # and can't figure out how to find a better version without
+    # further backtracking.
+    backtrack: 100
+- name: depclean
+  portage:
+    depclean: true

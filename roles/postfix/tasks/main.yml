@@ -1,0 +1,26 @@
+---
+- name: install postfix configuration
+  notify: "restart postfix"
+  when: postfix
+  block:
+    - name: install main.cf
+      copy:
+        src: "main.cf"
+        dest: "/etc/postfix/main.cf"
+        owner: root
+        group: root
+        mode: 0644
+    - name: install generic
+      notify: "regenerate generic.db"
+      template:
+        src: "generic.j2"
+        dest: "/etc/postfix/generic"
+        owner: root
+        group: root
+        mode: 0644
+- name: enable postfix
+  when: postfix
+  service:
+    name: postfix
+    enabled: true
+    state: started

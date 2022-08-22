@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec zfs-auto-snapshot --default-exclude --quiet --label=weekly --keep=8 //

@@ -1,0 +1,16 @@
+---
+- name: create dirs for network mounts
+  file:
+    path: "/network/{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items: "{{ network_mounts + host_network_mounts }}"
+- name: deploy fstab
+  template:
+    src: fstab.j2
+    dest: /etc/fstab
+    owner: root
+    group: root
+    mode: 0644

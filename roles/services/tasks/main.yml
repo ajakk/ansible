@@ -1,0 +1,8 @@
+---
+- name: start services
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  with_items:
+    "{{ services + host_services }}"
