@@ -8,6 +8,7 @@ my_domain: home.arpa
 my_email: jchelmert3@posteo.net
 gccarch: x86-64
 getpkg: true
+dns_server: 10.5.0.1
 
 # TODO: surely a way to grab these straight out of repositories.xml
 gentoo_repos:

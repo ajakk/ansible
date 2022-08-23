@@ -1,0 +1,14 @@
+---
+- name: install systemd-networkd configuration
+  notify: restart systemd-networkd
+  template:
+    src: "20-wired.network.j2"
+    dest: /etc/systemd/network/20-wired.network
+    owner: root
+    group: root
+    mode: 0644
+- name: start and enable systemd-networkd
+  service:
+    name: systemd-networkd
+    enabled: true
+    state: started
