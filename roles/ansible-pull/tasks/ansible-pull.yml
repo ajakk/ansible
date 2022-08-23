@@ -42,3 +42,4 @@
   git:
     repo: "{{ this_repo }}"
     dest: /etc/ansible-pull
+    version: main
