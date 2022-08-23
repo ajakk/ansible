@@ -47,6 +47,8 @@
       tags: 'ansible-pull'
     - role: 'podman_gentoo'
       tags: 'podman_gentoo'
+    - role: 'dnsmasq'
+      tags: 'dnsmasq'
     - role: 'dnscrypt-proxy'
       tags: 'dnscrypt-proxy'
     - role: 'greetd'

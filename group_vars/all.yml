@@ -9,6 +9,7 @@ my_email: jchelmert3@posteo.net
 gccarch: x86-64
 getpkg: true
 dns_server: 10.5.0.1
+libvirt_bridge: virbr0
 
 # TODO: surely a way to grab these straight out of repositories.xml
 gentoo_repos:
@@ -28,6 +29,7 @@ repos:
 ansible_pull: false
 dnscryptproxy: false
 dotsecrets: false
+dnsmasq: false
 filesystems: {}
 gitea: false
 host_network_mounts: []

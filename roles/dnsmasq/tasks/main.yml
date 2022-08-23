@@ -1,0 +1,4 @@
+---
+- name: configure dnsmasq
+  when: dnsmasq
+  include_tasks: dnsmasq.yml

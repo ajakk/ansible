@@ -1,0 +1,15 @@
+---
+- name: install dnsmasq.conf
+  notify: restart dnsmasq
+  template:
+    src: dnsmasq.conf.j2
+    dest: /etc/dnsmasq.conf
+    validate: 'dnsmasq --test --conf-file=%s'
+    owner: root
+    group: root
+    mode: 0644
+- name: start and enable dnsmasq
+  service:
+    name: dnsmasq
+    state: started
+    enabled: true
