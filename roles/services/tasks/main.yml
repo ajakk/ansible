@@ -1,8 +1,15 @@
 ---
-- name: start services
+- name: start and enable services
   service:
     name: "{{ item }}"
     state: started
     enabled: true
   with_items:
     "{{ services + host_services }}"
+- name: stop and disable services
+  service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+  with_items:
+    "{{ stopservices + host_stopservices }}"
