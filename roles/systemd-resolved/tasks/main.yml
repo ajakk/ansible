@@ -1,5 +1,6 @@
 ---
 - name: install resolved configuration
+  when: resolved
   notify: restart systemd-resolved
   template:
     src: "resolved.conf.j2"

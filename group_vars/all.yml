@@ -4,7 +4,6 @@ secrets_repo: http://git.wg.home.arpa/ajak/ansible-secrets
 node_exporter_port: 9100
 services:
   - systemd-timesyncd
-  - systemd-resolved
 my_domain: home.arpa
 my_email: jchelmert3@posteo.net
 gccarch: x86-64
@@ -43,5 +42,6 @@ podman_gentoo: false
 portage_git: false
 postfix: false
 prometheus: false
+resolved: true
 stopservices: []
 zfs: false
