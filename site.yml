@@ -23,25 +23,47 @@
       setup:
       tags: always
   roles:
-    - { role: 'hosts',          tags: 'hosts'          }
-    - { role: 'sshd',           tags: 'sshd'           }
-    - { role: 'sudo',           tags: 'sudo'           }
-    - { role: 'fstab',          tags: 'fstab'          }
-    - { role: 'zfs',            tags: 'zfs'            }
-    - { role: 'smartd',         tags: 'smartd'         }
-    - { role: 'portage',        tags: 'portage'        }
-    - { role: 'python-exec',    tags: 'python-exec'    }
-    - { role: 'ansible-pull',   tags: 'ansible-pull'   }
-    - { role: 'podman_gentoo',  tags: 'podman_gentoo'  }
-    - { role: 'dnscrypt-proxy', tags: 'dnscrypt-proxy' }
-    - { role: 'greetd',         tags: 'greetd'         }
-    - { role: 'nginx',          tags: 'nginx'          }
-    - { role: 'postfix',        tags: 'postfix'        }
-    - { role: 'nullmailer',     tags: 'nullmailer'     }
-    - { role: 'alertmanager',   tags: 'alertmanager'   }
-    - { role: 'prometheus',     tags: 'prometheus'     }
-    - { role: 'gitea',          tags: 'gitea'          }
-    - { role: 'portage-update', tags: 'portage-update' }
-    - { role: 'dotfiles',       tags: 'dotfiles'       }
-    - { role: 'services',       tags: 'services'       }
-    - { role: 'docker',         tags: 'docker'         }
+    - role: 'hosts'
+      tags: 'hosts'
+    - role: 'sshd'
+      tags: 'sshd'
+    - role: 'sudo'
+      tags: 'sudo'
+    - role: 'fstab'
+      tags: 'fstab'
+    - role: 'zfs'
+      tags: 'zfs'
+    - role: 'smartd'
+      tags: 'smartd'
+    - role: 'portage'
+      tags: 'portage'
+    - role: 'python-exec'
+      tags: 'python-exec'
+    - role: 'ansible-pull'
+      tags: 'ansible-pull'
+    - role: 'podman_gentoo'
+      tags: 'podman_gentoo'
+    - role: 'dnscrypt-proxy'
+      tags: 'dnscrypt-proxy'
+    - role: 'greetd'
+      tags: 'greetd'
+    - role: 'nginx'
+      tags: 'nginx'
+    - role: 'postfix'
+      tags: 'postfix'
+    - role: 'nullmailer'
+      tags: 'nullmailer'
+    - role: 'alertmanager'
+      tags: 'alertmanager'
+    - role: 'prometheus'
+      tags: 'prometheus'
+    - role: 'gitea'
+      tags: 'gitea'
+    - role: 'portage-update'
+      tags: 'portage-update'
+    - role: 'dotfiles'
+      tags: 'dotfiles'
+    - role: 'services'
+      tags: 'services'
+    - role: 'docker'
+      tags: 'docker'
