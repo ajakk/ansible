@@ -2,6 +2,9 @@
 - name: regenerate generic.db
   command:
     cmd: "postmap /etc/postfix/generic"
+- name: regenerate password.db
+  command:
+    cmd: "postmap /etc/postfix/password"
 - name: restart postfix
   service:
     name: postfix
