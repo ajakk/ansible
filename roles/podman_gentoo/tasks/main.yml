@@ -1,4 +1,4 @@
 ---
 - name: include podman-gentoo
   when: podman_gentoo
-  include: podman-gentoo.yml
+  include_tasks: podman-gentoo.yml
