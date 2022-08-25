@@ -1,6 +1,7 @@
 ---
 this_repo: http://git.wg.home.arpa/ajak/ansible
 secrets_repo: http://git.wg.home.arpa/ajak/ansible-secrets
+timezone: US/Central
 node_exporter_port: 9100
 services:
   - systemd-timesyncd
@@ -32,6 +33,7 @@ dotsecrets: false
 dnsmasq: false
 filesystems: {}
 gitea: false
+homeassistant: false
 host_network_mounts: []
 host_repos: []
 host_services: []

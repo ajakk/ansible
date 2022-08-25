@@ -29,6 +29,8 @@
       tags: 'sshd'
     - role: 'sudo'
       tags: 'sudo'
+    - role: 'timezone'
+      tags: 'timezone'
     - role: 'fstab'
       tags: 'fstab'
     - role: 'systemd-networkd'
