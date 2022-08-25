@@ -1,0 +1,17 @@
+---
+- name: create homeassistant's git repo
+  notify: restart homeassistant
+  block:
+    - name: create homeassistant's git repo
+      git:
+        repo: "{{ ha_repo }}"
+        dest: /etc/homeassistant
+        clone: true
+        update: true
+        accept_newhostkey: true
+    - name: deploy homeassistant
+      docker_compose:
+        project_src: /etc/homeassistant
+        pull: true
+        build: true
+        state: present

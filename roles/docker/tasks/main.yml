@@ -2,3 +2,6 @@
 - name: add mervin
   include_tasks: mervin.yml
   when: mervin
+- name: add homeassistant
+  include_tasks: homeassistant.yml
+  when: homeassistant

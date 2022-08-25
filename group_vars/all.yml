@@ -1,6 +1,8 @@
 ---
-this_repo: http://git.wg.home.arpa/ajak/ansible
-secrets_repo: http://git.wg.home.arpa/ajak/ansible-secrets
+repo_root: http://git.wg.home.arpa/ajak
+this_repo: "{{ repo_root }}/ansible"
+secrets_repo: "{{ repo_root }}/ansible-secrets"
+ha_repo: "{{ repo_root }}/homeassistant"
 timezone: US/Central
 node_exporter_port: 9100
 services:
