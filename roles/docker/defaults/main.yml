@@ -1,0 +1,9 @@
+---
+ha_repo: "{{ repo_root }}/homeassistant"
+mervin_repo: git@git.wg.home.arpa:ajak/mervin.git
+
+ha_confdir: /etc/homeassistant
+mervin_confdir: /etc/mervin
+
+mervin: false
+homeassistant: false

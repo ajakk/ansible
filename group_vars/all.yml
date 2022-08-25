@@ -2,7 +2,6 @@
 repo_root: http://git.wg.home.arpa/ajak
 this_repo: "{{ repo_root }}/ansible"
 secrets_repo: "{{ repo_root }}/ansible-secrets"
-ha_repo: "{{ repo_root }}/homeassistant"
 timezone: US/Central
 node_exporter_port: 9100
 services:
@@ -35,12 +34,10 @@ dotsecrets: false
 dnsmasq: false
 filesystems: {}
 gitea: false
-homeassistant: false
 host_network_mounts: []
 host_repos: []
 host_services: []
 host_stopservices: []
-mervin: false
 network_mounts: []
 nfsrepo: false
 nginx: false

@@ -4,14 +4,14 @@
   block:
     - name: create mervin's git repo
       git:
-        repo: git@git.wg.home.arpa:ajak/mervin.git
-        dest: /etc/mervin
+        repo: "{{ mervin_repo }}"
+        dest: "{{ mervin_confdir }}"
         clone: true
         update: true
         accept_newhostkey: true
     - name: update and build mervin's image
       docker_compose:
-        project_src: /etc/mervin
+        project_src: "{{ mervin_confdir }}"
         pull: true
         build: true
         state: present

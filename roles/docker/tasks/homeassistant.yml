@@ -5,13 +5,13 @@
     - name: create homeassistant's git repo
       git:
         repo: "{{ ha_repo }}"
-        dest: /etc/homeassistant
+        dest: "{{ ha_confdir }}"
         clone: true
         update: true
         accept_newhostkey: true
     - name: deploy homeassistant
       docker_compose:
-        project_src: /etc/homeassistant
+        project_src: "{{ ha_confdir }}"
         pull: true
         build: true
         state: present
