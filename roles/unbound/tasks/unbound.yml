@@ -1,0 +1,29 @@
+---
+# Do this first so the unbound.conf validator doesn't fail due to the
+# zonefile missing.
+- name: install {{ public_domain }}.zone
+  notify: restart unbound
+  template:
+    src: "{{ public_domain }}.zone.j2"
+    dest: "/etc/unbound/{{ public_domain }}.zone"
+    owner: root
+    group: root
+    mode: 0644
+- name: install unbound.conf
+  notify: restart unbound
+  template:
+    src: unbound.conf.j2
+    dest: /etc/unbound/unbound.conf
+    owner: root
+    group: root
+    mode: 0644
+    validate: "unbound-checkconf %s"
+- name: disable other dns servers
+  service:
+    name: dnsmasq
+    state: stopped
+- name: start and enable unbound
+  service:
+    name: unbound
+    state: started
+    enabled: true

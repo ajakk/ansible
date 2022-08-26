@@ -51,6 +51,8 @@
       tags: 'podman_gentoo'
     - role: 'dnsmasq'
       tags: 'dnsmasq'
+    - role: 'unbound'
+      tags: 'unbound'
     - role: 'dnscrypt-proxy'
       tags: 'dnscrypt-proxy'
     - role: 'greetd'
