@@ -3,3 +3,7 @@
   service:
     name: dnsmasq
     state: restarted
+# TODO: this should probably be available globally
+- name: reload systemd
+  systemd:
+    daemon_reload: true

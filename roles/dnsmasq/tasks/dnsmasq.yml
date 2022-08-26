@@ -8,6 +8,25 @@
     owner: root
     group: root
     mode: 0644
+- name: install authoritative records conf file
+  notify: restart dnsmasq
+  template:
+    src: dnsmasq-zones.conf.j2
+    dest: /etc/dnsmasq-zones.conf
+    validate: 'dnsmasq --test --conf-file=%s'
+    owner: root
+    group: root
+    mode: 0644
+- name: install systemd service drop-in to support auth-server
+  notify:
+    - restart dnsmasq
+    - reload systemd
+  copy:
+    src: override.conf
+    dest: /etc/systemd/system/dnsmasq.service.d/override.conf
+    owner: root
+    group: root
+    mode: 0644
 - name: start and enable dnsmasq
   service:
     name: dnsmasq
