@@ -50,6 +50,8 @@ server:
         # interface: 192.0.2.154
         # interface: 192.0.2.154@5003
         # interface: 2001:DB8::5
+        interface: 127.0.0.1
+        interface: 10.5.0.1
 
         # enable this feature to copy the source address of queries to reply.
         # Socket options are not supported on all platforms. experimental.
@@ -274,6 +276,7 @@ server:
         # access-control: ::0/0 refuse
         # access-control: ::1 allow
         # access-control: ::ffff:127.0.0.1 allow
+        access-control: 10.5.0.0/24 allow
 
         # tag access-control with list of tags (in "" with spaces between)
         # Clients using this access control element use localzones that
