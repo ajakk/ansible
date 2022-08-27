@@ -1,10 +1,10 @@
 ---
 - name: install nginx configuration
   when: nginx
-  notify: "restart nginx"
+  notify: restart nginx
   copy:
     src: "{{ ansible_hostname }}.nginx.conf"
-    dest: "/etc/nginx/nginx.conf"
+    dest: /etc/nginx/nginx.conf
     validate: bash -c 'nginx -t -c %s'
 - name: start and enable nginx
   when: nginx

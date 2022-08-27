@@ -1,4 +1,5 @@
+---
 - name: clean repo_dir
   file:
     state: absent
-    path: "/var/db/repos/gentoo"
+    path: /var/db/repos/gentoo

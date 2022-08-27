@@ -1,7 +1,7 @@
 ---
 - name: create dirs for network mounts
   file:
-    path: "/network/{{ item }}"
+    path: /network/{{ item }}
     state: directory
     owner: root
     group: root

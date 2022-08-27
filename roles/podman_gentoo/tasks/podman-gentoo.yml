@@ -15,7 +15,7 @@
     mode: 0744
 - name: install cronjobs per host
   copy:
-    src: "update-images"
+    src: update-images
     dest: /etc/cron.d/update-images
     owner: root
     group: root

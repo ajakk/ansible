@@ -5,7 +5,7 @@
   notify: restart unbound
   template:
     src: "{{ public_domain }}.zone.j2"
-    dest: "/etc/unbound/{{ public_domain }}.zone"
+    dest: /etc/unbound/{{ public_domain }}.zone
     owner: root
     group: root
     mode: 0644
@@ -17,7 +17,7 @@
     owner: root
     group: root
     mode: 0644
-    validate: "unbound-checkconf %s"
+    validate: unbound-checkconf %s
 - name: disable other dns servers
   service:
     name: dnsmasq

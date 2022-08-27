@@ -1,3 +1,4 @@
+---
 - name: restart gitea
   service:
     name: gitea

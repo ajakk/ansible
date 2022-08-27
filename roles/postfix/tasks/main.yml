@@ -1,25 +1,25 @@
 ---
 - name: install postfix configuration
-  notify: "restart postfix"
+  notify: restart postfix
   when: postfix
   block:
     - name: install main.cf
       copy:
-        src: "main.cf"
-        dest: "/etc/postfix/main.cf"
+        src: main.cf
+        dest: /etc/postfix/main.cf
         owner: root
         group: root
         mode: 0644
     - name: install generic
-      notify: "regenerate generic.db"
+      notify: regenerate generic.db
       template:
-        src: "generic.j2"
-        dest: "/etc/postfix/generic"
+        src: generic.j2
+        dest: /etc/postfix/generic
         owner: root
         group: root
         mode: 0644
     - name: install password file
-      notify: "regenerate password.db"
+      notify: regenerate password.db
       copy:
         src: password
         dest: /etc/postfix/password

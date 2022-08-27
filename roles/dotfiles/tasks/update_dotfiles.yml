@@ -7,16 +7,16 @@
   become_user: jake
   when: not keyfile_info.stat.exists
   openssh_keypair:
-    path: "~/.ssh/id_ed25519"
+    path: ~/.ssh/id_ed25519
     type: ed25519
     size: 256
     state: present
-    comment: "jake@{{ ansible_hostname }}"
+    comment: jake@{{ ansible_hostname }}
 - name: pull {{ dotdir }}
   become_user: jake
   git:
-    repo: "git@sirius.home.arpa:ajak/{{ dotdir }}.git"
-    dest: "~/.{{ dotdir }}"
+    repo: git@sirius.home.arpa:ajak/{{ dotdir }}.git
+    dest: ~/.{{ dotdir }}
     update: true
     accept_newhostkey: true
 - name: find directories of dotfiles to stow
@@ -30,7 +30,7 @@
   register: files
 - name: deploy dotfiles with stow
   become_user: jake
-  loop: '{{ files.files }}'
+  loop: "{{ files.files }}"
   vars:
     user_home: /home/jake
   environment:

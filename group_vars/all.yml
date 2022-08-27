@@ -19,9 +19,9 @@ gentoo_repos:
   gentoo:
     source: https://github.com/gentoo-mirror/gentoo
     extra_lines: |
-     auto-sync = yes
-     sync-git-verify-commit-signature = yes
-     sync-depth = 1
+      auto-sync = yes
+      sync-git-verify-commit-signature = yes
+      sync-depth = 1
   ajak:
     source: https://gitlab.com/ajak/ajak
 

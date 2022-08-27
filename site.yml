@@ -8,7 +8,7 @@
     # Ansible will try to use the latest python it has available,
     # which is often wrong. We don't necessarily have all the
     # modules for that implementation, so just use /usr/bin/python.
-    ansible_python_interpreter: "/usr/bin/python"
+    ansible_python_interpreter: /usr/bin/python
     usevault: true
   pre_tasks:
     - name: get passwords
@@ -16,64 +16,64 @@
         file: "{{ item }}"
       with_first_found:
         - "{{ inventory_hostname }}.pass.yml"
-        - "pass.yml"
+        - pass.yml
       when: usevault | bool
       tags: always
     - name: Gathering facts
       setup:
       tags: always
   roles:
-    - role: 'hosts'
-      tags: 'hosts'
-    - role: 'sshd'
-      tags: 'sshd'
-    - role: 'sudo'
-      tags: 'sudo'
-    - role: 'timezone'
-      tags: 'timezone'
-    - role: 'fstab'
-      tags: 'fstab'
-    - role: 'systemd-networkd'
-      tags: 'systemd-networkd'
-    - role: 'systemd-resolved'
-      tags: 'systemd-resolved'
-    - role: 'zfs'
-      tags: 'zfs'
-    - role: 'smartd'
-      tags: 'smartd'
-    - role: 'portage'
-      tags: 'portage'
-    - role: 'python-exec'
-      tags: 'python-exec'
-    - role: 'ansible-pull'
-      tags: 'ansible-pull'
-    - role: 'podman_gentoo'
-      tags: 'podman_gentoo'
-    - role: 'dnsmasq'
-      tags: 'dnsmasq'
-    - role: 'unbound'
-      tags: 'unbound'
-    - role: 'dnscrypt-proxy'
-      tags: 'dnscrypt-proxy'
-    - role: 'greetd'
-      tags: 'greetd'
-    - role: 'nginx'
-      tags: 'nginx'
-    - role: 'postfix'
-      tags: 'postfix'
-    - role: 'nullmailer'
-      tags: 'nullmailer'
-    - role: 'alertmanager'
-      tags: 'alertmanager'
-    - role: 'prometheus'
-      tags: 'prometheus'
-    - role: 'gitea'
-      tags: 'gitea'
-    - role: 'portage-update'
-      tags: 'portage-update'
-    - role: 'dotfiles'
-      tags: 'dotfiles'
-    - role: 'services'
-      tags: 'services'
-    - role: 'docker'
-      tags: 'docker'
+    - role: hosts
+      tags: hosts
+    - role: sshd
+      tags: sshd
+    - role: sudo
+      tags: sudo
+    - role: timezone
+      tags: timezone
+    - role: fstab
+      tags: fstab
+    - role: systemd-networkd
+      tags: systemd-networkd
+    - role: systemd-resolved
+      tags: systemd-resolved
+    - role: zfs
+      tags: zfs
+    - role: smartd
+      tags: smartd
+    - role: portage
+      tags: portage
+    - role: python-exec
+      tags: python-exec
+    - role: ansible-pull
+      tags: ansible-pull
+    - role: podman_gentoo
+      tags: podman_gentoo
+    - role: dnsmasq
+      tags: dnsmasq
+    - role: unbound
+      tags: unbound
+    - role: dnscrypt-proxy
+      tags: dnscrypt-proxy
+    - role: greetd
+      tags: greetd
+    - role: nginx
+      tags: nginx
+    - role: postfix
+      tags: postfix
+    - role: nullmailer
+      tags: nullmailer
+    - role: alertmanager
+      tags: alertmanager
+    - role: prometheus
+      tags: prometheus
+    - role: gitea
+      tags: gitea
+    - role: portage-update
+      tags: portage-update
+    - role: dotfiles
+      tags: dotfiles
+    - role: services
+      tags: services
+    - role: docker
+      tags: docker
