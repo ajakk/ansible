@@ -36,7 +36,7 @@
     user_home: /home/jake
   environment:
     STOW_DIR: "{{ user_home }}/.{{ dotdir }}"
-  ansible.builtin.ansible.builtin.shell: |
+  ansible.builtin.shell: |
     stow {{ item.path | basename }}
   # TODO: yes, this is wrong, but stow is hard to talk to
   changed_when: false
