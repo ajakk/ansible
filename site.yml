@@ -43,8 +43,8 @@
       tags: smartd
     - role: portage
       tags: portage
-    - role: python-exec
-      tags: python-exec
+    - role: python_exec
+      tags: python_exec
     - role: ansible-pull
       tags: ansible-pull
     - role: podman_gentoo
