@@ -69,8 +69,8 @@
       tags: prometheus
     - role: gitea
       tags: gitea
-    - role: portage-update
-      tags: portage-update
+    - role: portage_update
+      tags: portage_update
     - role: dotfiles
       tags: dotfiles
     - role: services
