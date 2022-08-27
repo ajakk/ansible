@@ -1,6 +1,5 @@
 ---
 - name: install smartd.conf
-  hosts: physical
   ansible.builtin.copy:
     src: smartd.conf
     dest: /etc/smartd.conf
@@ -9,7 +8,6 @@
     mode: 0644
     validate: smartd -q onecheck -c %s
 - name: start and enable smartd
-  hosts: physical
   ansible.builtin.service:
     name: smartd
     state: started
