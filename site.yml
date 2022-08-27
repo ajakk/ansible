@@ -53,8 +53,8 @@
       tags: dnsmasq
     - role: unbound
       tags: unbound
-    - role: dnscrypt-proxy
-      tags: dnscrypt-proxy
+    - role: dnscrypt_proxy
+      tags: dnscrypt_proxy
     - role: greetd
       tags: greetd
     - role: nginx
