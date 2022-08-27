@@ -1,6 +1,12 @@
 ---
 - name: get gpg key
-  ansible.builtin.shell:
+  # This triggers command-instead-of-module because it thinks we
+  # should be using get_url or uri to get the URL contents
+  # However, there is no builtin to then import the gpg key into the
+  # root user's keyring, so I would have to use another shell command
+  # to do that anyway. Thus, this is probably the most succinct way to
+  # accomplish this.
+  ansible.builtin.shell:  # noqa command-instead-of-module
     cmd: curl https://ajak.xyz/ajak.pub | gpg --import
   register: curl_result
   changed_when: "'imported' in curl_result.stderr"
