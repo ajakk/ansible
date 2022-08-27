@@ -1,6 +1,6 @@
 ---
 - name: create dirs for network mounts
-  file:
+  ansible.builtin.file:
     path: /network/{{ item }}
     state: directory
     owner: root
@@ -8,7 +8,7 @@
     mode: 0755
   with_items: "{{ network_mounts + host_network_mounts }}"
 - name: deploy fstab
-  template:
+  ansible.builtin.template:
     src: fstab.j2
     dest: /etc/fstab
     owner: root

@@ -1,6 +1,6 @@
 ---
 - name: copy cron files
-  copy:
+  ansible.builtin.copy:
     src: etc/
     dest: /etc/
     owner: root

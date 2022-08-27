@@ -1,7 +1,7 @@
 ---
 - name: copy zfs cron jobs
   when: zfs
-  copy:
+  ansible.builtin.copy:
     src: etc/{{ item }}
     dest: /etc
     owner: root

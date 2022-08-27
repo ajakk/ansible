@@ -4,14 +4,14 @@
   notify: restart prometheus
   block:
     - name: install prometheus.yml
-      template:
+      ansible.builtin.template:
         src: prometheus.yml.j2
         dest: /etc/prometheus/prometheus.yml
         mode: 0644
         validate: promtool check config %s
     - name: create alerts directory
       when: prometheus
-      file:
+      ansible.builtin.file:
         path: /etc/prometheus/alerts
         state: directory
         mode: 0755
@@ -20,14 +20,14 @@
       notify: restart prometheus
       with_fileglob:
         - alerts/*
-      copy:
+      ansible.builtin.copy:
         src: "{{ item }}"
         dest: /etc/prometheus/alerts/{{ item | basename }}
         mode: 0644
         validate: promtool check config %s
 - name: start and enable prometheus
   when: prometheus
-  service:
+  ansible.builtin.service:
     name: prometheus
     state: started
     enabled: true

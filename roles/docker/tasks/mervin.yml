@@ -3,7 +3,7 @@
   notify: restart mervin
   block:
     - name: create mervin's git repo
-      git:
+      ansible.builtin.git:
         repo: "{{ mervin_repo }}"
         dest: "{{ mervin_confdir }}"
         clone: true

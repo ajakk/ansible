@@ -1,26 +1,26 @@
 ---
 - name: get gpg key
-  shell:
+  ansible.builtin.shell:
     cmd: curl https://ajak.xyz/ajak.pub | gpg --import
   register: curl_result
   changed_when: "'imported' in curl_result.stderr"
 - name: remove old ansible-pull cronjob
-  file:
+  ansible.builtin.file:
     path: /etc/cron.daily/ansible-pull
     state: absent
 - name: remove wrongly named ansible-pull script
-  file:
+  ansible.builtin.file:
     path: /usr/local/bin/ansible-pull
     state: absent
 - name: install ansible-pull script
-  template:
+  ansible.builtin.template:
     src: ansible-pull.j2
     dest: /usr/local/bin/ansiblepull
     mode: 0744
     owner: root
     group: root
 - name: install ansible-pull cronjob
-  copy:
+  ansible.builtin.copy:
     content: |
       PATH="/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 
@@ -30,16 +30,16 @@
     owner: root
     group: root
 - name: add secrets repo
-  git:
+  ansible.builtin.git:
     repo: "{{ secrets_repo }}"
     dest: /etc/ansible-secrets
 - name: register ansible repo
-  stat:
+  ansible.builtin.stat:
     path: /etc/ansible-pull
   register: dir_info
 - name: ensure ansible-pull repo has correct URL
   when: dir_info.stat.exists
-  git:
+  ansible.builtin.git:
     repo: "{{ this_repo }}"
     dest: /etc/ansible-pull
     version: main

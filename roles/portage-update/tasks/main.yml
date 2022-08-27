@@ -2,12 +2,12 @@
 # TODO: somehow reorganize to not duplicate work between git and ansible
 # Only sometimes host stuff is in Git. Maybe automate?
 - name: register repository timestamp
-  shell: date -ud "$(cat /var/db/repos/gentoo/metadata/timestamp.chk)" +%s
+  ansible.builtin.shell: date -ud "$(cat /var/db/repos/gentoo/metadata/timestamp.chk)" +%s
   register: repo_timestamp
   changed_when: false
 - name: pull /etc/portage
   when: portage_git
-  git:
+  ansible.builtin.git:
     repo: git@sirius.home.arpa:ajak/etc-portage.git
     dest: /etc/portage
     update: true

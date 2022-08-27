@@ -3,7 +3,7 @@
   notify: restart homeassistant
   block:
     - name: create homeassistant's git repo
-      git:
+      ansible.builtin.git:
         repo: "{{ ha_repo }}"
         dest: "{{ ha_confdir }}"
         clone: true

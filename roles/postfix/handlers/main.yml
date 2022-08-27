@@ -1,11 +1,11 @@
 ---
 - name: regenerate generic.db
-  command:
+  ansible.builtin.command:
     cmd: postmap /etc/postfix/generic
 - name: regenerate password.db
-  command:
+  ansible.builtin.command:
     cmd: postmap /etc/postfix/password
 - name: restart postfix
-  service:
+  ansible.builtin.service:
     name: postfix
     state: restarted

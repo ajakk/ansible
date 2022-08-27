@@ -1,6 +1,6 @@
 ---
 - name: install python-exec.conf
-  copy:
+  ansible.builtin.copy:
     src: python-exec.conf
     dest: /etc/python-exec/python-exec.conf
     mode: 0644

@@ -1,7 +1,7 @@
 ---
 - name: install dnsmasq.conf
   notify: restart dnsmasq
-  template:
+  ansible.builtin.template:
     src: dnsmasq.conf.j2
     dest: /etc/dnsmasq.conf
     validate: dnsmasq --test --conf-file=%s
@@ -10,7 +10,7 @@
     mode: 0644
 - name: install authoritative records conf file
   notify: restart dnsmasq
-  template:
+  ansible.builtin.template:
     src: dnsmasq-zones.conf.j2
     dest: /etc/dnsmasq-zones.conf
     validate: dnsmasq --test --conf-file=%s
@@ -21,14 +21,14 @@
   notify:
     - restart dnsmasq
     - reload systemd
-  copy:
+  ansible.builtin.copy:
     src: override.conf
     dest: /etc/systemd/system/dnsmasq.service.d/override.conf
     owner: root
     group: root
     mode: 0644
 - name: start and enable dnsmasq
-  service:
+  ansible.builtin.service:
     name: dnsmasq
     state: started
     enabled: true

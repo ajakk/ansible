@@ -1,14 +1,14 @@
 ---
 - name: install systemd-networkd configuration
   notify: restart systemd-networkd
-  template:
+  ansible.builtin.template:
     src: 20-wired.network.j2
     dest: /etc/systemd/network/20-wired.network
     owner: root
     group: root
     mode: 0644
 - name: start and enable systemd-networkd
-  service:
+  ansible.builtin.service:
     name: systemd-networkd
     enabled: true
     state: started

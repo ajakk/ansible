@@ -1,6 +1,6 @@
 ---
 - name: check if key exists
-  stat:
+  ansible.builtin.stat:
     path: /home/jake/.ssh/id_ed25519.pub
   register: keyfile_info
 - name: generate ssh key
@@ -14,7 +14,7 @@
     comment: jake@{{ ansible_hostname }}
 - name: pull {{ dotdir }}
   become_user: jake
-  git:
+  ansible.builtin.git:
     repo: git@sirius.home.arpa:ajak/{{ dotdir }}.git
     dest: ~/.{{ dotdir }}
     update: true
@@ -35,7 +35,7 @@
     user_home: /home/jake
   environment:
     STOW_DIR: "{{ user_home }}/.{{ dotdir }}"
-  ansible.builtin.shell: |
+  ansible.builtin.ansible.builtin.shell: |
     stow {{ item.path | basename }}
   # TODO: yes, this is wrong, but stow is hard to talk to
   changed_when: false

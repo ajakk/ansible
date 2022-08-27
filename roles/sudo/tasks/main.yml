@@ -1,6 +1,6 @@
 ---
 - name: allow users in wheel to sudo
-  lineinfile:
+  ansible.builtin.lineinfile:
     regex: "%wheel ALL=(ALL) ALL"
     path: /etc/sudoers
     line: "%wheel ALL=(ALL) ALL"

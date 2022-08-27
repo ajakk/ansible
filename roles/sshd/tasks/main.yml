@@ -1,12 +1,12 @@
 ---
 - name: install sshd configuration
   notify: restart sshd
-  copy:
+  ansible.builtin.copy:
     src: sshd_config
     dest: /etc/ssh/sshd_config
     validate: sshd -tf %s
 - name: enable sshd
-  service:
+  ansible.builtin.service:
     name: sshd
     enabled: true
     state: started

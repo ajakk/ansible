@@ -4,7 +4,7 @@
   when: postfix
   block:
     - name: install main.cf
-      copy:
+      ansible.builtin.copy:
         src: main.cf
         dest: /etc/postfix/main.cf
         owner: root
@@ -12,7 +12,7 @@
         mode: 0644
     - name: install generic
       notify: regenerate generic.db
-      template:
+      ansible.builtin.template:
         src: generic.j2
         dest: /etc/postfix/generic
         owner: root
@@ -20,7 +20,7 @@
         mode: 0644
     - name: install password file
       notify: regenerate password.db
-      copy:
+      ansible.builtin.copy:
         src: password
         dest: /etc/postfix/password
         owner: root
@@ -28,7 +28,7 @@
         mode: 0600
 - name: enable postfix
   when: postfix
-  service:
+  ansible.builtin.service:
     name: postfix
     enabled: true
     state: started

@@ -1,5 +1,5 @@
 ---
 - name: restart dnscrypt-proxy
-  service:
+  ansible.builtin.service:
     name: dnscrypt-proxy
     state: restarted

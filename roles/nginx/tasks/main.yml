@@ -2,13 +2,13 @@
 - name: install nginx configuration
   when: nginx
   notify: restart nginx
-  copy:
+  ansible.builtin.copy:
     src: "{{ ansible_hostname }}.nginx.conf"
     dest: /etc/nginx/nginx.conf
     validate: bash -c 'nginx -t -c %s'
 - name: start and enable nginx
   when: nginx
-  service:
+  ansible.builtin.service:
     name: nginx
     state: started
     enabled: true
