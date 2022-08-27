@@ -1,0 +1,13 @@
+---
+name: lint
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: run ansible-lint
+        # This thing is noisy! Maybe fork it for custom arguments
+        # later? Might need to do it anyway to force it to not error
+        # on references to ansible-secrets.git
+        uses: ansible/ansible-lint-action@main

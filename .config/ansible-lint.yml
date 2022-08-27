@@ -1,0 +1,6 @@
+---
+exclude_paths:
+  # These files contains non-public secrets in a separate repository
+  - ../../ansible-secrets
+  # 'on:' should not be 'true:'
+  - ../.github
