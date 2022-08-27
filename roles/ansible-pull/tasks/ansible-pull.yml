@@ -33,6 +33,7 @@
   ansible.builtin.git:
     repo: "{{ secrets_repo }}"
     dest: /etc/ansible-secrets
+    version: main
 - name: register ansible repo
   ansible.builtin.stat:
     path: /etc/ansible-pull

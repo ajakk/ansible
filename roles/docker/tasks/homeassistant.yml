@@ -8,6 +8,7 @@
         dest: "{{ ha_confdir }}"
         clone: true
         update: true
+        version: main
         accept_newhostkey: true
     - name: deploy homeassistant
       docker_compose:

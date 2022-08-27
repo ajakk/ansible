@@ -18,6 +18,7 @@
     repo: git@sirius.home.arpa:ajak/{{ dotdir }}.git
     dest: ~/.{{ dotdir }}
     update: true
+    version: master
     accept_newhostkey: true
 - name: find directories of dotfiles to stow
   become_user: jake

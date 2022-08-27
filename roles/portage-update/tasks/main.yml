@@ -11,6 +11,7 @@
     repo: git@sirius.home.arpa:ajak/etc-portage.git
     dest: /etc/portage
     update: true
+    version: master
 - name: update repository
   # Only run when the repo's timestamp is from more than an hour ago
   when: not nfsrepo and (((ansible_date_time['epoch'] | int) - (repo_timestamp['stdout'] | int)) > 3600)

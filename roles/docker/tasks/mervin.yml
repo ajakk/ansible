@@ -8,6 +8,7 @@
         dest: "{{ mervin_confdir }}"
         clone: true
         update: true
+        version: master
         accept_newhostkey: true
     - name: update and build mervin's image
       docker_compose:
