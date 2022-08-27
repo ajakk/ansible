@@ -33,8 +33,8 @@
       tags: timezone
     - role: fstab
       tags: fstab
-    - role: systemd-networkd
-      tags: systemd-networkd
+    - role: networkd
+      tags: networkd
     - role: systemd-resolved
       tags: systemd-resolved
     - role: zfs
