@@ -3,6 +3,9 @@
   ansible.builtin.template:
     src: repo.conf.j2
     dest: /etc/portage/repos.conf/{{ item }}.conf
+    owner: root
+    group: root
+    mode: 0644
   with_items: "{{ repos + host_repos }}"
 - name: accept_keywords
   when: ansible_hostname == 'raptor'

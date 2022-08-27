@@ -6,6 +6,9 @@
     src: config.yml.j2
     dest: /etc/alertmanager/config.yml
     validate: amtool check-config %s
+    owner: root
+    group: root
+    mode: 0644
 - name: create alertmanager template directory
   when: prometheus
   ansible.builtin.file:

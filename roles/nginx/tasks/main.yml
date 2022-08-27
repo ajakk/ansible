@@ -6,6 +6,9 @@
     src: "{{ ansible_hostname }}.nginx.conf"
     dest: /etc/nginx/nginx.conf
     validate: bash -c 'nginx -t -c %s'
+    owner: root
+    group: root
+    mode: 0644
 - name: start and enable nginx
   when: nginx
   ansible.builtin.service:
