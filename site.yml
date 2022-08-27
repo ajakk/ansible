@@ -45,8 +45,8 @@
       tags: portage
     - role: python_exec
       tags: python_exec
-    - role: ansible-pull
-      tags: ansible-pull
+    - role: ansible_pull
+      tags: ansible_pull
     - role: podman_gentoo
       tags: podman_gentoo
     - role: dnsmasq
