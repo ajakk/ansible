@@ -8,7 +8,7 @@
 - name: pull /etc/portage
   when: portage_git
   ansible.builtin.git:
-    repo: git@sirius.home.arpa:ajak/etc-portage.git
+    repo: git@git.ajak.xyz:ajak/etc-portage.git
     dest: /etc/portage
     update: true
     version: master

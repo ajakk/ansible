@@ -6,7 +6,6 @@ timezone: US/Central
 node_exporter_port: 9100
 services:
   - systemd-timesyncd
-my_domain: home.arpa
 public_domain: ajak.xyz
 my_email: jchelmert3@posteo.net
 gccarch: x86-64

@@ -15,7 +15,7 @@
 - name: pull {{ dotdir }}
   become_user: jake
   ansible.builtin.git:
-    repo: git@sirius.home.arpa:ajak/{{ dotdir }}.git
+    repo: git@git.ajak.xyz:ajak/{{ dotdir }}.git
     dest: ~/.{{ dotdir }}
     update: true
     version: master
