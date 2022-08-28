@@ -4,8 +4,8 @@
   when: postfix
   block:
     - name: install main.cf
-      ansible.builtin.copy:
-        src: main.cf
+      ansible.builtin.template:
+        src: main.cf.j2
         dest: /etc/postfix/main.cf
         owner: root
         group: root
