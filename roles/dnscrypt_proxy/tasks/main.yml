@@ -10,13 +10,6 @@
         owner: root
         group: root
         mode: 0644
-    - name: install cloaking-rules.txt
-      ansible.builtin.template:
-        src: cloaking-rules.txt.j2
-        dest: /etc/dnscrypt-proxy/cloaking-rules.txt
-        owner: root
-        group: root
-        mode: 0644
 - name: start and enable dnscrypt-proxy
   when: dnscryptproxy
   ansible.builtin.service:
