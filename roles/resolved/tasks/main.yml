@@ -1,4 +1,14 @@
 ---
+- name: link resolv.conf to resolved's stub
+  when: resolved
+  ansible.builtin.file:
+    src: /run/systemd/resolve/stub-resolv.conf
+    dest: /etc/resolv.conf
+    owner: root
+    group: root
+    mode: 0644
+    state: link
+    force: true
 - name: install resolved configuration
   when: resolved
   notify: restart systemd-resolved
