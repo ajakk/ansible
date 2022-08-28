@@ -1,5 +1,5 @@
 ---
-repo_root: http://git.wg.home.arpa/ajak
+repo_root: http://git.wg.ajak.xyz/ajak
 this_repo: "{{ repo_root }}/ansible"
 secrets_repo: "{{ repo_root }}/ansible-secrets"
 timezone: US/Central
