@@ -2,14 +2,6 @@
 # Formerly this was done using a docker-compose.yml thrown into git
 # somewhere. We can't easily control labels for traefik this way, so
 # we instead manage the container directly
-- name: stop homeassistant
-  docker_compose:
-    project_src: "{{ ha_confdir }}"
-    state: absent
-- name: remove homeassistant's old docker configuration
-  ansible.builtin.file:
-    path: "{{ ha_confdir }}"
-    state: absent
 - name: start the homeassistant container
   # mostly grokked out of:
   # https://www.home-assistant.io/installation/linux#install-home-assistant-container
