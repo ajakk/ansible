@@ -1,18 +1,26 @@
 ---
-- name: create homeassistant's git repo
-  notify: restart homeassistant
-  block:
-    - name: create homeassistant's git repo
-      ansible.builtin.git:
-        repo: "{{ ha_repo }}"
-        dest: "{{ ha_confdir }}"
-        clone: true
-        update: true
-        version: main
-        accept_newhostkey: true
-    - name: deploy homeassistant
-      docker_compose:
-        project_src: "{{ ha_confdir }}"
-        pull: true
-        build: true
-        state: present
+# Formerly this was done using a docker-compose.yml thrown into git
+# somewhere. We can't easily control labels for traefik this way, so
+# we instead manage the container directly
+- name: stop homeassistant
+  docker_compose:
+    project_src: "{{ ha_confdir }}"
+    state: absent
+- name: remove homeassistant's old docker configuration
+  ansible.builtin.file:
+    path: "{{ ha_confdir }}"
+    state: absent
+- name: start the homeassistant container
+  # mostly grokked out of:
+  # https://www.home-assistant.io/installation/linux#install-home-assistant-container
+  community.docker.docker_container:
+    name: homeassistant
+    image: ghcr.io/home-assistant/home-assistant:stable
+    pull: true
+    privileged: true
+    state: started
+    restart_policy: unless-stopped
+    network_mode: host
+    volumes:
+      - /var/lib/homeassistant:/config
+      - /etc/localtime:/etc/localtime:ro
