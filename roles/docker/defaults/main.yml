@@ -2,8 +2,10 @@
 ha_repo: "{{ repo_root }}/homeassistant"
 mervin_repo: git@git.wg.ajak.xyz:ajak/mervin.git
 
-ha_confdir: /etc/homeassistant
+ha_confdir: /var/lib/homeassistant
 mervin_confdir: /etc/mervin
+traefik_confdir: /etc/traefik
 
 mervin: false
 homeassistant: false
+traefik: false

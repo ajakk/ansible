@@ -1,0 +1,18 @@
+---
+- name: add traefik's configuration
+  notify: restart traefik
+  ansible.builtin.copy:
+    src: traefik/
+    dest: "{{ traefik_confdir }}"
+    owner: root
+    group: root
+    mode: 0644
+- name: create traefik network
+  docker_network:
+    name: traefik
+- name: run traefik
+  docker_compose:
+    project_src: "{{ traefik_confdir }}"
+    pull: true
+    build: true
+    state: present

@@ -1,4 +1,7 @@
 ---
+- name: add traefik
+  include_tasks: traefik.yml
+  when: traefik
 - name: add mervin
   include_tasks: mervin.yml
   when: mervin

@@ -1,4 +1,12 @@
 ---
+- name: add homeassistant's configuration
+  ansible.builtin.template:
+    src: configuration.yaml.j2
+    dest: "{{ ha_confdir }}/configuration.yaml"
+    owner: root
+    group: root
+    mode: 0644
+  register: conf
 # Formerly this was done using a docker-compose.yml thrown into git
 # somewhere. We can't easily control labels for traefik this way, so
 # we instead manage the container directly
@@ -12,7 +20,14 @@
     privileged: true
     state: started
     restart_policy: unless-stopped
-    network_mode: host
+    network_mode: traefik
+    exposed_ports:
+      - 8123
+    labels:
+      traefik.http.routers.homeassistant.rule: Host(`ha.{{ public_domain }}`)
     volumes:
-      - /var/lib/homeassistant:/config
+      - "{{ ha_confdir}}:/config"
       - /etc/localtime:/etc/localtime:ro
+    # Hacky, but if we used a handler for the configuration we'd have
+    # to duplicate this entire task into a handler.
+    restart: "{{ conf.changed }}"

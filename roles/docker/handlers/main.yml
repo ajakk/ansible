@@ -1,4 +1,11 @@
 ---
+- name: restart traefik
+  docker_compose:
+    project_src: /etc/mervin
+    pull: true
+    build: true
+    state: present
+    restarted: true
 - name: restart mervin
   docker_compose:
     project_src: /etc/mervin
