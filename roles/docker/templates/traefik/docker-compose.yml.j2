@@ -11,6 +11,8 @@ services:
       - 80:80
       - 443:443
     restart: unless-stopped
+    environment:
+      - LINODE_TOKEN={{ linode_pat }}
     networks:
       - traefik
 networks:

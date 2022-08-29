@@ -24,7 +24,9 @@
     exposed_ports:
       - 8123
     labels:
-      traefik.http.routers.homeassistant.rule: Host(`ha.{{ public_domain }}`)
+      traefik.http.routers.ha.rule: Host(`ha.{{ public_domain }}`)
+      traefik.http.routers.ha.tls: "true"
+      traefik.http.routers.ha.tls.certresolver: myresolver
     volumes:
       - "{{ ha_confdir}}:/config"
       - /etc/localtime:/etc/localtime:ro

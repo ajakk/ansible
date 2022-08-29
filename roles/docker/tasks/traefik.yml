@@ -1,12 +1,27 @@
 ---
-- name: add traefik's configuration
-  notify: restart traefik
-  ansible.builtin.copy:
-    src: traefik/
-    dest: "{{ traefik_confdir }}"
+- name: create traefik's configuration directory
+  ansible.builtin.file:
+    path: "{{ traefik_confdir }}"
+    state: directory
     owner: root
     group: root
-    mode: 0644
+    mode: 0700
+- name: add traefik's traefik.toml
+  notify: restart traefik
+  ansible.builtin.template:
+    src: traefik/traefik.toml.j2
+    dest: "{{ traefik_confdir }}/traefik.toml"
+    owner: root
+    group: root
+    mode: 0600
+- name: add traefik's docker-compose
+  notify: restart traefik
+  ansible.builtin.template:
+    src: traefik/docker-compose.yml.j2
+    dest: "{{ traefik_confdir }}/docker-compose.yml"
+    owner: root
+    group: root
+    mode: 0600
 - name: create traefik network
   docker_network:
     name: traefik
