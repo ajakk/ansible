@@ -34,7 +34,7 @@ raptor.wg.{{ public_domain }}:/tank/gentoo/binpkgs/{{ gccarch }}:stable /var/cac
 {% if ansible_hostname != 'raptor' %}
 raptor.wg.{{ public_domain }}:/tank/gentoo/binpkgs/{{ gccarch }} /var/cache/binpkgs nfs defaults 0 0
 raptor.wg.{{ public_domain }}:/tank/gentoo/distfiles /var/cache/distfiles nfs defaults 0 0
-{% for mount in network_mounts + host_network_mounts %}
-raptor.wg.{{ public_domain }}:/tank/media/{{ mount }} /network/{{ mount }} nfs defaults 0 0
+{% for mount in network_mounts %}
+raptor.wg.{{ public_domain }}:/tank/{{ mount['prefix'] }}/{{ mount['target'] }} /network/{{ mount['target'] }} nfs defaults 0 0
 {% endfor %}
 {% endif %}

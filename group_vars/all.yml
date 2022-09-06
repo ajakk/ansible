@@ -34,11 +34,9 @@ dotsecrets: false
 dnsmasq: false
 filesystems: {}
 gitea: false
-host_network_mounts: []
 host_repos: []
 host_services: []
 host_stopservices: []
-network_mounts: []
 nfsrepo: false
 nginx: false
 podman_gentoo: false
