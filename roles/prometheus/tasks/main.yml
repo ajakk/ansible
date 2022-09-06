@@ -1,33 +1,4 @@
 ---
-- name: install prometheus configuration
+- name: configure prometheus
   when: prometheus
-  notify: restart prometheus
-  block:
-    - name: install prometheus.yml
-      ansible.builtin.template:
-        src: prometheus.yml.j2
-        dest: /etc/prometheus/prometheus.yml
-        mode: 0644
-        validate: promtool check config %s
-    - name: create alerts directory
-      when: prometheus
-      ansible.builtin.file:
-        path: /etc/prometheus/alerts
-        state: directory
-        mode: 0755
-    - name: install prometheus alerts
-      when: prometheus
-      notify: restart prometheus
-      with_fileglob:
-        - alerts/*
-      ansible.builtin.copy:
-        src: "{{ item }}"
-        dest: /etc/prometheus/alerts/{{ item | basename }}
-        mode: 0644
-        validate: promtool check config %s
-- name: start and enable prometheus
-  when: prometheus
-  ansible.builtin.service:
-    name: prometheus
-    state: started
-    enabled: true
+  include_tasks: prometheus.yml

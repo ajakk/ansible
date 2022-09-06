@@ -1,0 +1,50 @@
+---
+- name: create prometheus config directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - "{{ prom_confdir }}"
+    - "{{ prom_confdir }}/alerts"
+- name: create prometheus data directory
+  ansible.builtin.file:
+    path: "{{ prom_datadir }}"
+    state: directory
+    owner: nobody
+    group: nobody
+    mode: 0755
+- name: install prometheus.yml
+  ansible.builtin.template:
+    src: prometheus.yml.j2
+    dest: "{{ prom_confdir }}/prometheus.yml"
+    owner: root
+    group: root
+    mode: 0644
+    # validate: promtool check config %s
+- name: install prometheus alerts
+  when: prometheus
+  with_fileglob:
+    - alerts/*
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ prom_confdir }}/alerts/{{ item | basename }}"
+    mode: 0644
+    # validate: promtool check config %s
+- name: update and run prometheus container
+  community.docker.docker_container:
+    name: prometheus
+    image: prom/prometheus:latest
+    pull: true
+    state: started
+    restart_policy: unless-stopped
+    network_mode: traefik
+    labels:
+      traefik.http.routers.prometheus.rule: Host(`prometheus.{{ public_domain }}`)
+      traefik.http.routers.prometheus.tls: "true"
+      traefik.http.routers.prometheus.tls.certresolver: myresolver
+    volumes:
+      - "{{ prom_confdir }}:/etc/prometheus"
+      - "{{ prom_datadir }}:/prometheus"
