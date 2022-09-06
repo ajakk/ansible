@@ -71,6 +71,8 @@
       tags: gitea
     - role: portage_update
       tags: portage_update
+    - role: podman
+      tags: podman
     - role: dotfiles
       tags: dotfiles
     - role: services

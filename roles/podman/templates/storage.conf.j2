@@ -1,0 +1,6 @@
+[storage]
+driver = "zfs"
+graphroot = "/var/lib/containers/storage"
+
+[storage.options.zfs]
+fsname = "{{ podman_zfs_dataset }}"

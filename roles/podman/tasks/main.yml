@@ -1,0 +1,9 @@
+---
+- name: install podman's storage.conf
+  when: podman_zfs_dataset is defined
+  ansible.builtin.template:
+    src: storage.conf.j2
+    dest: /etc/containers/storage.conf
+    owner: root
+    group: root
+    mode: 0644
