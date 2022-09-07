@@ -1,7 +1,10 @@
 ---
-- name: Collect network mounts
+- name: Collect netmounts variables
   ansible.builtin.set_fact:
-    network_mounts: "{{ lookup('ansible.builtin.vars', * q('ansible.builtin.varnames', 'netmounts')) }}"
+    netmounts_vars: "{{ q('ansible.builtin.varnames', 'netmounts') }}"
+- name: Collect netmounts
+  ansible.builtin.set_fact:
+    network_mounts: "{{ lookup('ansible.builtin.vars', *netmounts_vars) }}"
 - name: Create dirs for network mounts
   ansible.builtin.file:
     path: /network/{{ item['target'] }}

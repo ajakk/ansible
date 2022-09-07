@@ -28,7 +28,7 @@
       traefik.http.routers.ha.tls: "true"
       traefik.http.routers.ha.tls.certresolver: myresolver
     volumes:
-      - "{{ ha_confdir}}:/config"
+      - "{{ ha_confdir }}:/config"
       - /etc/localtime:/etc/localtime:ro
     # Hacky, but if we used a handler for the configuration we'd have
     # to duplicate this entire task into a handler.
