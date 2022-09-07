@@ -1,5 +1,5 @@
 ---
-- name: install smartd.conf
+- name: Install smartd.conf
   ansible.builtin.copy:
     src: smartd.conf
     dest: /etc/smartd.conf
@@ -7,7 +7,7 @@
     group: root
     mode: 0644
     validate: smartd -q onecheck -c %s
-- name: start and enable smartd
+- name: Start and enable smartd
   ansible.builtin.service:
     name: smartd
     state: started

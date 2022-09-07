@@ -1,23 +1,23 @@
 ---
 # TODO: somehow reorganize to not duplicate work between git and ansible
 # Only sometimes host stuff is in Git. Maybe automate?
-- name: register repository timestamp
+- name: Register repository timestamp
   ansible.builtin.shell: date -ud "$(cat /var/db/repos/gentoo/metadata/timestamp.chk)" +%s
   register: repo_timestamp
   changed_when: false
-- name: pull /etc/portage
+- name: Pull /etc/portage
   when: portage_git
   ansible.builtin.git:
     repo: git@git.ajak.xyz:ajak/etc-portage.git
     dest: /etc/portage
     update: true
     version: master
-- name: update repository
+- name: Update repository
   # Only run when the repo's timestamp is from more than an hour ago
   when: not nfsrepo and (((ansible_date_time['epoch'] | int) - (repo_timestamp['stdout'] | int)) > 3600)
   portage:
     sync: true
-- name: update world (usepkg)
+- name: Update world (usepkg)
   when: not getpkg
   portage:
     package: "@world"
@@ -26,7 +26,7 @@
     newuse: true
     usepkgonly: true
     withbdeps: true
-- name: update world (getpkg)
+- name: Update world (getpkg)
   when: getpkg
   portage:
     package: "@world"
@@ -41,6 +41,6 @@
     # and can't figure out how to find a better version without
     # further backtracking.
     backtrack: 100
-- name: depclean
+- name: Depclean
   portage:
     depclean: true

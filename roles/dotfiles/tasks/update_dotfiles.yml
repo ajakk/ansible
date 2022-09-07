@@ -1,9 +1,9 @@
 ---
-- name: check if key exists
+- name: Check if key exists
   ansible.builtin.stat:
     path: /home/jake/.ssh/id_ed25519.pub
   register: keyfile_info
-- name: generate ssh key
+- name: Generate ssh key
   become_user: jake
   when: not keyfile_info.stat.exists
   openssh_keypair:
@@ -12,7 +12,7 @@
     size: 256
     state: present
     comment: jake@{{ ansible_hostname }}
-- name: pull {{ dotdir }}
+- name: Pull {{ dotdir }}
   become_user: jake
   ansible.builtin.git:
     repo: git@git.ajak.xyz:ajak/{{ dotdir }}.git
@@ -20,7 +20,7 @@
     update: true
     version: master
     accept_newhostkey: true
-- name: find directories of dotfiles to stow
+- name: Find directories of dotfiles to stow
   become_user: jake
   vars:
     user_home: /home/jake
@@ -29,7 +29,7 @@
     recurse: false
     file_type: directory
   register: files
-- name: deploy dotfiles with stow
+- name: Deploy dotfiles with stow
   become_user: jake
   loop: "{{ files.files }}"
   vars:

@@ -1,5 +1,5 @@
 ---
-- name: copy zfs cron jobs
+- name: Copy zfs cron jobs
   when: zfs
   ansible.builtin.copy:
     src: etc/{{ item }}

@@ -1,9 +1,9 @@
 ---
-- name: restart dnsmasq
+- name: Restart dnsmasq
   ansible.builtin.service:
     name: dnsmasq
     state: restarted
 # TODO: this should probably be available globally
-- name: reload systemd
+- name: Reload systemd
   ansible.builtin.systemd:
     daemon_reload: true

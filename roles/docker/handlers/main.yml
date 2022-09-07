@@ -1,19 +1,19 @@
 ---
-- name: restart traefik
+- name: Restart traefik
   docker_compose:
     project_src: /etc/mervin
     pull: true
     build: true
     state: present
     restarted: true
-- name: restart mervin
+- name: Restart mervin
   docker_compose:
     project_src: /etc/mervin
     pull: true
     build: true
     state: present
     restarted: true
-- name: restart homeassistant
+- name: Restart homeassistant
   docker_compose:
     project_src: /etc/homeassistant
     pull: true

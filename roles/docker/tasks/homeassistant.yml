@@ -1,5 +1,5 @@
 ---
-- name: add homeassistant's configuration
+- name: Add homeassistant's configuration
   ansible.builtin.template:
     src: configuration.yaml.j2
     dest: "{{ ha_confdir }}/configuration.yaml"
@@ -10,7 +10,7 @@
 # Formerly this was done using a docker-compose.yml thrown into git
 # somewhere. We can't easily control labels for traefik this way, so
 # we instead manage the container directly
-- name: start the homeassistant container
+- name: Start the homeassistant container
   # mostly grokked out of:
   # https://www.home-assistant.io/installation/linux#install-home-assistant-container
   community.docker.docker_container:

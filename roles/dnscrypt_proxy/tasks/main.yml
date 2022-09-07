@@ -1,16 +1,16 @@
 ---
-- name: install dnscrypt-proxy configuration
-  notify: restart dnscrypt-proxy
+- name: Install dnscrypt-proxy configuration
+  notify: Restart dnscrypt-proxy
   when: dnscryptproxy
   block:
-    - name: install dnscrypt-proxy.toml
+    - name: Install dnscrypt-proxy.toml
       ansible.builtin.copy:
         src: dnscrypt-proxy.toml
         dest: /etc/dnscrypt-proxy/dnscrypt-proxy.toml
         owner: root
         group: root
         mode: 0644
-- name: start and enable dnscrypt-proxy
+- name: Start and enable dnscrypt-proxy
   when: dnscryptproxy
   ansible.builtin.service:
     name: dnscrypt-proxy

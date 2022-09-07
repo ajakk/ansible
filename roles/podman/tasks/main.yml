@@ -1,5 +1,5 @@
 ---
-- name: install podman's storage.conf
+- name: Install podman's storage.conf
   when: podman_zfs_dataset is defined
   ansible.builtin.template:
     src: storage.conf.j2

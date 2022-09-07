@@ -1,4 +1,4 @@
 ---
-- name: configure prometheus
+- name: Configure prometheus
   when: prometheus
   include_tasks: prometheus.yml

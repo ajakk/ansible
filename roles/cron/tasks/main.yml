@@ -1,5 +1,5 @@
 ---
-- name: copy cron files
+- name: Copy cron files
   ansible.builtin.copy:
     src: etc/
     dest: /etc/

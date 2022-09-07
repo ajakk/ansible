@@ -1,6 +1,6 @@
 ---
-- name: install sshd configuration
-  notify: restart sshd
+- name: Install sshd configuration
+  notify: Restart sshd
   ansible.builtin.copy:
     src: sshd_config
     dest: /etc/ssh/sshd_config
@@ -8,7 +8,7 @@
     owner: root
     group: root
     mode: 0644
-- name: enable sshd
+- name: Enable sshd
   ansible.builtin.service:
     name: sshd
     enabled: true

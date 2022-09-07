@@ -1,5 +1,5 @@
 ---
-- name: clean repo_dir
+- name: Clean repo_dir
   ansible.builtin.file:
     state: absent
     path: /var/db/repos/gentoo

@@ -1,4 +1,4 @@
 ---
-- name: include ansible-pull
+- name: Include ansible-pull
   when: ansible_pull
   include_tasks: ansible-pull.yml

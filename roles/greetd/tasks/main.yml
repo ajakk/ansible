@@ -1,5 +1,5 @@
 ---
-- name: install greetd's config.toml
+- name: Install greetd's config.toml
   when: "'desktop' in group_names"
   ansible.builtin.copy:
     src: config.toml

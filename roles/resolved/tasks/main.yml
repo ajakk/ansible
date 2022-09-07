@@ -1,5 +1,5 @@
 ---
-- name: link resolv.conf to resolved's stub
+- name: Link resolv.conf to resolved's stub
   when: resolved
   ansible.builtin.file:
     src: /run/systemd/resolve/stub-resolv.conf
@@ -9,7 +9,7 @@
     mode: 0644
     state: link
     force: true
-- name: install resolved configuration
+- name: Install resolved configuration
   when: resolved
   notify: restart systemd-resolved
   ansible.builtin.template:

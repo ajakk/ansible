@@ -1,8 +1,8 @@
 ---
-- name: deploy mervin
-  notify: restart mervin
+- name: Deploy mervin
+  notify: Restart mervin
   block:
-    - name: create mervin's git repo
+    - name: Create mervin's git repo
       ansible.builtin.git:
         repo: "{{ mervin_repo }}"
         dest: "{{ mervin_confdir }}"
@@ -11,7 +11,7 @@
         version: master
         accept_newhostkey: true
         force: true
-    - name: update and build mervin's image
+    - name: Update and build mervin's image
       docker_compose:
         project_src: "{{ mervin_confdir }}"
         pull: true

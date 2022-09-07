@@ -1,18 +1,16 @@
 ---
-- name: collect network mounts
+- name: Collect network mounts
   ansible.builtin.set_fact:
-    network_mounts:
-      "{{ lookup('ansible.builtin.vars', *
-      q('ansible.builtin.varnames', 'netmounts')) }}"
-- name: create dirs for network mounts
+    network_mounts: "{{ lookup('ansible.builtin.vars', * q('ansible.builtin.varnames', 'netmounts')) }}"
+- name: Create dirs for network mounts
   ansible.builtin.file:
-    path: "/network/{{ item['target'] }}"
+    path: /network/{{ item['target'] }}
     state: directory
     owner: root
     group: root
     mode: 0755
   with_items: "{{ network_mounts }}"
-- name: deploy fstab
+- name: Deploy fstab
   ansible.builtin.template:
     src: fstab.j2
     dest: /etc/fstab

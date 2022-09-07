@@ -8,5 +8,3 @@ exclude_paths:
 warn_list:
   # Silence false positive in https://github.com/ajakk/ansible/runs/8059329138
   - var-spacing
-  # Silence inconsistent naming errors. This is a silly rule anyway, I think.
-  - name[casing]

@@ -1,23 +1,23 @@
 ---
-- name: install nullmailer configuration
-  notify: restart nullmailer
+- name: Install nullmailer configuration
+  notify: Restart nullmailer
   when: not postfix or postfix is not defined
   block:
-    - name: install nullmailer remotes configuration
+    - name: Install nullmailer remotes configuration
       ansible.builtin.copy:
         src: remotes
         dest: /etc/nullmailer/remotes
         owner: root
         group: nullmail
         mode: 0640
-    - name: install nullmailer me configuration
+    - name: Install nullmailer me configuration
       ansible.builtin.copy:
         content: "{{ ansible_hostname }}"
         dest: /etc/nullmailer/me
         owner: root
         group: root
         mode: 0644
-    - name: install nullmailer defaultdomain configuration
+    - name: Install nullmailer defaultdomain configuration
       ansible.builtin.copy:
         content: "{{ ansible_domain }}"
         dest: /etc/nullmailer/defaultdomain
@@ -25,7 +25,7 @@
         group: root
         mode: 0644
 
-- name: start and enable nullmailer
+- name: Start and enable nullmailer
   when: not postfix or postfix is not defined
   ansible.builtin.service:
     name: nullmailer

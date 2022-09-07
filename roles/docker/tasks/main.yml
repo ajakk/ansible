@@ -1,10 +1,10 @@
 ---
-- name: add traefik
+- name: Add traefik
   include_tasks: traefik.yml
   when: traefik
-- name: add mervin
+- name: Add mervin
   include_tasks: mervin.yml
   when: mervin
-- name: add homeassistant
+- name: Add homeassistant
   include_tasks: homeassistant.yml
   when: homeassistant

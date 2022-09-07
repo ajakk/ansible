@@ -1,5 +1,5 @@
 ---
-- name: create prometheus config directories
+- name: Create prometheus config directories
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
@@ -11,14 +11,14 @@
     - "{{ prom_confdir }}/alerts"
     - "{{ am_confdir }}"
     - "{{ am_confdir }}/template"
-- name: create prometheus data directory
+- name: Create prometheus data directory
   ansible.builtin.file:
     path: "{{ prom_datadir }}"
     state: directory
     owner: nobody
     group: nobody
     mode: 0755
-- name: install prometheus.yml
+- name: Install prometheus.yml
   ansible.builtin.template:
     src: prometheus.yml.j2
     dest: "{{ prom_confdir }}/prometheus.yml"
@@ -26,7 +26,7 @@
     group: root
     mode: 0644
     # validate: promtool check config %s
-- name: install prometheus alerts
+- name: Install prometheus alerts
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ prom_confdir }}/alerts/{{ item | basename }}"
@@ -36,7 +36,7 @@
     # validate: promtool check config %s
   with_fileglob:
     - alerts/*
-- name: install alertmanager config
+- name: Install alertmanager config
   ansible.builtin.template:
     src: am_config.yml.j2
     dest: "{{ am_confdir }}/alertmanager.yml"
@@ -44,14 +44,14 @@
     group: root
     mode: 0644
     # validate: amtool check-config %s
-- name: install docker-compose.yml
+- name: Install docker-compose.yml
   ansible.builtin.template:
     src: docker-compose.yml.j2
     dest: "{{ prom_confdir }}/docker-compose.yml"
     owner: root
     group: root
     mode: 0644
-- name: run prometheus and alertmanager
+- name: Run prometheus and alertmanager
   docker_compose:
     project_src: "{{ prom_confdir }}"
     pull: true

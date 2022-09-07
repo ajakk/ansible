@@ -1,16 +1,16 @@
 ---
-- name: install postfix configuration
-  notify: restart postfix
+- name: Install postfix configuration
+  notify: Restart postfix
   when: postfix
   block:
-    - name: install main.cf
+    - name: Install main.cf
       ansible.builtin.template:
         src: main.cf.j2
         dest: /etc/postfix/main.cf
         owner: root
         group: root
         mode: 0644
-    - name: install generic
+    - name: Install generic
       notify: regenerate generic.db
       ansible.builtin.template:
         src: generic.j2
@@ -18,7 +18,7 @@
         owner: root
         group: root
         mode: 0644
-    - name: install password file
+    - name: Install password file
       notify: regenerate password.db
       ansible.builtin.copy:
         src: password
@@ -26,7 +26,7 @@
         owner: root
         group: root
         mode: 0600
-- name: enable postfix
+- name: Enable postfix
   when: postfix
   ansible.builtin.service:
     name: postfix

@@ -1,7 +1,7 @@
 ---
-- name: install gitea configuration
+- name: Install gitea configuration
   when: gitea
-  notify: restart gitea
+  notify: Restart gitea
   ansible.builtin.copy:
     src: "{{ ansible_hostname }}.app.ini"
     dest: /etc/gitea/app.ini

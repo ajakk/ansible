@@ -1,19 +1,19 @@
 ---
-- name: create podman-gentoo config dir
+- name: Create podman-gentoo config dir
   ansible.builtin.file:
     path: /etc/podman-gentoo
     state: directory
     owner: root
     group: root
     mode: 0644
-- name: install update scripts per host
+- name: Install update scripts per host
   ansible.builtin.copy:
     src: "{{ ansible_hostname }}/usr/local/bin/update_images.sh"
     dest: /usr/local/bin/update_images.sh
     owner: root
     group: root
     mode: 0744
-- name: install cronjobs per host
+- name: Install cronjobs per host
   ansible.builtin.copy:
     src: update-images
     dest: /etc/cron.d/update-images

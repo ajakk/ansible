@@ -1,11 +1,11 @@
 ---
-- name: start and enable services
+- name: Start and enable services
   ansible.builtin.service:
     name: "{{ item }}"
     state: started
     enabled: true
   with_items: "{{ services + host_services }}"
-- name: stop and disable services
+- name: Stop and disable services
   ansible.builtin.service:
     name: "{{ item }}"
     state: stopped

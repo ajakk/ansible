@@ -1,6 +1,6 @@
 ---
-- name: install dnsmasq.conf
-  notify: restart dnsmasq
+- name: Install dnsmasq.conf
+  notify: Restart dnsmasq
   ansible.builtin.template:
     src: dnsmasq.conf.j2
     dest: /etc/dnsmasq.conf
@@ -8,8 +8,8 @@
     owner: root
     group: root
     mode: 0644
-- name: install authoritative records conf file
-  notify: restart dnsmasq
+- name: Install authoritative records conf file
+  notify: Restart dnsmasq
   ansible.builtin.template:
     src: dnsmasq-zones.conf.j2
     dest: /etc/dnsmasq-zones.conf
@@ -17,17 +17,17 @@
     owner: root
     group: root
     mode: 0644
-- name: install systemd service drop-in to support auth-server
+- name: Install systemd service drop-in to support auth-server
   notify:
-    - restart dnsmasq
-    - reload systemd
+    - Restart dnsmasq
+    - Reload systemd
   ansible.builtin.copy:
     src: override.conf
     dest: /etc/systemd/system/dnsmasq.service.d/override.conf
     owner: root
     group: root
     mode: 0644
-- name: start and enable dnsmasq
+- name: Start and enable dnsmasq
   ansible.builtin.service:
     name: dnsmasq
     state: started

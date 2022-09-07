@@ -1,4 +1,4 @@
 ---
-- name: configure unbound
+- name: Configure unbound
   when: unbound
   include_tasks: unbound.yml

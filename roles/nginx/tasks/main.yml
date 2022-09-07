@@ -1,7 +1,7 @@
 ---
-- name: install nginx configuration
+- name: Install nginx configuration
   when: nginx
-  notify: restart nginx
+  notify: Restart nginx
   ansible.builtin.copy:
     src: "{{ ansible_hostname }}.nginx.conf"
     dest: /etc/nginx/nginx.conf
@@ -9,7 +9,7 @@
     owner: root
     group: root
     mode: 0644
-- name: start and enable nginx
+- name: Start and enable nginx
   when: nginx
   ansible.builtin.service:
     name: nginx

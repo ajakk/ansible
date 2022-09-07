@@ -1,5 +1,5 @@
 ---
-- name: install repos
+- name: Install repos
   ansible.builtin.template:
     src: repo.conf.j2
     dest: /etc/portage/repos.conf/{{ item }}.conf
@@ -7,17 +7,17 @@
     group: root
     mode: 0644
   with_items: "{{ repos + host_repos }}"
-- name: accept_keywords
+- name: Add accepted keywords
   when: ansible_hostname == 'raptor'
   block:
-    - name: create directory
+    - name: Create directory
       ansible.builtin.file:
         path: /etc/portage/package_accept_keywords
         state: directory
         owner: root
         group: root
         mode: 0644
-    - name: deploy accept_keywords file
+    - name: Deploy accept_keywords file
       ansible.builtin.copy:
         src: package.accept_keywords
         dest: /etc/portage/package.accept_keywords/package.accept_keywords
