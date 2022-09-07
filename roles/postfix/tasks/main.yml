@@ -11,7 +11,7 @@
         group: root
         mode: 0644
     - name: Install generic
-      notify: regenerate generic.db
+      notify: Regenerate generic.db
       ansible.builtin.template:
         src: generic.j2
         dest: /etc/postfix/generic
@@ -19,7 +19,7 @@
         group: root
         mode: 0644
     - name: Install password file
-      notify: regenerate password.db
+      notify: Regenerate password.db
       ansible.builtin.copy:
         src: password
         dest: /etc/postfix/password

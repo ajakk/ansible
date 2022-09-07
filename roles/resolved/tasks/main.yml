@@ -11,7 +11,7 @@
     force: true
 - name: Install resolved configuration
   when: resolved
-  notify: restart systemd-resolved
+  notify: Restart systemd-resolved
   ansible.builtin.template:
     src: resolved.conf.j2
     dest: /etc/systemd/resolved.conf
