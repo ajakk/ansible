@@ -63,8 +63,6 @@
       tags: postfix
     - role: nullmailer
       tags: nullmailer
-    - role: alertmanager
-      tags: alertmanager
     - role: prometheus
       tags: prometheus
     - role: gitea
