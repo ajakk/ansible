@@ -1,0 +1,25 @@
+---
+version: "3.9"
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      - "{{ prom_confdir }}:/etc/prometheus"
+      - "{{ prom_datadir }}:/prometheus"
+    networks:
+      - traefik
+    labels:
+      traefik.http.routers.prometheus.rule: Host(`prometheus.{{ public_domain }}`)
+      traefik.http.routers.prometheus.tls: "true"
+      traefik.http.routers.prometheus.tls.certresolver: myresolver
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: alertmanager
+    restart: unless-stopped
+    volumes:
+      - "{{ am_confdir }}:/etc/alertmanager"
+networks:
+  traefik:
+    external: true

@@ -9,6 +9,8 @@
   with_items:
     - "{{ prom_confdir }}"
     - "{{ prom_confdir }}/alerts"
+    - "{{ am_confdir }}"
+    - "{{ am_confdir }}/template"
 - name: create prometheus data directory
   ansible.builtin.file:
     path: "{{ prom_datadir }}"
@@ -25,26 +27,33 @@
     mode: 0644
     # validate: promtool check config %s
 - name: install prometheus alerts
-  when: prometheus
-  with_fileglob:
-    - alerts/*
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ prom_confdir }}/alerts/{{ item | basename }}"
+    owner: root
+    group: root
     mode: 0644
     # validate: promtool check config %s
-- name: update and run prometheus container
-  community.docker.docker_container:
-    name: prometheus
-    image: prom/prometheus:latest
+  with_fileglob:
+    - alerts/*
+- name: install alertmanager config
+  ansible.builtin.template:
+    src: am_config.yml.j2
+    dest: "{{ am_confdir }}/alertmanager.yml"
+    owner: root
+    group: root
+    mode: 0644
+    # validate: amtool check-config %s
+- name: install docker-compose.yml
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "{{ prom_confdir }}/docker-compose.yml"
+    owner: root
+    group: root
+    mode: 0644
+- name: run prometheus and alertmanager
+  docker_compose:
+    project_src: "{{ prom_confdir }}"
     pull: true
-    state: started
-    restart_policy: unless-stopped
-    network_mode: traefik
-    labels:
-      traefik.http.routers.prometheus.rule: Host(`prometheus.{{ public_domain }}`)
-      traefik.http.routers.prometheus.tls: "true"
-      traefik.http.routers.prometheus.tls.certresolver: myresolver
-    volumes:
-      - "{{ prom_confdir }}:/etc/prometheus"
-      - "{{ prom_datadir }}:/prometheus"
+    build: true
+    state: present
