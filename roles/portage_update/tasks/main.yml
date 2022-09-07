@@ -12,6 +12,7 @@
     dest: /etc/portage
     update: true
     version: master
+    accept_newhostkey: true
 - name: Update repository
   # Only run when the repo's timestamp is from more than an hour ago
   when: not nfsrepo and (((ansible_date_time['epoch'] | int) - (repo_timestamp['stdout'] | int)) > 3600)
