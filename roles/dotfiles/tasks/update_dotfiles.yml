@@ -43,6 +43,7 @@
   ansible.builtin.shell: >-
     (
     [[
+    ! -e "{{ user_home }}/.ssh" &&
     -e "{{ user_home }}/.ssh/known_hosts" &&
     ! -L "{{ user_home }}/.ssh/known_hosts"
     ]] && mv {{ user_home }}/.ssh/known_hosts{,.bak}
