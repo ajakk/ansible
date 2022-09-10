@@ -1,5 +1,5 @@
 ---
-repo_root: http://git.wg.ajak.xyz/ajak
+repo_root: https://git.ajak.xyz/ajak
 this_repo: "{{ repo_root }}/ansible"
 secrets_repo: "{{ repo_root }}/ansible-secrets"
 timezone: US/Central
@@ -33,7 +33,6 @@ dnscryptproxy: false
 dotsecrets: false
 dnsmasq: false
 filesystems: {}
-gitea: false
 host_repos: []
 host_services: []
 host_stopservices: []

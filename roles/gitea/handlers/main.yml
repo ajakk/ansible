@@ -1,5 +1,8 @@
 ---
-- name: Restart gitea
-  ansible.builtin.service:
-    name: gitea
-    state: restarted
+- name: Rebuild gitea
+  docker_compose:
+    project_src: "{{ gitea_confdir }}"
+    pull: true
+    build: true
+    state: present
+    recreate: always

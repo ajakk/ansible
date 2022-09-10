@@ -1,8 +1,8 @@
 ---
 - name: Install sshd configuration
   notify: Restart sshd
-  ansible.builtin.copy:
-    src: sshd_config
+  ansible.builtin.template:
+    src: sshd_config.j2
     dest: /etc/ssh/sshd_config
     validate: sshd -tf %s
     owner: root

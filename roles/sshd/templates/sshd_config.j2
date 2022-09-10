@@ -120,3 +120,9 @@ AcceptEnv LANG LC_ALL LC_COLLATE LC_CTYPE LC_MESSAGES LC_MONETARY LC_NUMERIC LC_
 
 # Allow client to pass COLORTERM to match TERM. #658540
 AcceptEnv COLORTERM
+
+{% if gitea is defined and gitea %}
+Match User git
+  AuthorizedKeysCommandUser git
+  AuthorizedKeysCommand /usr/bin/ssh -p 2222 -o StrictHostKeyChecking=no git@127.0.0.1 /usr/local/bin/gitea keys -c /data/gitea/conf/app.ini -e git -u %u -t %t -k %k
+{% endif %}

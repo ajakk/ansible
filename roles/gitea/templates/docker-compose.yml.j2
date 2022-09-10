@@ -1,0 +1,28 @@
+---
+version: "3.9"
+services:
+  gitea:
+    image: gitea/gitea:latest
+    container_name: gitea
+    restart: unless-stopped
+    environment:
+      - USER_UID={{ git_uid }}
+      - USER_GID={{ git_gid }}
+    volumes:
+      - "{{ gitea_datadir }}:/data"
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - traefik
+    labels:
+      traefik.http.routers.git.rule: Host(`git.{{ public_domain }}`)
+      traefik.http.routers.git.tls: "true"
+      traefik.http.routers.git.tls.certresolver: myresolver
+      traefik.http.services.gitea-websecure.loadbalancer.server.port: 3000
+    expose:
+      - 2222
+    ports:
+      - "127.0.0.1:2222:22"
+networks:
+  traefik:
+    external: true

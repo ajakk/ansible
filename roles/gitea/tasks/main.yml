@@ -1,10 +1,4 @@
 ---
-- name: Install gitea configuration
+- name: Configure and run gitea
   when: gitea
-  notify: Restart gitea
-  ansible.builtin.copy:
-    src: "{{ ansible_hostname }}.app.ini"
-    dest: /etc/gitea/app.ini
-    owner: root
-    group: root
-    mode: "0644"
+  include_tasks: gitea.yml
