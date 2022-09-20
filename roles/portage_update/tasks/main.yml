@@ -1,6 +1,10 @@
 ---
 # TODO: somehow reorganize to not duplicate work between git and ansible
 # Only sometimes host stuff is in Git. Maybe automate?
+- name: Check Gentoo repo existence
+  ansible.builtin.stat:
+    path: /var/db/repos/gentoo/
+  register: repo_state
 - name: Register repository timestamp
   ansible.builtin.shell: date -ud "$(cat /var/db/repos/gentoo/metadata/timestamp.chk)" +%s
   register: repo_timestamp
@@ -15,7 +19,7 @@
     accept_newhostkey: true
 - name: Update repository
   # Only run when the repo's timestamp is from more than an hour ago
-  when: not nfsrepo and (((ansible_date_time['epoch'] | int) - (repo_timestamp['stdout'] | int)) > 3600)
+  when: not repo_state.stat.exists or (not nfsrepo and (((ansible_date_time['epoch'] | int) - (repo_timestamp['stdout'] | int)) > 3600))
   portage:
     sync: true
 - name: Update world (usepkg)

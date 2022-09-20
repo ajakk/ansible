@@ -1,4 +1,13 @@
 ---
+- name: Check if gentoo repo is a git repo
+  ansible.builtin.stat:
+    path: "{{ gentoo_repo_base }}/gentoo/.git"
+  register: repo_state
+- name: Remove rsync'd gentoo repo
+  when: not repo_state.stat.exists
+  ansible.builtin.file:
+    path: "{{ gentoo_repo_base }}/gentoo"
+    state: absent
 - name: Install repos
   ansible.builtin.template:
     src: repo.conf.j2
