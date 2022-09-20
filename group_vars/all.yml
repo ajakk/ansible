@@ -20,7 +20,6 @@ gentoo_repos:
     extra_lines: |
       auto-sync = yes
       sync-git-verify-commit-signature = yes
-      sync-depth = 1
   ajak:
     source: https://gitlab.com/ajak/ajak
 
