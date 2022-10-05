@@ -1,0 +1,15 @@
+---
+- name: Deploy dns server stack
+  when: dnsserver
+  block:
+    # dnscrypt-proxy for handling outbound requests
+    # unbound for handling local zone
+    # pihole for filtering
+    - name: Setup docker network
+      include_tasks: network.yml
+    - name: Deploy dnscrypt-proxy
+      include_tasks: dnscryptproxy.yml
+    - name: Deploy unbound
+      include_tasks: unbound.yml
+    - name: Deploy pihole
+      include_tasks: pihole.yml

@@ -1,0 +1,22 @@
+---
+- name: Update and start pihole
+  community.docker.docker_container:
+    name: pihole
+    image: pihole/pihole:latest
+    pull: true
+    state: started
+    restart_policy: unless-stopped
+    network_mode: "{{ network_name }}"
+    labels:
+      traefik.http.routers.pihole.rule: Host(`pihole.{{ public_domain }}`)
+      traefik.http.routers.pihole.tls: "true"
+      traefik.http.routers.pihole.tls.certresolver: myresolver
+      traefik.http.services.pihole-websecure.loadbalancer.server.port: "1234"
+    env:
+      PIHOLE_DNS_: "unbound"
+      DNSMASQ_LISTENING: "all"
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      # TODO: traefik
+      - "80:80"

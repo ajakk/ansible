@@ -77,3 +77,5 @@
       tags: services
     - role: docker
       tags: docker
+    - role: dnsserver
+      tags: dnsserver

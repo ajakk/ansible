@@ -1,0 +1,6 @@
+---
+network_name: dnsserver
+dnsserver: false
+
+unbound_confdir: /etc/unbound
+dnscryptproxy_confdir: /etc/dnscrypt-proxy

@@ -1,0 +1,30 @@
+---
+# TODO: revisit dealing with this in a container
+- name: Create unbound configuration directory
+  ansible.builtin.file:
+    path: /etc/unbound
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+- name: Install unbound configuration
+  ansible.builtin.template:
+    src: "{{ item }}.j2"
+    dest: "{{ unbound_confdir }}/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - "{{ public_domain }}.zone"
+    - "unbound.conf"
+- name: Update and start unbound
+  # RESTART WHEN CONFIG CHANGED
+  community.docker.docker_container:
+    name: unbound
+    image: ajak/unbound
+    pull: true
+    state: started
+    network_mode: "{{ network_name }}"
+    restart_policy: unless-stopped
+    volumes:
+      - "{{ unbound_confdir }}:/etc/unbound:ro"

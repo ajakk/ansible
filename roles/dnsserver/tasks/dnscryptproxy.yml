@@ -1,0 +1,26 @@
+---
+- name: Create dnscrypt-proxy configuration dir
+  ansible.builtin.file:
+    path: "{{ dnscryptproxy_confdir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+- name: Add dnscrypt-proxy configuration
+  ansible.builtin.copy:
+    src: "dnscrypt-proxy.toml"
+    dest: "{{ dnscryptproxy_confdir }}/dnscrypt-proxy.toml"
+    owner: root
+    group: root
+    mode: 0644
+- name: Deploy dnscrypt-proxy
+  community.docker.docker_container:
+    name: dnscrypt-proxy
+    # TODO - roll my own? this is out of date
+    image: gists/dnscrypt-proxy
+    pull: true
+    state: started
+    restart_policy: unless-stopped
+    network_mode: "{{ network_name }}"
+    volumes:
+      - "{{ dnscryptproxy_confdir }}:/etc/dnscrypt-proxy"
