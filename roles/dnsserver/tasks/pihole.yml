@@ -15,6 +15,7 @@
     env:
       PIHOLE_DNS_: "unbound"
       DNSMASQ_LISTENING: "all"
+      FTLCONF_BLOCK_ICLOUD_PR: "false"
     ports:
       - "53:53/tcp"
       - "53:53/udp"
