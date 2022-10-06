@@ -52,7 +52,7 @@
     group: root
     mode: 0644
 - name: Run prometheus and alertmanager
-  docker_compose:
+  community.docker.docker_compose:
     project_src: "{{ prom_confdir }}"
     pull: true
     build: true

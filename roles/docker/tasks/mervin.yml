@@ -12,7 +12,7 @@
         accept_newhostkey: true
         force: true
     - name: Update and build mervin's image
-      docker_compose:
+      community.docker.docker_compose:
         project_src: "{{ mervin_confdir }}"
         pull: true
         build: true
