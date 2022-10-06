@@ -23,7 +23,7 @@
     group: root
     mode: 0600
 - name: Create traefik network
-  docker_network:
+  community.docker.docker_network:
     name: traefik
 - name: Run traefik
   community.docker.docker_compose:
