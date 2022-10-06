@@ -10,17 +10,32 @@
         owner: root
         group: nullmail
         mode: 0640
+    # TODO If the host is sufficiently new, the original facts
+    # gathering might not have gotten a hostname or domain, because
+    # those are derived from /etc/hosts and /etc/hostname, which are
+    # configured in other roles. We should gather facts again as
+    # necessary.
+    - name: Re-gather facts for hostname/domain
+      when:
+        ansible_hostname + '.' + ansible_domain != inventory_hostname
+      ansible.builtin.setup:
+        gather_subset:
+          - system
     - name: Install nullmailer me configuration
-      ansible.builtin.copy:
-        content: "{{ ansible_hostname }}"
+      ansible.builtin.lineinfile:
+        line: "{{ ansible_hostname }}"
         dest: /etc/nullmailer/me
+        regexp: ".*"
+        create: true
         owner: root
         group: root
         mode: 0644
     - name: Install nullmailer defaultdomain configuration
-      ansible.builtin.copy:
-        content: "{{ ansible_domain }}"
+      ansible.builtin.lineinfile:
+        line: "{{ ansible_domain }}"
         dest: /etc/nullmailer/defaultdomain
+        regexp: ".*"
+        create: true
         owner: root
         group: root
         mode: 0644
