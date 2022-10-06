@@ -16,6 +16,8 @@
       PIHOLE_DNS_: "unbound"
       DNSMASQ_LISTENING: "all"
       FTLCONF_BLOCK_ICLOUD_PR: "false"
+    volumes:
+      - etc_pihole:/etc/pihole
     ports:
       - "53:53/tcp"
       - "53:53/udp"
