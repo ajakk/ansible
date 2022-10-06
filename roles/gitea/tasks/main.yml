@@ -1,4 +1,4 @@
 ---
 - name: Configure and run gitea
   when: gitea
-  include_tasks: gitea.yml
+  ansible.builtin.include_tasks: gitea.yml

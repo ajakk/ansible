@@ -1,4 +1,4 @@
 ---
 - name: Configure vm's systemd-networkd
   when: inventory_hostname in groups['vms']
-  include_tasks: vm.yml
+  ansible.builtin.include_tasks: vm.yml

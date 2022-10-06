@@ -1,4 +1,4 @@
 ---
 - name: Configure prometheus
   when: prometheus
-  include_tasks: prometheus.yml
+  ansible.builtin.include_tasks: prometheus.yml

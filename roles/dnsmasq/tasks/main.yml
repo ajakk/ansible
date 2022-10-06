@@ -1,4 +1,4 @@
 ---
 - name: Configure dnsmasq
   when: dnsmasq
-  include_tasks: dnsmasq.yml
+  ansible.builtin.include_tasks: dnsmasq.yml

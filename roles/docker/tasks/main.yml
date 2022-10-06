@@ -1,10 +1,10 @@
 ---
 - name: Add traefik
-  include_tasks: traefik.yml
+  ansible.builtin.include_tasks: traefik.yml
   when: traefik
 - name: Add mervin
-  include_tasks: mervin.yml
+  ansible.builtin.include_tasks: mervin.yml
   when: mervin
 - name: Add homeassistant
-  include_tasks: homeassistant.yml
+  ansible.builtin.include_tasks: homeassistant.yml
   when: homeassistant

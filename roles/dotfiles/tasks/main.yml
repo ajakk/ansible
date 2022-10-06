@@ -1,6 +1,6 @@
 ---
 - name: Update dotfiles
-  include_tasks: update_dotfiles.yml
+  ansible.builtin.include_tasks: update_dotfiles.yml
   loop_control:
     loop_var: dotdir
   loop: "{{ [ 'dotfiles' ] + ([ 'dotsecrets' ] if dotsecrets else []) }}"

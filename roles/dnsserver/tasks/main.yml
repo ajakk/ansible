@@ -6,10 +6,10 @@
     # unbound for handling local zone
     # pihole for filtering
     - name: Setup docker network
-      include_tasks: network.yml
+      ansible.builtin.include_tasks: network.yml
     - name: Deploy dnscrypt-proxy
-      include_tasks: dnscryptproxy.yml
+      ansible.builtin.include_tasks: dnscryptproxy.yml
     - name: Deploy unbound
-      include_tasks: unbound.yml
+      ansible.builtin.include_tasks: unbound.yml
     - name: Deploy pihole
-      include_tasks: pihole.yml
+      ansible.builtin.include_tasks: pihole.yml

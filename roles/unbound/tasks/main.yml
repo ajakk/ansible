@@ -1,4 +1,4 @@
 ---
 - name: Configure unbound
   when: unbound
-  include_tasks: unbound.yml
+  ansible.builtin.include_tasks: unbound.yml
