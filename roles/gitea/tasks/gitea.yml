@@ -36,7 +36,7 @@
     mode: 0700
 - name: Generate ssh key for git
   become_user: git
-  openssh_keypair:
+  community.crypto.openssh_keypair:
     path: ~/.ssh/id_ed25519
     type: ed25519
     size: 256
