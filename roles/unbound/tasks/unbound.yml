@@ -1,7 +1,7 @@
 ---
 # Do this first so the unbound.conf validator doesn't fail due to the
 # zonefile missing.
-- name: Install {{ public_domain }}.zone
+- name: Install zonefile for {{ public_domain }}
   notify: Restart unbound
   ansible.builtin.template:
     src: "{{ public_domain }}.zone.j2"
