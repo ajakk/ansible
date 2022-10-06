@@ -20,11 +20,11 @@
 - name: Update repository
   # Only run when the repo's timestamp is from more than an hour ago
   when: not repo_state.stat.exists or (not nfsrepo and (((ansible_date_time['epoch'] | int) - (repo_timestamp['stdout'] | int)) > 3600))
-  portage:
+  portage: # noqa fqcn
     sync: true
 - name: Update world (usepkg)
   when: not getpkg
-  portage:
+  portage: # noqa fqcn
     package: "@world"
     update: true
     deep: true
@@ -33,7 +33,7 @@
     withbdeps: true
 - name: Update world (getpkg)
   when: getpkg
-  portage:
+  portage: # noqa fqcn
     package: "@world"
     update: true
     deep: true
@@ -47,5 +47,5 @@
     # further backtracking.
     backtrack: 100
 - name: Depclean
-  portage:
+  portage: # noqa fqcn
     depclean: true
