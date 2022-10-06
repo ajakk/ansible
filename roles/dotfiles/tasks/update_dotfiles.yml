@@ -6,7 +6,7 @@
 - name: Generate ssh key
   become_user: jake
   when: not keyfile_info.stat.exists
-  openssh_keypair:
+  community.crypto.openssh_keypair:
     path: ~/.ssh/id_ed25519
     type: ed25519
     size: 256
