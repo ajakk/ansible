@@ -7,6 +7,7 @@ services:
     volumes:
       - /etc/traefik/traefik.toml:/traefik.toml
       - /var/run/docker.sock:/var/run/docker.sock
+      - letsencrypt:/var/lib/traefik
     ports:
       - 80:80
       - 443:443
@@ -18,3 +19,6 @@ services:
 networks:
   traefik:
     external: true
+volumes:
+  letsencrypt:
+    external: false
