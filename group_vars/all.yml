@@ -10,7 +10,7 @@ public_domain: ajak.xyz
 my_email: jchelmert3@posteo.net
 gccarch: x86-64
 getpkg: true
-dns_server: 10.5.0.1
+dns_server: 192.168.1.213
 libvirt_bridge: virbr0
 
 # TODO: surely a way to grab these straight out of repositories.xml
