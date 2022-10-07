@@ -9,7 +9,7 @@ services:
       - USER_UID={{ git_uid }}
       - USER_GID={{ git_gid }}
     volumes:
-      - "{{ gitea_datadir }}:/data"
+      - "{{ gitea_volume }}:/data"
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     networks:
@@ -25,4 +25,7 @@ services:
       - "127.0.0.1:2222:22"
 networks:
   traefik:
+    external: true
+volumes:
+  gitea_data:
     external: true

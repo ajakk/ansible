@@ -1,4 +1,6 @@
 ---
+# TODO: confdir/datadir don't exactly make sense here when the data is
+# in a volume
 - name: Create gitea config directory
   ansible.builtin.file:
     path: "{{ item }}"
@@ -17,6 +19,9 @@
     owner: root
     group: root
     mode: 0644
+- name: Create gitea's data volume
+  community.docker.docker_volume:
+    name: "{{ gitea_volume }}"
 - name: Install gitea's docker-compose.yml
   ansible.builtin.template:
     src: docker-compose.yml.j2

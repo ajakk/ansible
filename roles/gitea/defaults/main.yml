@@ -3,6 +3,7 @@ gitea: false
 
 gitea_datadir: /network/git
 gitea_confdir: /etc/gitea
+gitea_volume: gitea_data
 
 # https://github.com/gentoo/api-gentoo-org/blob/597639e90f0d51b7f070a34fd34b59c52879b41c/files/uid-gid.txt#L253
 git_uid: 196
