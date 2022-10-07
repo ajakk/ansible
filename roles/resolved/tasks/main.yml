@@ -1,26 +1,4 @@
 ---
-- name: Link resolv.conf to resolved's stub
+- name: Configure resolved
   when: resolved
-  ansible.builtin.file:
-    src: /run/systemd/resolve/stub-resolv.conf
-    dest: /etc/resolv.conf
-    owner: root
-    group: root
-    mode: 0644
-    state: link
-    force: true
-- name: Install resolved configuration
-  when: resolved
-  notify: Restart systemd-resolved
-  ansible.builtin.template:
-    src: resolved.conf.j2
-    dest: /etc/systemd/resolved.conf
-    owner: root
-    group: root
-    mode: 0644
-- name: Start and enable resolved
-  when: resolved
-  ansible.builtin.service:
-    name: systemd-resolved
-    state: started
-    enabled: true
+  ansible.builtin.include_tasks: resolved.yml
