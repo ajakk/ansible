@@ -6,6 +6,12 @@ services:
     container_name: gitea
     restart: unless-stopped
     environment:
+      - GITEA__database__PATH=/data/gitea.db
+      - GITEA__repository__ROOT=/data/gitea-repositories
+      - GITEA__server__SSH_DOMAIN=git.{{ public_domain }}
+      - GITEA__server__DOMAIN=git.{{ public_domain }}
+      - GITEA__server__ROOT_URL=https://git.{{ public_domain }}
+      - GITEA__picture__DISABLE_GRAVATAR=true
       - USER_UID={{ git_uid }}
       - USER_GID={{ git_gid }}
     volumes:

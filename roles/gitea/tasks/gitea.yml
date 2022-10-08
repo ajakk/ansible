@@ -1,6 +1,4 @@
 ---
-# TODO: confdir/datadir don't exactly make sense here when the data is
-# in a volume
 - name: Create gitea config directory
   ansible.builtin.file:
     path: "{{ item }}"
@@ -10,15 +8,6 @@
     mode: 0755
   with_items:
     - "{{ gitea_confdir }}"
-- name: Install gitea's config file
-  notify: Rebuild gitea
-  ansible.builtin.copy:
-    src: app.ini
-    # gitea uses configuration from the data directory
-    dest: "{{ gitea_datadir }}/gitea/conf/app.ini"
-    owner: root
-    group: root
-    mode: 0644
 - name: Create gitea's data volume
   community.docker.docker_volume:
     name: "{{ gitea_volume }}"
@@ -48,13 +37,15 @@
     state: present
     comment: git@{{ ansible_hostname }}
   register: ssh_key
-- name: Add ssh key into gitea's authorized_keys
-  ansible.builtin.lineinfile:
-    path: "{{ gitea_datadir }}/git/.ssh/authorized_keys"
-    line: "{{ ssh_key.public_key }}"
-    owner: "{{ git_uid }}"
-    group: "{{ git_gid }}"
-    mode: 0600
+# TODO: datadir doesn't exactly make sense here when the data is
+# in a volume
+# - name: Add ssh key into gitea's authorized_keys
+#   ansible.builtin.lineinfile:
+#     path: "{{ gitea_datadir }}/git/.ssh/authorized_keys"
+#     line: "{{ ssh_key.public_key }}"
+#     owner: "{{ git_uid }}"
+#     group: "{{ git_gid }}"
+#     mode: 0600
 - name: Create git ssh-shell
   ansible.builtin.copy:
     src: ssh-shell
