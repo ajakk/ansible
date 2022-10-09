@@ -73,6 +73,8 @@
       tags: portage_update
     - role: podman
       tags: podman
+    - role: transmission
+      tags: transmission
     - role: dotfiles
       tags: dotfiles
     - role: services

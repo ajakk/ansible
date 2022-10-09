@@ -1,0 +1,4 @@
+---
+- name: Configure transmission
+  when: transmission
+  ansible.builtin.include_tasks: transmission.yml
