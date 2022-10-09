@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-journalctl -p 0..4 --since yesterday

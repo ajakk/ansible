@@ -59,6 +59,8 @@
       tags: greetd
     - role: nginx
       tags: nginx
+    - role: node_exporter
+      tags: node_exporter
     - role: postfix
       tags: postfix
     - role: nullmailer

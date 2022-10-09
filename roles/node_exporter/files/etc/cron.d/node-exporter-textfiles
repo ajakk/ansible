@@ -1,0 +1,1 @@
+0 * * * * node_exporter /usr/local/bin/repo_timestamp /var/lib/node_exporter/repo_timestamps.prom

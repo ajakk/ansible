@@ -1,0 +1,48 @@
+#!/usr/bin/env python
+
+import os
+from os.path import exists, join
+import time
+import sys
+
+import portage
+from portage.const import TIMESTAMP_FORMAT
+from portage.repository.config import RepoConfig
+
+
+STDOUT = '/dev/stdout'
+
+
+def _output_repo_timestamp(repository: RepoConfig, dest: str) -> None:
+    timestamp_file = join(repository.location, "metadata/timestamp.chk")
+    if not exists(timestamp_file):
+        return
+
+    with open(timestamp_file, 'r', encoding='UTF-8') as f:
+        timestamp = time.strptime(f.read().strip(), TIMESTAMP_FORMAT)
+        epoch_timestamp = int(time.mktime(timestamp))
+
+    with open(dest, 'a', encoding='UTF-8') as f:
+        f.write(
+            f"repo_timestamp{{name=\"{repository.name}\"}} {epoch_timestamp}\n"
+        )
+
+
+if __name__ == '__main__':
+    repos = portage.portdb.settings.repositories
+
+    if len(sys.argv) <= 1:
+        print(f"Usage: {sys.argv[0]} file")
+        sys.exit(0)
+
+    if sys.argv[1] == '-':
+        OUTFILE = STDOUT
+    else:
+        OUTFILE = sys.argv[1]
+
+    if OUTFILE != '/dev/stdout' and exists(OUTFILE):
+        # We want to flush away any old values
+        os.unlink(OUTFILE)
+
+    for repo in repos:
+        _output_repo_timestamp(repo, OUTFILE)

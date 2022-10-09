@@ -1,0 +1,31 @@
+---
+- name: Create node_exporter systemd service drop-in directory
+  ansible.builtin.file:
+    name: "/etc/systemd/system/node_exporter.service.d"
+    state: directory
+    owner: node_exporter
+    group: node_exporter
+    mode: 0755
+- name: Install repo timestamp script
+  ansible.builtin.copy:
+    src: usr/local/bin/repo_timestamp
+    dest: /usr/local/bin
+    owner: root
+    group: root
+    mode: 0755
+- name: Copy cronjob
+  ansible.builtin.copy:
+    src: etc/cron.d/node-exporter-textfiles
+    dest: /etc/cron.d/
+    owner: root
+    group: root
+    mode: 0644
+# TODO: drop this after https://bugs.gentoo.org/876241
+- name: Add node_exporter systemd service drop-in
+  notify: Restart node_exporter
+  ansible.builtin.copy:
+    src: etc/systemd/system/node_exporter.service.d/override.conf
+    dest: /etc/systemd/system/node_exporter.service.d/override.conf
+    owner: root
+    group: root
+    mode: 0644
