@@ -1,4 +1,11 @@
 ---
+- name: Install node_exporter
+  ansible.builtin.include_role:
+    name: portage_package
+  vars:
+    world_pkgs:
+      - app-metrics/node_exporter
+    now: true
 - name: Create node_exporter systemd service drop-in directory
   ansible.builtin.file:
     name: "/etc/systemd/system/node_exporter.service.d"
@@ -21,6 +28,7 @@
     group: root
     mode: 0644
 # TODO: drop this after https://bugs.gentoo.org/876241
+# and now 1.4.0 stabilization
 - name: Add node_exporter systemd service drop-in
   notify: Restart node_exporter
   ansible.builtin.copy:
