@@ -1,0 +1,1 @@
+*/5 * * * * root /usr/local/bin/nullmailer_exporter > /var/lib/node_exporter/nullmailer_metrics.prom

@@ -39,6 +39,20 @@
         owner: root
         group: root
         mode: 0644
+    - name: Install nullmailer metrics cronjob
+      ansible.builtin.copy:
+        src: usr/local/bin/nullmailer_exporter
+        dest: /usr/local/bin/nullmailer_exporter
+        owner: root
+        group: root
+        mode: 0755
+    - name: Install nullmailer metrics cronjob
+      ansible.builtin.copy:
+        src: etc/cron.d/nullmailer-metrics
+        dest: /etc/cron.d/nullmailer-metrics
+        owner: root
+        group: root
+        mode: 0644
 
 - name: Start and enable nullmailer
   when: not postfix or postfix is not defined
