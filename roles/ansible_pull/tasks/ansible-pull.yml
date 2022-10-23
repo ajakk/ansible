@@ -52,3 +52,17 @@
     dest: /etc/ansible-pull
     version: main
     accept_newhostkey: true
+- name: Create ansible configuration directory
+  ansible.builtin.file:
+    path: /etc/ansible/
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+- name: Add ansible.cfg
+  ansible.builtin.template:
+    src: ansible.cfg.j2
+    dest: /etc/ansible/ansible.cfg
+    owner: root
+    group: root
+    mode: 0644

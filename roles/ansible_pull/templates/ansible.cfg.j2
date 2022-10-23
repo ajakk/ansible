@@ -1,0 +1,6 @@
+[defaults]
+callbacks_enabled = mail
+
+[callback_mail]
+smtphost = {{ smtp_host }}
+sender = ansible@{{ ansible_hostname }}.{{ public_domain }}
