@@ -3,10 +3,10 @@
 from os import listdir
 from os.path import join, isfile, basename
 
-prefix = "/var/spool/nullmailer"
+PREFIX = "/var/spool/nullmailer"
 
-dirs = [join(prefix, x) for x in ["failed", "queue"]]
+dirs = [join(PREFIX, x) for x in ["failed", "queue"]]
 for d in dirs:
     files = [x for x in listdir(d)
-             if isfile(join(prefix, d, x)) and not x.startswith('.')]
+             if isfile(join(PREFIX, d, x)) and not x.startswith('.')]
     print(f"nullmailer_{basename(d)} {len(files)}")
