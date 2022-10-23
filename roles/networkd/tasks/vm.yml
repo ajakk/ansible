@@ -1,12 +1,29 @@
 ---
 - name: Install systemd-networkd configuration
+  # Little bit hacky. We have two interfaces to the VMs: an interface
+  # connected to openvswitch which provides connectivity to public
+  # network, and the private libvirt bridged network. The private
+  # network has goodies like smtp and nfs, so we want access to that
+  # subnet, but we don't want to add that as the default route.
+  # So, instead of "manually" configuring the DHCP settings on the
+  # client side, we should configure them via the DHCP
+  # server. Unfortunately, libvirt doesn't seem to be passing options
+  # from network XML to dnsmasq properly.
   notify: Restart systemd-networkd
   ansible.builtin.template:
-    src: 20-wired.network.j2
-    dest: /etc/systemd/network/20-wired.network
+    src: "20-{{ item }}.network.j2"
+    dest: "/etc/systemd/network/20-{{ item }}.network"
     owner: root
     group: root
     mode: 0644
+  with_items:
+    - public
+    - private
+- name: Remove old network file
+  notify: Restart systemd-networkd
+  ansible.builtin.file:
+    path: /etc/systemd/network/20-wired.network
+    state: absent
 - name: Start and enable systemd-networkd
   ansible.builtin.service:
     name: systemd-networkd
