@@ -83,3 +83,5 @@
       tags: docker
     - role: dnsserver
       tags: dnsserver
+    - role: grafana
+      tags: grafana
