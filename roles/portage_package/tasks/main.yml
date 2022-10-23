@@ -7,7 +7,7 @@
     package: "{{ item }}"
     noreplace: true
     getbinpkg: "{{ getpkg | default(false) }}"
-  with_items: "{{ world_pkgs }}"
+  loop: "{{ world_pkgs }}"
 - name: Debug
   ansible.builtin.debug:
     msg: "Removing these packages from world: {{ depclean_pkgs }}"
@@ -17,4 +17,4 @@
     depclean: true
     getbinpkg: true
     state: absent
-  with_items: "{{ depclean_pkgs }}"
+  loop: "{{ depclean_pkgs }}"
