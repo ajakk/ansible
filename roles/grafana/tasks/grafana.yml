@@ -1,0 +1,54 @@
+---
+- name: Create configuration directories
+  ansible.builtin.file:
+    name: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - "{{ grafana_confdir }}"
+    - "{{ grafana_confdir }}/provisioning"
+    - "{{ grafana_confdir }}/provisioning/datasources"
+- name: Add provisioned configuration
+  ansible.builtin.copy:
+    src: provisioning/datasource.yml
+    dest: "{{ grafana_confdir }}/provisioning/datasources/datasource.yml"
+    owner: root
+    group: root
+    mode: 0644
+  register: datasource_config
+- name: Add configuration
+  ansible.builtin.copy:
+    src: grafana.ini
+    dest: "{{ grafana_confdir }}/grafana.ini"
+    owner: root
+    group: root
+    mode: 0644
+  register: config
+- name: Create grafana volumes
+  community.docker.docker_volume:
+    name: "{{ item }}"
+  with_items:
+    - "grafana_varlog"
+    - "grafana_varlib"
+- name: Run grafana
+  community.docker.docker_container:
+    name: grafana
+    image: grafana/grafana-oss:latest
+    pull: true
+    state: started
+    restart_policy: unless-stopped
+    network_mode: traefik
+    labels:
+      traefik.http.routers.grafana.rule: Host(`grafana.{{ public_domain }}`)
+      traefik.http.routers.grafana.tls: "true"
+      traefik.http.routers.grafana.tls.certresolver: myresolver
+    volumes:
+      # These volumes are listed here, but not sure if they're all
+      # strictly necessary.
+      # https://grafana.com/docs/grafana/v9.0/setup-grafana/installation/docker/#migrate-from-previous-docker-containers-versions
+      - "{{ grafana_confdir }}:/etc/grafana"
+      - grafana_varlog:/var/log/grafana
+      - grafana_varlib:/var/lib/grafana
+    restart: "{{ datasource_config.changed or config.changed }}"

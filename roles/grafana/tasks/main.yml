@@ -1,0 +1,4 @@
+---
+- name: Add grafana
+  ansible.builtin.include_tasks: grafana.yml
+  when: grafana
