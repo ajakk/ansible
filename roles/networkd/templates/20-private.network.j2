@@ -3,9 +3,12 @@ Name=enp2s0
 
 [Network]
 DHCP=yes
+IPv6LinkLocalAddressGenerationMode=none
 
 [DHCP]
 UseRoutes=false
+UseDNS=false
 
 [Route]
+Gateway=192.168.122.1
 Destination=10.5.0.0/24
