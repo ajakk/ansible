@@ -1,0 +1,11 @@
+---
+# TODO: move to systemd-boot
+- name: Ensure root partition mounts rw
+  # TODO: can remove after https://github.com/systemd/systemd/issues/24978
+  # Will be in systemd-252
+  notify: Reconfigure grub
+  when: inventory_hostname in groups['vms']
+  ansible.builtin.lineinfile:
+    regex: "GRUB_CMDLINE_LINUX_DEFAULT="
+    line: "GRUB_CMDLINE_LINUX_DEFAULT=\"rw\""
+    path: /etc/default/grub

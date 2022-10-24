@@ -85,3 +85,5 @@
       tags: dnsserver
     - role: grafana
       tags: grafana
+    - role: grub
+      tags: grub
