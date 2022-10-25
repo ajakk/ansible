@@ -4,3 +4,4 @@
   loop_control:
     loop_var: dotdir
   loop: "{{ ['dotfiles'] + ['dotsecrets'] if dotsecrets else [] }}"
+  failed_when: false
