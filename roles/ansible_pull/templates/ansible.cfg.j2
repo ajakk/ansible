@@ -1,6 +1,9 @@
 [defaults]
 callbacks_enabled = mail
 
+[inventory]
+host_pattern_mismatch = ignore
+
 [callback_mail]
 smtphost = {{ smtp_host }}
 sender = ansible@{{ ansible_hostname }}.{{ public_domain }}
