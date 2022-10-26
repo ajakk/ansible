@@ -27,6 +27,9 @@ gentoo_repos:
 repos:
   - gentoo
 
+world:
+  - app-text/wgetpaste
+
 # Some default-off's so I don't have to care if a var is defined
 ansible_pull: false
 dnscryptproxy: false

@@ -4,17 +4,16 @@
     msg: "Adding these packages to world: {{ world_pkgs }}"
 - name: Add packages to world
   portage: # noqa fqcn
-    package: "{{ item }}"
+    package: "{{ world_pkgs }}"
     noreplace: true
     getbinpkg: "{{ getpkg | default(false) }}"
-  loop: "{{ world_pkgs }}"
+    state: present
 - name: Debug
   ansible.builtin.debug:
     msg: "Removing these packages from world: {{ depclean_pkgs }}"
 - name: Add packages to world
   portage: # noqa fqcn
-    package: "{{ item }}"
+    package: "{{ depclean_pkgs }}"
     depclean: true
     getbinpkg: true
     state: absent
-  loop: "{{ depclean_pkgs }}"

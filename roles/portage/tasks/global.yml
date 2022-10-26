@@ -1,0 +1,40 @@
+---
+- name: Check Gentoo repo existence
+  ansible.builtin.stat:
+    path: /var/db/repos/gentoo/
+  register: repo_state
+- name: Register repository timestamp
+  ansible.builtin.shell: date -ud "$(cat /var/db/repos/gentoo/metadata/timestamp.chk)" +%s
+  register: repo_timestamp
+  changed_when: false
+- name: Update repository
+  # Only sync when the repo's timestamp is from more than an hour ago
+  when: |-
+    (((ansible_date_time['epoch'] | int) - (repo_timestamp['stdout'] | int)) > 3600)
+  portage: # noqa fqcn
+    sync: true
+- name: Add global packages
+  portage: # noqa fqcn
+    package: "{{ world }}"
+    noreplace: true
+    getbinpkg: "{{ getpkg | default(false) }}"
+    state: present
+- name: Update world (getpkg)
+  portage: # noqa fqcn
+    package: "@world"
+    update: true
+    deep: true
+    newuse: true
+    getbinpkgonly: "{{ getpkg }}"
+    usepkgonly: "{{ not getpkg }}"
+    withbdeps: true
+
+    # This should be necessary, but when the binpkgs are generated
+    # from both unstable and stable environments, sometimes Portage
+    # unreasonably latches on to a package built with an unstable dep
+    # and can't figure out how to find a better version without
+    # further backtracking.
+    backtrack: 100
+- name: Depclean
+  portage: # noqa fqcn
+    depclean: true

@@ -1,14 +1,6 @@
 ---
 # TODO: somehow reorganize to not duplicate work between git and ansible
 # Only sometimes host stuff is in Git. Maybe automate?
-- name: Check Gentoo repo existence
-  ansible.builtin.stat:
-    path: /var/db/repos/gentoo/
-  register: repo_state
-- name: Register repository timestamp
-  ansible.builtin.shell: date -ud "$(cat /var/db/repos/gentoo/metadata/timestamp.chk)" +%s
-  register: repo_timestamp
-  changed_when: false
 - name: Pull /etc/portage
   when: portage_git
   ansible.builtin.git:
@@ -17,35 +9,7 @@
     update: true
     version: master
     accept_newhostkey: true
-- name: Update repository
-  # Only run when the repo's timestamp is from more than an hour ago
-  when: not repo_state.stat.exists or (not nfsrepo and (((ansible_date_time['epoch'] | int) - (repo_timestamp['stdout'] | int)) > 3600))
-  portage: # noqa fqcn
-    sync: true
-- name: Update world (usepkg)
-  when: not getpkg
-  portage: # noqa fqcn
-    package: "@world"
-    update: true
-    deep: true
-    newuse: true
-    usepkgonly: true
-    withbdeps: true
-- name: Update world (getpkg)
-  when: getpkg
-  portage: # noqa fqcn
-    package: "@world"
-    update: true
-    deep: true
-    newuse: true
-    getbinpkgonly: true
-
-    # This should be necessary, but when the binpkgs are generated
-    # from both unstable and stable environments, sometimes Portage
-    # unreasonably latches on to a package built with an unstable dep
-    # and can't figure out how to find a better version without
-    # further backtracking.
-    backtrack: 100
-- name: Depclean
-  portage: # noqa fqcn
-    depclean: true
+- name: Run global portage update
+  ansible.builtin.include_role:
+    tasks_from: global
+    name: portage
