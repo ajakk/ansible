@@ -11,7 +11,7 @@
 - name: Debug
   ansible.builtin.debug:
     msg: "Removing these packages from world: {{ depclean_pkgs }}"
-- name: Add packages to world
+- name: Depclean packages
   portage: # noqa fqcn
     package: "{{ depclean_pkgs }}"
     depclean: true
