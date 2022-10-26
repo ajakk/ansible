@@ -87,3 +87,5 @@
       tags: grafana
     - role: grub
       tags: grub
+    - role: password_store
+      tags: password_store

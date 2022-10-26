@@ -1,0 +1,10 @@
+---
+- name: Add and update pass database
+  become_user: jake
+  when: dotsecrets
+  ansible.builtin.git:
+    repo: "{{ pass_repo }}"
+    verify_commit: true
+    version: master
+    dest: ~/.password-store
+    accept_newhostkey: true
