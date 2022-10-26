@@ -1,10 +1,21 @@
 ---
-- name: Start and enable services
+- name: Start and enable system services
   ansible.builtin.service:
     name: "{{ item }}"
     state: started
     enabled: true
   with_items: "{{ services + host_services }}"
+- name: Start and enable user services
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+    scope: user
+  with_items: "{{ user_services }}"
+  become_user: jake
+  environment:
+    # TODO - automatic detection of UID
+    XDG_RUNTIME_DIR: "/run/user/1000"
 - name: Stop and disable services
   ansible.builtin.service:
     name: "{{ item }}"
