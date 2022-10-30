@@ -1,2 +1,11 @@
 ---
+group_assignments:
+  - name: "{{ whoami }}"
+    groups:
+      - kvm
+      - libvirt
+      - seat
+      - usb
+      - video
+      - wheel
 portage_git: true

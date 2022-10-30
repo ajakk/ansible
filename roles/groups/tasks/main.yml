@@ -1,0 +1,7 @@
+---
+- name: Add users to groups
+  loop: "{{ group_assignments }}"
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    groups: "{{ item.groups + [item.name] }}"
+    append: true

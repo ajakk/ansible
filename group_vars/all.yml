@@ -8,6 +8,7 @@ services:
   - systemd-timesyncd
 public_domain: ajak.xyz
 my_email: jchelmert3@posteo.net
+whoami: jake
 gccarch: x86-64
 getpkg: true
 dns_server: 192.168.1.213

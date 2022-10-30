@@ -89,3 +89,5 @@
       tags: grub
     - role: password_store
       tags: password_store
+    - role: groups
+      tags: groups
