@@ -41,13 +41,7 @@
   # case of running against the local host, the file is created upon
   # entry to the task
   ansible.builtin.shell: >-
-    (
-    [[
-    ! -e "{{ user_home }}/.ssh" &&
-    -e "{{ user_home }}/.ssh/known_hosts" &&
-    ! -L "{{ user_home }}/.ssh/known_hosts"
-    ]] && mv {{ user_home }}/.ssh/known_hosts{,.bak}
-    );
+    [[ -L "{{ user_home }}/.ssh/known_hosts" ]] && rm {{ user_home }}/.ssh/known_hosts &&
     stow {{ item.path | basename }}
   # TODO: yes, this is wrong, but stow is hard to talk to
   changed_when: false
