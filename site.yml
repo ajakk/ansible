@@ -91,3 +91,5 @@
       tags: password_store
     - role: groups
       tags: groups
+    - role: u2f_keys
+      tags: u2f_keys

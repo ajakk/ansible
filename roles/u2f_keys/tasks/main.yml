@@ -1,0 +1,16 @@
+---
+# TODO: deliberately not adding PAM configuration to handle this for
+# now. It's one line, and PAM's configuration format is sensitive to
+# line ordering, so attempting to add the line will be error prone. It
+# also has the side effect of requiring a touch when running over ssh
+# with the u2f device attached, and this isn't desirable when running
+# Ansible against the local host - one has to touch the device every
+# time Ansible has to authenticate for sudo.
+- name: Add u2f key mappings for authentication
+  when: u2f_mappings
+  ansible.builtin.template:
+    src: u2f_mappings.j2
+    dest: /etc/u2f_mappings
+    owner: root
+    group: root
+    mode: 0644
