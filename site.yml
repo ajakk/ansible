@@ -22,7 +22,6 @@
     - name: Gathering facts
       setup:
       tags: always
-      failed_when: true
   roles:
     - role: hosts
       tags: hosts
