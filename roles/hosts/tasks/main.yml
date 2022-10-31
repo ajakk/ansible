@@ -1,6 +1,5 @@
 ---
 - name: Install /etc/hosts
-  failed_when: true
   ansible.builtin.template:
     src: hosts.j2
     dest: /etc/hosts
