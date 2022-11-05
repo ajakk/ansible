@@ -5,6 +5,10 @@
 - name: Regenerate password.db
   ansible.builtin.command:
     cmd: postmap /etc/postfix/password
+- name: Restart postfix_exporter
+  ansible.builtin.service:
+    name: postfix_exporter
+    state: restarted
 - name: Restart postfix
   ansible.builtin.service:
     name: postfix

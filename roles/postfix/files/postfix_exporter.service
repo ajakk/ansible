@@ -1,0 +1,16 @@
+[Unit]
+Description=Postfix Prometheus Exporter
+Documentation=https://github.com/kumina/postfix_exporter
+After=network.target postfix.service
+
+[Service]
+# TODO: we should be using postfix_exporter as user/group, but don't
+# understand access control for the showq socket (which _exporter
+# needs)
+User=postfix
+Group=postfix
+ExecStart=/usr/bin/postfix_exporter --systemd.enable --postfix.logfile_path=""
+
+[Install]
+WantedBy=multi-user.target
+

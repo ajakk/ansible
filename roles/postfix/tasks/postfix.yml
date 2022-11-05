@@ -1,0 +1,53 @@
+---
+- name: Install packages
+  ansible.builtin.include_role:
+    name: portage_package
+  vars:
+    world_pkgs:
+      - app-metrics/postfix_exporter
+      - mail-mta/postfix
+    now: true
+- name: Install postfix exporter service
+  notify:
+    - Restart postfix_exporter
+    - Reload systemd
+  ansible.builtin.copy:
+    src: postfix_exporter.service
+    dest: /etc/systemd/system/postfix_exporter.service
+    owner: root
+    group: root
+    mode: 0644
+- name: Install postfix configuration
+  notify: Restart postfix
+  block:
+    - name: Install main.cf
+      ansible.builtin.template:
+        src: main.cf.j2
+        dest: /etc/postfix/main.cf
+        owner: root
+        group: root
+        mode: 0644
+    - name: Install generic
+      notify: Regenerate generic.db
+      ansible.builtin.template:
+        src: generic.j2
+        dest: /etc/postfix/generic
+        owner: root
+        group: root
+        mode: 0644
+    - name: Install password file
+      notify: Regenerate password.db
+      ansible.builtin.copy:
+        src: password
+        dest: /etc/postfix/password
+        owner: root
+        group: root
+        mode: 0600
+- name: Enable postfix services
+  ansible.builtin.service:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+  with_items:
+    - postfix
+    - postfix_exporter
