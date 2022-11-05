@@ -1,0 +1,21 @@
+---
+groups:
+  - name: AllInstances
+    rules:
+      - alert: NullmailerHighFailure
+        expr: nullmailer_failed > 0
+        for: 0m
+        labels:
+          severity: critical
+        annotations:
+          summary: Nullmailer high failure (instance {{ $labels.instance }})
+          description: "Nullmailer has a high failure rate here. Is it working?\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+      - alert: NullmailerLargeQueue
+        expr: nullmailer_queue > 0
+        for: 0m
+        labels:
+          severity: critical
+        annotations:
+          summary: Nullmailer high queue (instance {{ $labels.instance }})
+          description: "Nullmailer has a large queue here. Is it working?\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
