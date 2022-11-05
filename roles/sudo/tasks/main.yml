@@ -1,4 +1,11 @@
 ---
+- name: Create sudoers.d
+  ansible.builtin.file:
+    path: /etc/sudoers.d
+    state: directory
+    owner: root
+    group: root
+    mode: 0750
 - name: Allow users in wheel to sudo
   ansible.builtin.copy:
     src: sudoers.local
