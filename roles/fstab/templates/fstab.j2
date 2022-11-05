@@ -31,7 +31,7 @@ UUID={{ uuid }} {{ fs.mountpoint }} {{ fs.filesystem }} {{ fs.options }} {{ fs.d
 {% if ansible_hostname == 'sirius' %}
 raptor.wg.{{ public_domain }}:/tank/gentoo/binpkgs/{{ gccarch }}:stable /var/cache/binpkgs:stable nfs defaults 0 0
 {% endif %}
-{% if ansible_hostname != 'raptor' %}
+{% if ansible_hostname != 'raptor' and not satellite %}
 raptor.wg.{{ public_domain }}:/tank/gentoo/binpkgs/{{ gccarch }} /var/cache/binpkgs nfs defaults 0 0
 raptor.wg.{{ public_domain }}:/tank/gentoo/distfiles /var/cache/distfiles nfs defaults 0 0
 {% for mount in network_mounts %}
