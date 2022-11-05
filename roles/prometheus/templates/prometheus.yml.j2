@@ -21,11 +21,15 @@ scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: "prometheus"
 
-    # metrics_path defaults to '/metrics'
-    # scheme defaults to 'http'.
-
     static_configs:
       - targets: ["localhost:9090"]
+
+  - job_name: "node_exporter"
+    static_configs:
 {% for host in groups['all'] | map('extract', hostvars) | selectattr('monitor_hostname', 'defined') %}
       - targets: ["{{ host['monitor_hostname'] }}:{{ node_exporter_port }}"]
 {% endfor %}
+
+  - job_name: "postfix_exporter"
+    static_configs:
+      - targets: ["{{ smtp_host }}:{{ postfix_exporter_port }}"]

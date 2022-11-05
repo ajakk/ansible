@@ -6,6 +6,7 @@ this_repo: "{{ repo_root }}/ansible"
 secrets_repo: "{{ repo_root }}/ansible-secrets"
 timezone: US/Central
 node_exporter_port: 9100
+postfix_exporter_port: 9154
 system_services_all:
   - systemd-timesyncd
 my_email: jchelmert3@posteo.net
