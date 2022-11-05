@@ -1,4 +1,6 @@
 ---
+public_domain: ajak.xyz
+wg_domain: "wg.{{ public_domain }}"
 repo_root: https://git.ajak.xyz/ajak
 this_repo: "{{ repo_root }}/ansible"
 secrets_repo: "{{ repo_root }}/ansible-secrets"
@@ -6,13 +8,12 @@ timezone: US/Central
 node_exporter_port: 9100
 services:
   - systemd-timesyncd
-public_domain: ajak.xyz
 my_email: jchelmert3@posteo.net
 whoami: jake
 gccarch: x86-64
 getpkg: true
 dns_server: 192.168.1.213
-smtp_host: "sirius.wg.{{ public_domain }}"
+smtp_host: "sirius.{{ wg_domain }}"
 libvirt_bridge: virbr0
 
 # TODO: surely a way to grab these straight out of repositories.xml

@@ -1,6 +1,6 @@
 global:
   # The smarthost and SMTP sender used for mail notifications.
-  smtp_smarthost: 'sirius.wg.{{ public_domain }}:25'
+  smtp_smarthost: 'sirius.{{ wg_domain }}:25'
   smtp_from: 'alertmanager@{{ public_domain }}'
   smtp_require_tls: false
 
