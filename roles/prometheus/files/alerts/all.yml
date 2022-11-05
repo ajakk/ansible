@@ -49,3 +49,13 @@ groups:
         annotations:
           summary: Disk usage very high (instance {{ $labels.instance }})
           description: "Disk usage over 90%!\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+      - alert: CronieFailed
+        expr: |-
+          node_systemd_unit_state{name="cronie.service", state="failed"} != 0
+        for: 10m
+        labels:
+          severity: critical
+        annotations:
+          summary: Cronie service failed! (instance {{ $labels.instance }})
+          description: "Cronie service failed!\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
