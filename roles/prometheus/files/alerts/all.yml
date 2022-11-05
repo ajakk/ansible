@@ -37,3 +37,15 @@ groups:
         annotations:
           summary: Nullmailer high queue (instance {{ $labels.instance }})
           description: "Nullmailer has a large queue here. Is it working?\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+      - alert: DiskSpace
+        expr: |-
+          (100 -
+          ((node_filesystem_avail_bytes{fstype!~"nfs4|tmpfs"} * 100) /
+            node_filesystem_size_bytes{fstype!~"nfs4|tmpfs"})) > 90
+        for: 10m
+        labels:
+          severity: critical
+        annotations:
+          summary: Disk usage very high (instance {{ $labels.instance }})
+          description: "Disk usage over 90%!\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
