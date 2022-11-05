@@ -1,19 +1,34 @@
 ---
-- name: Deploy mervin
-  notify: Restart mervin
-  block:
-    - name: Create mervin's git repo
-      ansible.builtin.git:
-        repo: "{{ mervin_repo }}"
-        dest: "{{ mervin_confdir }}"
-        clone: true
-        update: true
-        version: master
-        accept_newhostkey: true
-        force: true
-    - name: Update and build mervin's image
-      community.docker.docker_compose:
-        project_src: "{{ mervin_confdir }}"
-        pull: true
-        build: true
-        state: present
+- name: Create user for mervin
+  ansible.builtin.user:
+    name: mervin
+    state: present
+    generate_ssh_key: true
+- name: Get user's UID/GID
+  ansible.builtin.getent:
+    database: passwd
+- name: Create mervin's git repo
+  become_user: mervin
+  ansible.builtin.git:
+    repo: "{{ mervin_repo }}"
+    dest: "{{ mervin_confdir }}"
+    clone: true
+    update: true
+    version: master
+    accept_newhostkey: true
+    force: true
+  register: conf
+- name: Update and build mervin's image
+  community.docker.docker_container:
+    name: limnoria
+    image: ghcr.io/linuxserver/limnoria
+    restart: "{{ conf.changed }}"
+    pull: true
+    state: started
+    restart_policy: unless-stopped
+    volumes:
+      - "{{ mervin_confdir }}:/config"
+      - /etc/localtime:/etc/localtime:ro
+    env:
+      PUID: "{{ getent_passwd['mervin'].1 }}"
+      GUID: "{{ getent_passwd['mervin'].2 }}"
