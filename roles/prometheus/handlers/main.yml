@@ -1,1 +1,11 @@
 ---
+- name: Restart prometheus
+  community.docker.docker_container:
+    name: prometheus
+    restart: true
+    state: started
+- name: Restart alertmanager
+  community.docker.docker_container:
+    name: alertmanager
+    restart: true
+    state: started

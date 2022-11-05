@@ -19,6 +19,7 @@
     group: nobody
     mode: 0755
 - name: Install prometheus.yml
+  notify: Restart prometheus
   ansible.builtin.template:
     src: prometheus.yml.j2
     dest: "{{ prom_confdir }}/prometheus.yml"
@@ -27,6 +28,7 @@
     mode: 0644
     # validate: promtool check config %s
 - name: Install prometheus alerts
+  notify: Restart prometheus
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ prom_confdir }}/alerts/{{ item | basename }}"
@@ -37,6 +39,7 @@
   with_fileglob:
     - alerts/*
 - name: Install alertmanager config
+  notify: Restart alertmanager
   ansible.builtin.template:
     src: am_config.yml.j2
     dest: "{{ am_confdir }}/alertmanager.yml"

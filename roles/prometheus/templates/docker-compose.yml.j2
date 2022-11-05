@@ -10,6 +10,7 @@ services:
       - "{{ prom_datadir }}:/prometheus"
     networks:
       - traefik
+      - prometheus
     labels:
       traefik.http.routers.prometheus.rule: Host(`prometheus.{{ public_domain }}`)
       traefik.http.routers.prometheus.tls: "true"
@@ -18,8 +19,11 @@ services:
     image: prom/alertmanager:latest
     container_name: alertmanager
     restart: unless-stopped
+    networks:
+      - prometheus
     volumes:
       - "{{ am_confdir }}:/etc/alertmanager"
 networks:
   traefik:
     external: true
+  prometheus:
