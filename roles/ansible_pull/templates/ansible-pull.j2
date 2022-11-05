@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 
 export ANSIBLE_NOCOWS=1
-export ANSIBLE_DISPLAY_SKIPPED_HOSTS=no
-export ANSIBLE_DISPLAY_OK_HOSTS=no
 
 pushd /etc/ansible-secrets >/dev/null
-git pull
+git pull --quiet
 popd >/dev/null
 
-ansible-pull -d /etc/ansible-pull -e usevault=false -i /etc/ansible-pull/inventory.yaml -U {{ this_repo }} --verify-commit site.yml
+ansible-pull -d /etc/ansible-pull -e usevault=false -i /etc/ansible-pull/inventory.yaml -U {{ this_repo }} --verify-commit site.yml 2>&1 >/dev/null
