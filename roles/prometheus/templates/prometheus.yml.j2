@@ -26,6 +26,6 @@ scrape_configs:
 
     static_configs:
       - targets: ["localhost:9090"]
-{% for host in groups['all'] | map('extract', hostvars) | selectattr('host_services', 'defined') | selectattr('host_services', 'contains', 'node_exporter') | map(attribute='wg_hostname') %}
-      - targets: ["{{ host }}:{{ node_exporter_port }}"]
+{% for host in groups['all'] | map('extract', hostvars) | selectattr('monitor_hostname', 'defined') %}
+      - targets: ["{{ host['monitor_hostname'] }}:{{ node_exporter_port }}"]
 {% endfor %}
