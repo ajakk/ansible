@@ -1,0 +1,2 @@
+Defaults mailto="root@localhost"
+%wheel ALL=(ALL:ALL) ALL
