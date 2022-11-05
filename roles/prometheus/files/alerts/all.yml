@@ -4,7 +4,7 @@ groups:
     rules:
       - alert: PrometheusTargetMissing
         expr: up == 0
-        for: 0m
+        for: 10m
         labels:
           severity: critical
         annotations:
@@ -22,7 +22,7 @@ groups:
 
       - alert: NullmailerHighFailure
         expr: nullmailer_failed > 0
-        for: 0m
+        for: 15m
         labels:
           severity: critical
         annotations:
@@ -31,7 +31,7 @@ groups:
 
       - alert: NullmailerLargeQueue
         expr: nullmailer_queue > 0
-        for: 0m
+        for: 15m
         labels:
           severity: critical
         annotations:
