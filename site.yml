@@ -19,10 +19,6 @@
         - pass.yml
       when: usevault | bool
       tags: always
-    - name: fail
-      assert:
-        that: false
-      tags: always
     - name: Gathering facts
       setup:
       tags: always
