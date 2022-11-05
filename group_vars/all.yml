@@ -6,7 +6,7 @@ this_repo: "{{ repo_root }}/ansible"
 secrets_repo: "{{ repo_root }}/ansible-secrets"
 timezone: US/Central
 node_exporter_port: 9100
-services:
+system_services_all:
   - systemd-timesyncd
 my_email: jchelmert3@posteo.net
 whoami: jake
@@ -39,8 +39,6 @@ dotsecrets: false
 dnsmasq: false
 filesystems: {}
 host_repos: []
-host_services: []
-host_stopservices: []
 nfsrepo: false
 nginx: false
 podman_gentoo: false
@@ -48,5 +46,4 @@ portage_git: false
 postfix: false
 prometheus: false
 resolved: true
-stopservices: []
 zfs: false
