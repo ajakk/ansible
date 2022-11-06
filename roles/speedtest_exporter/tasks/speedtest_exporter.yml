@@ -1,0 +1,12 @@
+---
+- name: Run speedtest_exporter
+  community.docker.docker_container:
+    name: speedtest_exporter
+    image: miguelndecarvalho/speedtest-exporter
+    pull: true
+    restart_policy: unless-stopped
+    state: started
+    published_ports:
+      - 9798:9798
+    exposed_ports:
+      - 9798

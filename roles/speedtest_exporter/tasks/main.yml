@@ -1,0 +1,4 @@
+---
+- name: Deploy speedtest_exporter
+  when: speedtest_exporter
+  ansible.builtin.include_tasks: speedtest_exporter.yml

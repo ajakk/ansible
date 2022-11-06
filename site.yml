@@ -75,6 +75,8 @@
       tags: podman
     - role: transmission
       tags: transmission
+    - role: speedtest_exporter
+      tags: speedtest_exporter
     - role: dotfiles
       tags: dotfiles
     - role: services
