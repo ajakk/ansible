@@ -34,7 +34,7 @@ scrape_configs:
     static_configs:
       - targets: ["{{ smtp_host }}:{{ postfix_exporter_port }}"]
 
-  - job_name: "speedtext_exporter"
+  - job_name: "speedtest_exporter"
     scrape_interval: 30m
     scrape_timeout: 1m
     static_configs:
