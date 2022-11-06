@@ -3,16 +3,17 @@
   ansible.builtin.stat:
     path: /var/db/repos/gentoo/
   register: repo_state
+- name: Register repository timestamp
+  ansible.builtin.shell: date -ud "$(cat /var/db/repos/gentoo/metadata/timestamp.chk)" +%s
+  register: repo_timestamp
+  changed_when: false
 - name: Update repository
-  # Only run when the repo's timestamp is from more than an hour ago
+  # Only sync when the repo's timestamp is from more than an hour ago
   when: |-
-    not repo_state.stat.exists or
-    (not nfsrepo and
-    (((ansible_date_time['epoch'] | int) - (repo_timestamp['stdout'] | int)) > 3600))
+    (((ansible_date_time['epoch'] | int) - (repo_timestamp['stdout'] | int)) > 3600)
   portage: # noqa fqcn
     sync: true
 - name: Update world (getpkg)
-  when: getpkg
   portage: # noqa fqcn
     package: "@world"
     update: true
