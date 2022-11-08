@@ -20,6 +20,7 @@
     update: true
     version: master
     accept_newhostkey: true
+  failed_when: false
 - name: Find directories of dotfiles to stow
   become_user: jake
   vars:
