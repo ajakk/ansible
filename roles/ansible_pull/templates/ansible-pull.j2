@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+start=$(date +%s)
+
 export ANSIBLE_NOCOWS=1
 
 pushd /etc/ansible-secrets >/dev/null
@@ -8,4 +10,8 @@ popd >/dev/null
 
 ansible-pull -d /etc/ansible-pull -e usevault=false -i /etc/ansible-pull/inventory.yaml -U {{ this_repo }} --verify-commit site.yml 2>&1 >/dev/null
 
-echo "ansible_pull_last_run $(date +%s)" > /var/lib/node_exporter/ansible_pull.prom
+end=$(date +%s)
+textfile=/var/lib/node_exporter/ansible_pull.prom
+
+echo "ansible_pull_last_run ${end}" > ${textfile}
+echo "ansible_pull_run_duration $((end-start))" >> ${textfile}
