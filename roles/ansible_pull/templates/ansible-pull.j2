@@ -13,5 +13,5 @@ ansible-pull -d /etc/ansible-pull -e usevault=false -i /etc/ansible-pull/invento
 end=$(date +%s)
 textfile=/var/lib/node_exporter/ansible_pull.prom
 
-echo "ansible_pull_last_run ${end}" > ${textfile}
+echo "ansible_pull_last_run_duration ${end}" > ${textfile}
 echo "ansible_pull_run_duration $((end-start))" >> ${textfile}
