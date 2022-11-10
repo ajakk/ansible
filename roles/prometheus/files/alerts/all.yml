@@ -59,3 +59,12 @@ groups:
         annotations:
           summary: Cronie service failed! (instance {{ $labels.instance }})
           description: "Cronie service failed!\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+      - alert: MissedAnsiblePull
+        expr: (time() - ansible_pull_last_run) > (3600*12)
+        for: 0m
+        labels:
+          severity: critical
+        annotations:
+          summary: Looks like ansible-pull isn't running properly! (instance {{ $labels.instance }})
+          description: "Looks like ansible-pull isn't running properly!\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
