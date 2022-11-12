@@ -89,8 +89,8 @@
       tags: grafana
     - role: grub
       tags: grub
-    - role: password_store
-      tags: password_store
+    # - role: password_store
+    #   tags: password_store
     - role: groups
       tags: groups
     - role: u2f_keys
