@@ -16,9 +16,11 @@
       tags: always
   tasks:
     - include_role:
-        name: "{{ item }}"
+        name: "{{ host_role }}"
         apply:
           tags:
-            - "{{ item }}"
+            - "{{ host_role }}"
       tags: always
+      loop_control:
+        loop_var: host_role
       loop: "{{ my_roles }}"
