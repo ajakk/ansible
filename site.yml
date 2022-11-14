@@ -4,23 +4,15 @@
   become: true
   hosts: all
   gather_facts: false
-  vars:
-    # Ansible will try to use the latest python it has available,
-    # which is often wrong. We don't necessarily have all the
-    # modules for that implementation, so just use /usr/bin/python.
-    ansible_python_interpreter: /usr/bin/python
-    usevault: true
   pre_tasks:
-    - name: get passwords
-      include_vars:
+    - include_vars:
         file: "{{ item }}"
       with_first_found:
         - "{{ inventory_hostname }}.pass.yml"
         - pass.yml
-      when: usevault | bool
+      when: usevault | default(True) | bool
       tags: always
-    - name: Gathering facts
-      setup:
+    - setup:
       tags: always
   tasks:
     - include_role:

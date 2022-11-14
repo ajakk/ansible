@@ -1,8 +1,11 @@
 [defaults]
 callbacks_enabled = mail
 
+# Ansible will try to use the latest python it has available,
+# which is often wrong. We don't necessarily have all the
+# modules for that implementation, so just use /usr/bin/python.
 # TODO: maybe look into INTERPRETER_PYTHON_DISTRO_MAP instead?
-interpreter_python = auto_silent
+interpreter_python = /usr/bin/python
 
 [inventory]
 host_pattern_mismatch = ignore
