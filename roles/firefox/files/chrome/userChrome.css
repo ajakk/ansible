@@ -1,0 +1,20 @@
+/* Hide horizontal tabbar */
+#TabsToolbar {
+    visibility: collapse;
+}
+
+/* Counter stuff */
+#tabbar {
+    counter-reset: vtabs atabs tabs;
+    /* vtabs tracks visible tabs, atabs tracks active tabs, tabs tracks all tabs */
+}
+
+/* Hide sidebar titles */
+#sidebar-header {
+    display: none;
+}
+
+/* Hide X button */
+tab-item tab-closebox {
+    display: none;
+}

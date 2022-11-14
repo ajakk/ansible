@@ -1,0 +1,4 @@
+---
+- name: Deploy Firefox configuration
+  when: firefox
+  ansible.builtin.include_tasks: firefox.yml

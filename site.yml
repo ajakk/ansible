@@ -95,3 +95,5 @@
       tags: groups
     - role: u2f_keys
       tags: u2f_keys
+    - role: firefox
+      tags: firefox
