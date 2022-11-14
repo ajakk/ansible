@@ -22,78 +22,11 @@
     - name: Gathering facts
       setup:
       tags: always
-  roles:
-    - role: hosts
-      tags: hosts
-    - role: sshd
-      tags: sshd
-    - role: sudo
-      tags: sudo
-    - role: timezone
-      tags: timezone
-    - role: fstab
-      tags: fstab
-    - role: networkd
-      tags: networkd
-    - role: resolved
-      tags: resolved
-    - role: zfs
-      tags: zfs
-    - role: smartd
-      tags: smartd
-    - role: portage
-      tags: portage
-    - role: python_exec
-      tags: python_exec
-    - role: ansible_pull
-      tags: ansible_pull
-    - role: podman_gentoo
-      tags: podman_gentoo
-    - role: dnsmasq
-      tags: dnsmasq
-    - role: unbound
-      tags: unbound
-    - role: dnscrypt_proxy
-      tags: dnscrypt_proxy
-    - role: greetd
-      tags: greetd
-    - role: nginx
-      tags: nginx
-    - role: node_exporter
-      tags: node_exporter
-    - role: postfix
-      tags: postfix
-    - role: nullmailer
-      tags: nullmailer
-    - role: prometheus
-      tags: prometheus
-    - role: gitea
-      tags: gitea
-    - role: portage_update
-      tags: portage_update
-    - role: podman
-      tags: podman
-    - role: transmission
-      tags: transmission
-    - role: speedtest_exporter
-      tags: speedtest_exporter
-    - role: dotfiles
-      tags: dotfiles
-    - role: services
-      tags: services
-    - role: docker
-      tags: docker
-    - role: dnsserver
-      tags: dnsserver
-    - role: grafana
-      tags: grafana
-    - role: grub
-      tags: grub
-    # - role: password_store
-    #   tags: password_store
-    - role: groups
-      tags: groups
-    - role: u2f_keys
-      tags: u2f_keys
-    - role: firefox
-      tags: firefox
+  tasks:
+    - include_role:
+        name: "{{ item }}"
+        apply:
+          tags:
+            - "{{ item }}"
+      tags: always
+      loop: "{{ my_roles }}"

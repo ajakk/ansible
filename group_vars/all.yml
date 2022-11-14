@@ -33,6 +33,44 @@ repos:
 world:
   - app-text/wgetpaste
 
+my_roles:
+  - hosts
+  - sshd
+  - sudo
+  - timezone
+  - fstab
+  - networkd
+  - resolved
+  - zfs
+  - smartd
+  - portage
+  - python_exec
+  - ansible_pull
+  - podman_gentoo
+  - dnsmasq
+  - unbound
+  - dnscrypt_proxy
+  - greetd
+  - nginx
+  - node_exporter
+  - postfix
+  - nullmailer
+  - prometheus
+  - gitea
+  - portage_update
+  - podman
+  - transmission
+  - speedtest_exporter
+  - dotfiles
+  - services
+  - docker
+  - dnsserver
+  - grafana
+  - grub
+  # - password_store
+  - groups
+  - u2f_keys
+  - firefox
 # Some default-off's so I don't have to care if a var is defined
 ansible_pull: false
 dnscryptproxy: false
