@@ -37,12 +37,6 @@
     user_home: /home/jake
   environment:
     STOW_DIR: "{{ user_home }}/.{{ dotdir }}"
-  # we want to stow known_hosts, but we can't do it easily since it
-  # often already exists on the hosts we want to touch, and in the
-  # case of running against the local host, the file is created upon
-  # entry to the task
-  ansible.builtin.shell: >-
-    [[ -L "{{ user_home }}/.ssh/known_hosts" ]] && rm {{ user_home }}/.ssh/known_hosts;
-    stow {{ item.path | basename }}
+  ansible.builtin.command: stow {{ item.path | basename }}
   # TODO: yes, this is wrong, but stow is hard to talk to
   changed_when: false
