@@ -1,0 +1,10 @@
+#
+# Minimal torrc so tor will work out of the box
+#
+#User tor
+PIDFile /run/tor/tor.pid
+Log notice syslog
+DataDirectory /var/lib/tor/data
+
+HiddenServiceDir /var/lib/tor/data/hiddenservice
+HiddenServicePort 22 127.0.0.1:22

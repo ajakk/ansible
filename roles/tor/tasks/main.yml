@@ -1,0 +1,4 @@
+---
+- name: Configure tor
+  when: tor
+  ansible.builtin.include_tasks: tor.yml
