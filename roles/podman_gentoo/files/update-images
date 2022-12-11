@@ -1,1 +1,1 @@
-#0 */12 * * * root /usr/bin/flock -w 0 /run/update.flock /usr/local/bin/update_images.sh
+0 */12 * * * root /usr/bin/flock -w 0 /run/update.flock /usr/local/bin/update_images.sh
