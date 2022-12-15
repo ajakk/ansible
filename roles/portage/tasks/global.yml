@@ -23,12 +23,12 @@
     usepkgonly: "{{ not getpkg }}"
     withbdeps: true
 
-    # This should be necessary, but when the binpkgs are generated
+    # This shouldn't be necessary, but when the binpkgs are generated
     # from both unstable and stable environments, sometimes Portage
     # unreasonably latches on to a package built with an unstable dep
     # and can't figure out how to find a better version without
     # further backtracking.
-    backtrack: 100
+    backtrack: 1000
 - name: Depclean
   portage: # noqa fqcn
     depclean: true
