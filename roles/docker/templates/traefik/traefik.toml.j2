@@ -19,6 +19,6 @@
   email = "{{ my_email }}"
   storage = "/var/lib/traefik/acme.json"
   [certificatesResolvers.myresolver.acme.dnsChallenge]
-    provider = "linode"
+    provider = "hurricane"
     delayBeforeCheck = 0
     resolvers = ["1.1.1.1:53", "8.8.8.8:53"]

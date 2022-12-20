@@ -14,6 +14,7 @@ services:
     restart: unless-stopped
     environment:
       - LINODE_TOKEN={{ linode_pat }}
+      - HURRICANE_TOKENS={{ hurricane_tokens | combine | items | map('join', ':') | join(',') }}
     networks:
       - traefik
 networks:
