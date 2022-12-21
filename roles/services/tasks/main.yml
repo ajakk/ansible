@@ -17,12 +17,12 @@
       "{{ lookup('ansible.builtin.vars', *user_services_vars) }}"
 - name: Lookup system stop service variables
   ansible.builtin.set_fact:
-    stop_system_services_vars:
-      "{{ q('ansible.builtin.varnames', 'stop_system_services') }}"
+    system_stop_services_vars:
+      "{{ q('ansible.builtin.varnames', 'system_stop_services') }}"
 - name: Lookup system stop services
   ansible.builtin.set_fact:
-    stop_system_services:
-      "{{ lookup('ansible.builtin.vars', *stop_system_services_vars) }}"
+    system_stop_services:
+      "{{ lookup('ansible.builtin.vars', *system_stop_services_vars) }}"
 - name: Start and enable system services
   ansible.builtin.service:
     name: "{{ item }}"
@@ -45,4 +45,4 @@
     name: "{{ item }}"
     state: stopped
     enabled: false
-  with_items: "{{ stop_system_services }}"
+  with_items: "{{ system_stop_services }}"
