@@ -1,0 +1,31 @@
+---
+version: "3.8"
+services:
+  traefik:
+    image: traefik:latest
+    container_name: traefik
+    volumes:
+      - /etc/traefik/traefik.toml:/traefik.toml
+      - /var/run/docker.sock:/var/run/docker.sock
+      - letsencrypt:/var/lib/traefik
+    ports:
+      - 80:80
+      - 443:443
+    restart: unless-stopped
+    environment:
+      - HURRICANE_TOKENS={{ hurricane_tokens | combine | items | map('join', ':') | join(',') }}
+    networks:
+      - {{ network_name }}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=Host(`{{ ansible_fqdn }}`) && (PathPrefix(`/api`, `/dashboard`))"
+      - "traefik.http.routers.api.service=api@internal"
+      - "traefik.http.routers.api.entrypoints=https"
+      - "traefik.http.routers.api.tls=true"
+      - "traefik.http.routers.api.tls.certresolver=myresolver"
+networks:
+  {{ network_name }}:
+    external: true
+volumes:
+  letsencrypt:
+    external: false

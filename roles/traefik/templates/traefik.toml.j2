@@ -1,0 +1,23 @@
+[entryPoints]
+  [entryPoints.http]
+      address = ":80"
+      [entryPoints.http.http.redirections.entryPoint]
+          to = "https"
+          scheme = "https"
+  [entryPoints.https]
+      address = ":443"
+
+[providers]
+  [providers.docker]
+    network = "{{ network_name }}"
+
+[api]
+  dashboard = true
+
+[certificatesResolvers.myresolver.acme]
+  email = "{{ my_email }}"
+  storage = "/var/lib/traefik/acme.json"
+  [certificatesResolvers.myresolver.acme.dnsChallenge]
+    provider = "hurricane"
+    delayBeforeCheck = 0
+    resolvers = ["1.1.1.1:53", "8.8.8.8:53"]

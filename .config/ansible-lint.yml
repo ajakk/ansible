@@ -8,3 +8,6 @@ exclude_paths:
 warn_list:
   # Silence false positive in https://github.com/ajakk/ansible/runs/8059329138
   - var-spacing
+
+skip_list:
+  - meta-no-info
