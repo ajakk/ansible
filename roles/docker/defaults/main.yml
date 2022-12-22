@@ -8,4 +8,3 @@ traefik_confdir: /etc/traefik
 
 mervin: false
 homeassistant: false
-traefik: false

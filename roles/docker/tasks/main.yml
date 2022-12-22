@@ -1,7 +1,4 @@
 ---
-- name: Add traefik
-  ansible.builtin.include_tasks: traefik.yml
-  when: traefik
 - name: Add mervin
   ansible.builtin.include_tasks: mervin.yml
   when: mervin
