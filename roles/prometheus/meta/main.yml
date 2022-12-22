@@ -1,0 +1,4 @@
+---
+dependencies:
+  - role: traefik
+    network_name: traefik
