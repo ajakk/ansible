@@ -10,7 +10,6 @@ services:
       - "{{ prom_datadir }}:/prometheus"
     networks:
       - traefik
-      - prometheus
     labels:
       traefik.http.routers.prometheus.rule: Host(`prometheus.{{ public_domain }}`)
       traefik.http.routers.prometheus.tls: "true"
@@ -20,9 +19,13 @@ services:
     container_name: alertmanager
     restart: unless-stopped
     networks:
-      - prometheus
+      - traefik
     volumes:
       - "{{ am_confdir }}:/etc/alertmanager"
+    labels:
+      traefik.http.routers.alertmanager.rule: Host(`alertmanager.{{ public_domain }}`)
+      traefik.http.routers.alertmanager.tls: "true"
+      traefik.http.routers.alertmanager.tls.certresolver: myresolver
 networks:
   traefik:
     external: true
