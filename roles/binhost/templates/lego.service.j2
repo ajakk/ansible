@@ -1,0 +1,12 @@
+[Unit]
+Description=Renew certificates with lego
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/lego.env
+ExecStart=lego --email "${LEGO_EMAIL}" --dns hurricane {{ domain_list }} renew --renew-hook=lego-postrenew
+# meh
+WorkingDirectory=/root
+
+[Install]
+WantedBy=multi-user.target

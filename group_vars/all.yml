@@ -51,6 +51,7 @@ my_roles:
   - unbound
   - dnscrypt_proxy
   - greetd
+  - binhost
   - node_exporter
   - postfix
   - nullmailer

@@ -1,0 +1,4 @@
+---
+- name: Configure binhost
+  ansible.builtin.include_tasks: binhost.yml
+  when: binhost
