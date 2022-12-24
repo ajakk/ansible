@@ -51,7 +51,6 @@ my_roles:
   - unbound
   - dnscrypt_proxy
   - greetd
-  - nginx
   - node_exporter
   - postfix
   - nullmailer
@@ -80,7 +79,6 @@ dnsmasq: false
 filesystems: {}
 host_repos: []
 nfsrepo: false
-nginx: false
 podman_gentoo: false
 portage_git: false
 postfix: false
