@@ -13,7 +13,6 @@ my_email: jchelmert3@posteo.net
 whoami: jake
 gccarch: x86-64
 getpkg: true
-dns_server: 192.168.1.213
 smtp_host: "sirius.{{ wg_domain }}"
 libvirt_bridge: virbr0
 
