@@ -1,0 +1,7 @@
+---
+dependencies:
+  - role: consul_service
+    vars:
+      service: postfix_exporter
+      port: "{{ postfix_exporter_port }}"
+    when: postfix
