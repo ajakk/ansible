@@ -3,4 +3,3 @@ consul_client: false
 consul_server: false
 consul_client_container: consul-client
 consul_server_hostname: "consul.{{ wg_domain }}"
-consul_client_bind_ip:
