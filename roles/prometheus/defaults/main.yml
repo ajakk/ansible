@@ -1,6 +1,9 @@
 ---
 prometheus: false
 
+# TODO: remove once consul is working effectively
+node_exporter_port: 9100
+
 prom_confdir: /etc/prometheus
 prom_datadir: /network/logs/prometheus
 
