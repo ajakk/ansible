@@ -3,3 +3,4 @@ dependencies:
   - role: consul
     vars:
       consul_client: true
+    when: not consul_server
