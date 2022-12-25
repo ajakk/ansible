@@ -69,6 +69,7 @@ my_roles:
   - u2f_keys
   - firefox
   - tor
+  - consul
 # Some default-off's so I don't have to care if a var is defined
 ansible_pull: false
 dnscryptproxy: false
