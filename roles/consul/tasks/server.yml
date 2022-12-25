@@ -1,0 +1,19 @@
+---
+- name: Deploy the consul server
+  community.docker.docker_container:
+    name: consul
+    image: consul
+    network_mode: host
+    pull: true
+    state: started
+    restart_policy: unless-stopped
+    command_handling: correct
+    command:
+      - consul
+      - agent
+      - -server
+      - -data-dir=/consul/data
+      - -bootstrap-expect=1
+      - "-bind={{ ansible_wg0.ipv4.address }}"
+    volumes:
+      - consul:/consul/data

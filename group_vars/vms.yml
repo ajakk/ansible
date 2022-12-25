@@ -5,3 +5,5 @@ group_system_services:
 
 public_interface: enp1s0
 private_interface: enp2s0
+consul_client_bind_ip: |-
+  {{ hostvars[inventory_hostname]['ansible_' + private_interface].ipv4.address }}

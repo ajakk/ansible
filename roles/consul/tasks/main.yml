@@ -1,0 +1,7 @@
+---
+- name: Install and configure consul server
+  ansible.builtin.include_tasks: server.yml
+  when: consul_server
+- name: Install and configure consul client
+  ansible.builtin.include_tasks: client.yml
+  when: consul_client

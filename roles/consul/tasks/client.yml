@@ -1,0 +1,18 @@
+---
+# This doesn't fail if the service fails immediately afterwards
+- name: Deploy the consul client
+  community.docker.docker_container:
+    name: "{{ consul_client_container }}"
+    image: consul
+    network_mode: host
+    pull: true
+    state: started
+    command_handling: correct
+    command:
+      - consul
+      - agent
+      - -bind={{ consul_client_bind_ip }}
+      - -retry-join={{ consul_server_hostname }}
+      - -data-dir=/consul/data
+    volumes:
+      - consul:/consul/data
