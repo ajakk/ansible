@@ -1,0 +1,5 @@
+---
+dependencies:
+  - role: consul
+    vars:
+      consul_client: true

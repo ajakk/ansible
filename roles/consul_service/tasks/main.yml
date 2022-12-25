@@ -1,0 +1,11 @@
+---
+# So, the way we have to do this is rather icky. The consul ansible
+# module requires python-consul, which doesn't support
+# python3.10. Since we aren't able to use the native Ansible plumbing,
+# so we have to do this manually with the docker container.
+- name: Register consul service for {{ service }}
+  ansible.builtin.uri:
+    method: PUT
+    url: "{{ consul_api_root }}/v1/agent/service/register"
+    body: "{{ lookup('template', 'service.json.j2') }}"
+    body_format: json
