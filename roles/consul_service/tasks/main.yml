@@ -6,6 +6,6 @@
 - name: Register consul service for {{ service }}
   ansible.builtin.uri:
     method: PUT
-    url: "{{ consul_api_root }}/v1/agent/service/register"
+    url: "{{ consul_api_root }}:8500/v1/agent/service/register"
     body: "{{ lookup('template', 'service.json.j2') }}"
     body_format: json
