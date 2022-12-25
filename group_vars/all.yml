@@ -13,7 +13,6 @@ whoami: jake
 gccarch: x86-64
 getpkg: true
 smtp_host: "sirius.{{ wg_domain }}"
-libvirt_bridge: virbr0
 
 # TODO: surely a way to grab these straight out of repositories.xml
 gentoo_repos:
