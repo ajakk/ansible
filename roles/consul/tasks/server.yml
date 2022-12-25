@@ -15,5 +15,6 @@
       - -data-dir=/consul/data
       - -bootstrap-expect=1
       - "-bind={{ ansible_wg0.ipv4.address }}"
+      - "-client={{ ansible_wg0.ipv4.address }}"
     volumes:
       - consul:/consul/data
