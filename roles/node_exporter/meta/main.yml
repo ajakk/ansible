@@ -4,3 +4,4 @@ dependencies:
     vars:
       service: node_exporter
       port: "{{ node_exporter_port }}"
+    when: node_exporter
