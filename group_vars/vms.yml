@@ -2,3 +2,6 @@
 # nfsrepo: true
 group_system_services:
   - node_exporter
+
+public_interface: enp1s0
+private_interface: enp2s0
