@@ -38,6 +38,7 @@
     owner: root
     group: root
     mode: 0644
+    validate: nginx -tc %s
 - name: Start lego service
   ansible.builtin.service:
     name: lego.service
