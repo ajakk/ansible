@@ -19,6 +19,8 @@
         state: present
       with_items:
         - docker
+        - docker-compose
+        - glances
         - python-docker
         - tmux
         - vim
@@ -31,6 +33,27 @@
       with_items:
         - docker
         - systemd-networkd
+    - name: Disable unecessary services
+      ansible.builtin.service:
+        name: "{{ item }}"
+        state: stopped
+        enabled: false
+      with_items:
+        - cockpit.socket
+    - name: Add wireguard firewall zone
+      ansible.posix.firewalld:
+        zone: trusted
+        interface: wg0
+        permanent: true
+        state: enabled
+        immediate: true
+    - name: Allow dns through firewall
+      ansible.posix.firewalld:
+        zone: FedoraServer
+        service: dns
+        permanent: true
+        state: enabled
+        immediate: true
     - include_role:
         name: "{{ host_role }}"
         apply:
