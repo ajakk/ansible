@@ -10,3 +10,10 @@
       - "{{ speedtest_exporter_port }}:{{ speedtest_exporter_port }}"
     exposed_ports:
       - "{{ speedtest_exporter_port }}"
+- name: Allow exporter access through firewall
+  ansible.posix.firewalld:
+    zone: trusted
+    port: "{{ speedtest_exporter_port }}/tcp"
+    permanent: true
+    state: enabled
+    immediate: true
