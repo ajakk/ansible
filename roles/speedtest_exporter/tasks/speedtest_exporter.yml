@@ -7,6 +7,6 @@
     restart_policy: unless-stopped
     state: started
     published_ports:
-      - 9798:9798
+      - "{{ speedtest_exporter_port }}:{{ speedtest_exporter_port }}"
     exposed_ports:
-      - 9798
+      - "{{ speedtest_exporter_port }}"

@@ -1,2 +1,3 @@
 ---
 speedtest_exporter: false
+speedtest_exporter_port: 9798

@@ -1,0 +1,7 @@
+---
+dependencies:
+  - role: consul_service
+    vars:
+      service: speedtest_exporter
+      port: "{{ speedtest_exporter_port }}"
+    when: speedtest_exporter
