@@ -4,6 +4,8 @@ services:
   traefik:
     image: traefik:latest
     container_name: traefik
+    # https://serverfault.com/questions/1005574/selinux-with-docker-and-traefik
+    privileged: true
     volumes:
       - /etc/traefik/traefik.toml:/traefik.toml:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
