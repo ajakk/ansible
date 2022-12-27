@@ -27,4 +27,4 @@
     network_mode: "{{ network_name }}"
     restart_policy: unless-stopped
     volumes:
-      - "{{ unbound_confdir }}:/etc/unbound:ro"
+      - "{{ unbound_confdir }}:/etc/unbound:ro,Z"
