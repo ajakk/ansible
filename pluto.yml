@@ -6,6 +6,7 @@
   gather_facts: false
   pre_tasks:
     - include_tasks: setup.yml
+      tags: always
   tasks:
     - name: Set hostname
       ansible.builtin.hostname:
