@@ -1,0 +1,41 @@
+#!/usr/bin/ansible-playbook
+---
+- name: pluto.yml
+  become: true
+  hosts: pluto.ajak.xyz
+  gather_facts: false
+  pre_tasks:
+    - include_tasks: setup.yml
+  tasks:
+    - name: Set hostname
+      ansible.builtin.hostname:
+        name: "{{ inventory_hostname }}"
+        use: systemd
+    # TODO: should probably be dependencies of the roles...
+    - name: Install prerequisite packages
+      ansible.builtin.package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - docker
+        - python-docker
+        - tmux
+        - vim
+        - wireguard-tools
+    - name: Enable necessary services
+      ansible.builtin.service:
+        name: "{{ item }}"
+        state: started
+        enabled: true
+      with_items:
+        - docker
+        - systemd-networkd
+    - include_role:
+        name: "{{ host_role }}"
+        apply:
+          tags:
+            - "{{ host_role }}"
+      tags: always
+      loop_control:
+        loop_var: host_role
+      loop: "{{ pluto_roles }}"
