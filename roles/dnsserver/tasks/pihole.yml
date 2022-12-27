@@ -19,5 +19,6 @@
     volumes:
       - etc_pihole:/etc/pihole
     ports:
-      - "53:53/tcp"
-      - "53:53/udp"
+      # hacky
+      - "{{ ansible_enp3s0.ipv4.address }}:53:53/tcp"
+      - "{{ ansible_enp3s0.ipv4.address }}:53:53/udp"
