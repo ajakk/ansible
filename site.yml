@@ -5,15 +5,7 @@
   hosts: all
   gather_facts: false
   pre_tasks:
-    - include_vars:
-        file: "{{ item }}"
-      with_first_found:
-        - "{{ inventory_hostname }}.pass.yml"
-        - pass.yml
-      when: usevault | default(True) | bool
-      tags: always
-    - setup:
-      tags: always
+    - include_tasks: setup.yml
   tasks:
     - include_role:
         name: "{{ host_role }}"

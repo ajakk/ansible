@@ -1,0 +1,11 @@
+---
+# Common pre_tasks to be used across all playbooks
+- include_vars:
+    file: "{{ item }}"
+  with_first_found:
+    - "{{ inventory_hostname }}.pass.yml"
+    - pass.yml
+  when: usevault | default(True) | bool
+  tags: always
+- setup:
+  tags: always
