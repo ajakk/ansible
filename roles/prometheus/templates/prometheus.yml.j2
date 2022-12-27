@@ -24,12 +24,6 @@ scrape_configs:
     static_configs:
       - targets: ["localhost:9090"]
 
-  - job_name: "speedtest_exporter"
-    scrape_interval: 30m
-    scrape_timeout: 1m
-    static_configs:
-      - targets: ["pollux.{{ wg_domain }}:9798"]
-
   - job_name: 'consul'
     consul_sd_configs:
       - server: 'consul.{{ wg_domain }}:8500'
@@ -37,6 +31,17 @@ scrape_configs:
       - source_labels: [__meta_consul_tags]
         regex: .*,prometheus,.*
         action: keep
+      # speedtest-exporters should only be scraped rarely
+      - source_labels: [__meta_consul_service]
+        regex: .*speedtest_exporter.*
+        action: replace
+        target_label: __scrape_interval__
+        replacement: 30m
+      - source_labels: [__meta_consul_tags]
+        regex: .*speedtest_exporter.*
+        action: replace
+        target_label: __scrape_timeout__
+        replacement: 5m
       - source_labels: [__meta_consul_service]
         target_label: job
       # Maybe relabel endpoint with hostname?
