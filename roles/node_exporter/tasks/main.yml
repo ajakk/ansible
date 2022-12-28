@@ -2,3 +2,6 @@
 - name: Configure node_exporter
   ansible.builtin.include_tasks: node_exporter.yml
   when: node_exporter
+- name: Deploy node_exporter as a container
+  ansible.builtin.include_tasks: node_exporter_container.yml
+  when: node_exporter_container

@@ -1,0 +1,24 @@
+---
+- name: Add node_exporter to firewall
+  ansible.posix.firewalld:
+    zone: trusted
+    service: prometheus-node-exporter
+    permanent: true
+    state: enabled
+    immediate: true
+- name: Deploy node_exporter container
+  community.docker.docker_container:
+    image: prom/node-exporter:latest
+    name: node-exporter
+    restart_policy: unless-stopped
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    ports:
+      - "{{ ansible_wg0.ipv4.address }}:{{ node_exporter_port }}:{{ node_exporter_port }}"
