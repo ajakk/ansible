@@ -69,7 +69,6 @@ my_roles:
   - consul
 
 # Some default-off's so I don't have to care if a var is defined
-podman_gentoo: false
 portage_git: false
 postfix: false
 prometheus: false
