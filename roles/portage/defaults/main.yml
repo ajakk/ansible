@@ -1,2 +1,3 @@
 ---
 gentoo_repo_base: /var/db/repos
+host_repos: []
