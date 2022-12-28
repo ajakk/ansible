@@ -1,5 +1,4 @@
 ---
-# nfsrepo: true
 group_system_services:
   - node_exporter
 
