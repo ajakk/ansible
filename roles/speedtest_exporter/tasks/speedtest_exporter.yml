@@ -6,10 +6,8 @@
     pull: true
     restart_policy: unless-stopped
     state: started
-    published_ports:
-      - "{{ speedtest_exporter_port }}:{{ speedtest_exporter_port }}"
-    exposed_ports:
-      - "{{ speedtest_exporter_port }}"
+    ports:
+      - "{{ ansible_wg0.ipv4.address }}:{{ speedtest_exporter_port }}:{{ speedtest_exporter_port }}"
 - name: Allow exporter access through firewall
   ansible.posix.firewalld:
     zone: trusted
