@@ -11,6 +11,7 @@
   with_items:
     - docker
     - docker-compose
+    - git
     - glances
     - python-docker
     - tmux
@@ -31,6 +32,13 @@
     enabled: false
   with_items:
     - cockpit.socket
+- name: Drop cockpit from firewall
+  ansible.posix.firewalld:
+    zone: FedoraServer
+    service: cockpit
+    permanent: true
+    state: disabled
+    immediate: true
 - name: Add wireguard firewall zone
   ansible.posix.firewalld:
     zone: trusted
