@@ -8,6 +8,11 @@
     - include_tasks: setup.yml
       tags: always
   tasks:
+    - include_tasks: "{{ tasksfile }}"
+      with_fileglob:
+        - "tasks/{{ ansible_hostname }}.yml"
+      loop_control:
+        loop_var: tasksfile
     - include_role:
         name: "{{ host_role }}"
         apply:

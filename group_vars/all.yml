@@ -71,11 +71,6 @@ my_roles:
   - tor
   - consul
 
-pluto_roles:
-  - hosts
-  - dnsserver
-  - speedtest_exporter
-
 # Some default-off's so I don't have to care if a var is defined
 ansible_pull: false
 dnscryptproxy: false
