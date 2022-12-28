@@ -5,8 +5,6 @@ repo_root: https://git.ajak.xyz/ajak
 this_repo: "{{ repo_root }}/ansible"
 secrets_repo: "{{ repo_root }}/ansible-secrets"
 timezone: US/Central
-system_services_all:
-  - systemd-timesyncd
 my_email: jchelmert3@posteo.net
 whoami: jake
 gccarch: x86-64
