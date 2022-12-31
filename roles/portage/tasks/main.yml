@@ -16,6 +16,14 @@
     group: root
     mode: 0644
   with_items: "{{ repos + host_repos }}"
+- name: Update make.conf
+  when: inventory_hostname in groups['vms']
+  ansible.builtin.template:
+    src: make.conf.j2
+    dest: /etc/portage/make.conf
+    owner: root
+    group: root
+    mode: 0644
 - name: Add accepted keywords
   when: ansible_hostname == 'raptor'
   block:
