@@ -38,6 +38,7 @@ my_roles:
   - zfs
   - smartd
   - portage
+  - portage_update
   - python_exec
   - ansible_pull
   - podman_gentoo
@@ -51,7 +52,6 @@ my_roles:
   - nullmailer
   - prometheus
   - gitea
-  - portage_update
   - podman
   - transmission
   - speedtest_exporter
