@@ -2,6 +2,7 @@
 group_assignments:
   - name: "{{ whoami }}"
     groups:
+      - cdrom
       - kvm
       - libvirt
       - seat
