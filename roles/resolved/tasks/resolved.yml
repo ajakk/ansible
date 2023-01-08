@@ -3,8 +3,8 @@
   ansible.builtin.file:
     src: /run/systemd/resolve/resolv.conf
     dest: /etc/resolv.conf
-    owner: root
-    group: root
+    owner: systemd-resolve
+    group: systemd-resolve
     mode: 0644
     state: link
     force: true
