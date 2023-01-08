@@ -4,7 +4,7 @@ group_system_services:
 
 internal_interfaces:
   - enp1s0
-trusted_interface:
+trusted_interfaces:
   - enp2s0
 consul_client_bind_ip: |-
-  {{ hostvars[inventory_hostname]['ansible_' + trusted_interface].ipv4.address }}
+  {{ hostvars[inventory_hostname]['ansible_' + trusted_interfaces[0]].ipv4.address }}
