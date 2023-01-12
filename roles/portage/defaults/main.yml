@@ -1,3 +1,5 @@
 ---
+etcportage_ansible: false
 gentoo_repo_base: /var/db/repos
 host_repos: []
+podman_gentoo: false
