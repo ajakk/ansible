@@ -5,7 +5,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0644
+    mode: 0755
 - name: Install update scripts per host
   ansible.builtin.copy:
     src: "{{ ansible_hostname }}/usr/local/bin/update_images.sh"
