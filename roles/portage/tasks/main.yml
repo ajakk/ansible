@@ -16,16 +16,8 @@
     group: root
     mode: 0644
   with_items: "{{ repos + host_repos }}"
-- name: Update make.conf
-  when: inventory_hostname in groups['vms']
-  ansible.builtin.template:
-    src: make.conf.j2
-    dest: /etc/portage/make.conf
-    owner: root
-    group: root
-    mode: 0644
 - name: Deploy portage configuration
-  when: podman_gentoo
+  when: podman_gentoo or inventory_hostname in groups['vms']
   ansible.builtin.copy:
     src: "{{ ansible_architecture }}/"
     dest: "{{ item }}"
@@ -37,4 +29,4 @@
     # symlink's target
     local_follow: false
   with_items:
-    - /etc/podman-gentoo/base
+    - "{{ ['/etc/portage'] + (['/etc/podman-gentoo/base'] if podman_gentoo else []) }}"
