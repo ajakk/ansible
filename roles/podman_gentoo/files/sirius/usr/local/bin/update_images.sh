@@ -6,6 +6,4 @@ function update() {
 	podman-gentoo "${1}" "/etc/podman-gentoo/${1}" "/var/cache/binpkgs" registry.wg.ajak.xyz
 }
 
-update sirius
-update stable
-update docker01
+update base
