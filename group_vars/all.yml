@@ -39,6 +39,7 @@ my_roles:
   - smartd
   - portage
   - portage_update
+  - firewalld
   - python_exec
   - ansible_pull
   - podman_gentoo

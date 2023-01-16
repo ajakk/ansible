@@ -1,0 +1,27 @@
+---
+# public interfaces are WAN
+# internal interfaces are LAN but not trusted
+# trusted interfaces are LAN but trusted
+- name: Start and enable firewalld
+  ansible.builtin.service:
+    name: firewalld
+    state: started
+    enabled: true
+- name: Add interfaces to trusted zone
+  ansible.posix.firewalld:
+    permanent: true
+    zone: trusted
+    interface: "{{ item }}"
+    state: enabled
+    immediate: true
+  with_items:
+    - "{{ trusted_interfaces }}"
+- name: Add interfaces to internal zone
+  ansible.posix.firewalld:
+    permanent: true
+    zone: internal
+    interface: "{{ item }}"
+    state: enabled
+    immediate: true
+  with_items:
+    - "{{ internal_interfaces }}"

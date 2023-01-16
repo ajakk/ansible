@@ -1,0 +1,7 @@
+---
+dependencies:
+  - role: portage_package
+    vars:
+      world_pkgs:
+        - net-firewall/firewalld
+    when: ansible_os_family == "Gentoo"
