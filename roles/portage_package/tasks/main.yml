@@ -1,4 +1,8 @@
 ---
+- name: Ensure role only runs on Gentoo
+  when: ansible_os_family != "Gentoo"
+  ansible.builtin.fail:
+    msg: "This role should only run on Gentoo!"
 - name: Debug
   ansible.builtin.debug:
     msg: "Adding these packages to world: {{ world_pkgs }}"
