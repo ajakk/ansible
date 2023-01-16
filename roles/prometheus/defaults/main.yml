@@ -8,3 +8,5 @@ prom_confdir: /etc/prometheus
 prom_datadir: /network/logs/prometheus
 
 am_confdir: /etc/alertmanager
+
+consul_exporter_port: 9107

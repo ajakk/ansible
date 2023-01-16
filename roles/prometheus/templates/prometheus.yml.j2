@@ -24,6 +24,17 @@ scrape_configs:
     static_configs:
       - targets: ["localhost:9090"]
 
+  # consul alone cannot be relied upon to ensure everything is up
+  # because the consul agent can disappear without its associated
+  # targets being treated as down, because the targets will disappear
+  # thus, we need a way to ensure consul is running, and we use
+  # consul_exporters for this
+  - job_name: "consul_exporter"
+    static_configs:
+{% for host in groups["all"] %}
+      - targets: ["{{ host }}:{{ consul_exporter_port }}"]
+{% endfor %}
+
   - job_name: 'consul'
     consul_sd_configs:
       - server: 'consul.{{ wg_domain }}:8500'
