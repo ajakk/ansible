@@ -1,0 +1,32 @@
+---
+# TODO: We maybe want to validate the vars passed here eventually,
+# but:
+# Bug: https://github.com/ansible/ansible/issues/74995
+# Workaround: https://stackoverflow.com/questions/51873965/check-that-only-one-of-several-ansible-variables-is-defined
+# TODO: We also probably want a way to "reset" the firewall state to
+# properly handle removing services. Is there a way to start fresh
+# every run then make that configuration runtime+permanent at the end?
+- name: Add service to specified zone
+  when: service is defined
+  ansible.posix.firewalld:
+    permanent: true
+    immediate: true
+    state: enabled
+    service: "{{ service }}"
+    zone: "{{ zone }}"
+- name: Add port(s) to specified zone
+  when: port is defined
+  ansible.posix.firewalld:
+    permanent: true
+    immediate: true
+    state: enabled
+    port: "{{ port }}"
+    zone: "{{ zone }}"
+- name: Add rich rule to specified zone
+  when: rich_rule is defined
+  ansible.posix.firewalld:
+    permanent: true
+    immediate: true
+    state: enabled
+    rich_rule: "{{ rich_rule }}"
+    zone: "{{ zone }}"
