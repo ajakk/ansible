@@ -1,5 +1,9 @@
 ---
 dependencies:
+  - role: firewalld_service
+    vars:
+      zone: trusted
+      service: prometheus-node-exporter
   - role: consul_service
     vars:
       service: node_exporter
