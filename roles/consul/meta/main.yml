@@ -1,16 +1,36 @@
 ---
 dependencies:
+  # TODO: This is a total hack to punch holes through the only place
+  # that the libvirt zone exists, the consul server. Most of this is
+  # only needed so that VMs and the virtualization host can
+  # communicate over the libvirt bridge properly. Ideally we'd allow
+  # everything through here and treat each vm as a regular host on the
+  # network, but docker is awful and lets everything through the host
+  # firewalls.
   - role: firewalld_service
     vars:
       service_file: consul.xml
       service: consul
       zone: libvirt
-    # We only want the hole to be punched through the libvirt zone,
-    # which is only existing where the libvirt zone exists
     when: consul_server
   - role: firewalld_service
     vars:
       service_file: consul-exporter.xml
       service: consul-exporter
+      zone: libvirt
+    when: consul_server
+  - role: firewalld_service
+    vars:
+      service: prometheus-node-exporter
+      zone: libvirt
+    when: consul_server
+  - role: firewalld_service
+    vars:
+      port: 9154/tcp
+      zone: libvirt
+    when: consul_server
+  - role: firewalld_service
+    vars:
+      service: smtp
       zone: libvirt
     when: consul_server
