@@ -1,0 +1,11 @@
+---
+- name: Run consul exporter
+  community.docker.docker_container:
+    name: consul-exporter
+    image: prom/consul-exporter
+    pull: true
+    state: started
+    restart_policy: unless-stopped
+    command_handling: correct
+    ports:
+      - "{{ consul_client_bind_ip }}:{{ consul_exporter_port }}:9107"

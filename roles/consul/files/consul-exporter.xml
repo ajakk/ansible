@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service>
+  <short>Consul Exporter</short>
+  <description>Prometheus exporter for Consul</description>
+  <port protocol="tcp" port="9107"/>
+</service>

@@ -5,3 +5,6 @@
 - name: Install and configure consul client
   ansible.builtin.include_tasks: client.yml
   when: consul_client
+- name: Install and configure consul exporter
+  ansible.builtin.include_tasks: exporter.yml
+  when: consul_server or consul_client
