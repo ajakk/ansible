@@ -6,6 +6,14 @@
 # TODO: We also probably want a way to "reset" the firewall state to
 # properly handle removing services. Is there a way to start fresh
 # every run then make that configuration runtime+permanent at the end?
+- name: Add firewalld service definition file
+  when: service_file is defined
+  ansible.builtin.copy:
+    src: "{{ service_file }}"
+    dest: /etc/firewalld/services
+    owner: root
+    group: root
+    mode: 0644
 - name: Add service to specified zone
   when: service is defined
   ansible.posix.firewalld:

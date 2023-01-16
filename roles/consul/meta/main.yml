@@ -1,0 +1,10 @@
+---
+dependencies:
+  - role: firewalld_service
+    vars:
+      service_file: consul.xml
+      service: consul
+      zone: libvirt
+    # We only want the hole to be punched through the libvirt zone,
+    # which is only existing where the libvirt zone exists
+    when: consul_server
