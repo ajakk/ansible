@@ -1,7 +1,7 @@
 ---
 - name: Deploy the consul server
   community.docker.docker_container:
-    name: consul
+    name: consul-server
     image: consul
     network_mode: host
     pull: true
