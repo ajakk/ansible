@@ -31,6 +31,10 @@ scrape_configs:
   # consul_exporters for this
   - job_name: "consul_exporter"
     static_configs:
+{# TODO: need to think about how to get the IP that these services are #}
+{# actually accessible on. The hostnames are not associated with the #}
+{# IP the services are bound to, so all of these targets are dead. #}
+
 {% for host in groups["all"] %}
       - targets: ["{{ host }}:{{ consul_exporter_port }}"]
 {% endfor %}
