@@ -30,3 +30,11 @@
     local_follow: false
   with_items:
     - "{{ ['/etc/portage'] + (['/etc/podman-gentoo/base'] if podman_gentoo else []) }}"
+- name: Add world file to binhost
+  when: podman_gentoo
+  ansible.builtin.copy:
+    src: world
+    dest: /etc/podman-gentoo/base
+    owner: root
+    group: root
+    mode: 0644
