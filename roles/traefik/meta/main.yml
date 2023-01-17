@@ -1,0 +1,6 @@
+---
+dependencies:
+  - role: portage_package
+    vars:
+      world_pkgs: app-containers/docker-compose
+    when: ansible_os_family == "Gentoo"
