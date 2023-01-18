@@ -14,6 +14,14 @@
     owner: root
     group: root
     mode: 0600
+- name: Add traefik's extra configuration
+  notify: Restart traefik
+  ansible.builtin.template:
+    src: extra.toml.j2
+    dest: "{{ traefik_confdir }}/extra.toml"
+    owner: root
+    group: root
+    mode: 0600
 - name: Add traefik's docker-compose
   notify: Restart traefik
   ansible.builtin.template:

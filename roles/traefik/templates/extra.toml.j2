@@ -1,0 +1,15 @@
+[http.services]
+{% for proxy in traefik_proxy_for %}
+  [http.services.{{ proxy['name'] }}.loadBalancer]
+    [[http.services.{{ proxy['name'] }}.loadBalancer.servers]]
+      url = "http://host.docker.internal:{{ proxy['port'] }}"
+{% endfor %}
+
+[http.routers]
+{% for proxy in traefik_proxy_for %}
+  [http.routers.{{ proxy['name'] }}]
+    rule = "Host(`{{ proxy['name'] }}.{{ public_domain }}`)"
+    service = "{{ proxy['name'] }}"
+    [http.routers.{{ proxy['name'] }}.tls]
+      certresolver = "myresolver"
+{% endfor %}

@@ -10,6 +10,10 @@
 [providers]
   [providers.docker]
     network = "{{ network_name }}"
+{% if traefik_proxy_for is defined %}
+  [providers.file]
+    filename = "/extra.toml"
+{% endif %}
 
 [api]
   dashboard = true

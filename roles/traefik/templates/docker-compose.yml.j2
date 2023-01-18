@@ -8,8 +8,13 @@ services:
     privileged: true
     volumes:
       - /etc/traefik/traefik.toml:/traefik.toml:ro
+{% if traefik_proxy_for is defined %}
+      - /etc/traefik/extra.toml:/extra.toml:ro
+{% endif %}
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - letsencrypt:/var/lib/traefik
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - 80:80
       - 443:443
