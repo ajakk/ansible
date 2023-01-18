@@ -42,25 +42,11 @@ http {
         ignore_invalid_headers on;
 
         server {
-                listen 80;
+                listen 8080;
 
-                return 301 https://$host$request_uri;
-        }
-
-        # SSL example
-        server {
-               listen 443 ssl;
-               server_name {{ ansible_fqdn }};
-
-               ssl_certificate /etc/ssl/nginx/nginx.pem;
-               ssl_certificate_key /etc/ssl/nginx/nginx.key;
-
-               access_log /var/log/nginx/localhost.ssl_access_log main;
-               error_log /var/log/nginx/localhost.ssl_error_log info;
-
-               location / {
-                       root {{ webroot }};
-                       autoindex on;
-               }
+                location / {
+                        root {{ webroot }};
+                        autoindex on;
+                }
         }
 }
