@@ -16,6 +16,7 @@
     mode: 0600
 - name: Add traefik's extra configuration
   notify: Restart traefik
+  when: traefik_proxy_for is defined
   ansible.builtin.template:
     src: extra.toml.j2
     dest: "{{ traefik_confdir }}/extra.toml"
