@@ -1,0 +1,24 @@
+---
+- name: Create requisite host directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - /etc/jellyfin
+    - /var/cache/jellyfin
+- name: Deploy jellyfin container
+  community.docker.docker_container:
+    name: jellyfin
+    image: jellyfin/jellyfin
+    pull: true
+    state: started
+    network_mode: "{{ network }}"
+    restart_policy: unless-stopped
+    labels:
+      traefik.http.routers.jellyfin.rule: Host(`jellyfin.{{ public_domain }}`)
+      traefik.http.routers.jellyfin.tls: "true"
+      traefik.http.routers.jellyfin.tls.certresolver: myresolver
+    volumes: "{{ jellyfin_volumes }}"
