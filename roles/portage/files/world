@@ -14,6 +14,7 @@ app-crypt/tpm2-tools
 app-editors/emacs
 app-editors/vim
 app-emulation/libvirt
+app-emulation/virt-manager
 app-metrics/node_exporter
 app-metrics/postfix_exporter
 app-misc/jq
