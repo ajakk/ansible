@@ -24,6 +24,7 @@ app-shells/bash-completion
 app-text/wgetpaste
 dev-util/strace
 dev-vcs/git
+dev-vcs/subversion
 mail-mta/postfix
 net-analyzer/fail2ban
 net-analyzer/nmap
