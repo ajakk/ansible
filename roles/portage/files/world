@@ -33,9 +33,9 @@ net-analyzer/ossec-hids
 net-analyzer/tcpdump
 net-dns/bind-tools
 net-firewall/firewalld
-net-misc/app-cacher-ng
+net-fs/nfs-utils
+net-misc/apt-cacher-ng
 net-misc/mosh
-net-misc/nfs-utils
 net-misc/openvswitch
 net-misc/socat
 net-misc/whois
