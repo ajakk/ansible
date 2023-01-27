@@ -1,7 +1,8 @@
 ---
-- name: Add mervin
-  ansible.builtin.include_tasks: mervin.yml
-  when: mervin
+# Doesn't seem fixed: https://github.com/progval/Limnoria/issues/1516
+# - name: Add mervin
+#   ansible.builtin.include_tasks: mervin.yml
+#   when: mervin
 - name: Add homeassistant
   ansible.builtin.include_tasks: homeassistant.yml
   when: homeassistant
