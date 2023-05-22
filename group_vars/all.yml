@@ -4,7 +4,7 @@ wg_domain: "wg.{{ public_domain }}"
 repo_root: https://git.ajak.xyz/ajak
 this_repo: "{{ repo_root }}/ansible"
 secrets_repo: "{{ repo_root }}/ansible-secrets"
-timezone: US/Central
+timezone: US/Pacific
 my_email: jchelmert3@posteo.net
 whoami: jake
 gccarch: x86-64
