@@ -1,15 +1,4 @@
 ---
-- name: Get gpg key
-  # This triggers command-instead-of-module because it thinks we
-  # should be using get_url or uri to get the URL contents
-  # However, there is no builtin to then import the gpg key into the
-  # root user's keyring, so I would have to use another shell command
-  # to do that anyway. Thus, this is probably the most succinct way to
-  # accomplish this.
-  ansible.builtin.shell: # noqa command-instead-of-module
-    cmd: curl https://ajak.xyz/ajak.pub | gpg --import
-  register: curl_result
-  changed_when: "'imported' in curl_result.stderr"
 - name: Remove old ansible-pull cronjob
   ansible.builtin.file:
     path: /etc/cron.daily/ansible-pull
@@ -30,6 +19,7 @@
     content: |
       PATH="/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 
+      0 0 * * 0 root gpg --keyserver hkps://keys.gentoo.org --recv-keys 39333C79B7BD85CD55C02E4C812BDFCB974B5783
       0 */6 * * * root /usr/local/bin/ansiblepull
     dest: /etc/cron.d/ansible-pull
     mode: 0644
