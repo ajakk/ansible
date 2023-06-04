@@ -18,6 +18,7 @@ gentoo_repos:
     extra_lines: |
       auto-sync = yes
       sync-git-verify-commit-signature = yes
+      volatile = no
   ajak:
     source: https://gitlab.com/ajak/ajak
 
