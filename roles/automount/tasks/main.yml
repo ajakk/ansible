@@ -23,5 +23,6 @@
   when: host_netmounts
   ansible.builtin.service:
     name: "{{ item.where | replace('/', '-') | regex_replace('^-', '') }}.automount"
+    state: started
     enabled: true
   with_items: "{{ host_netmounts }}"
