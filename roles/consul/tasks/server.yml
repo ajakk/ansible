@@ -2,7 +2,7 @@
 - name: Deploy the consul server
   community.docker.docker_container:
     name: consul-server
-    image: consul
+    image: hashicorp/consul
     network_mode: host
     pull: true
     state: started
