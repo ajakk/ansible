@@ -18,6 +18,8 @@
   with_items: "{{ repos + host_repos }}"
 - name: Deploy portage configuration
   when: podman_gentoo or inventory_hostname in groups['vms']
+  # annoyingly, copying directories doesn't actually output diffs for
+  # files inside
   ansible.builtin.copy:
     src: "{{ ansible_architecture }}/"
     dest: "{{ item }}"
