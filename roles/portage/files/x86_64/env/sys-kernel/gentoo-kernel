@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+function post_pkg_postinst() {
+    einfo "Cleaning old kernels..."
+    eclean-kernel -n 2
+}
