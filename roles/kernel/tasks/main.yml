@@ -1,0 +1,4 @@
+---
+- name: Add Gentoo kernel UKI configuration
+  when: uki
+  ansible.builtin.include_tasks: kernel.yml

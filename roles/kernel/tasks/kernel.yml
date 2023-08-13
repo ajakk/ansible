@@ -1,0 +1,8 @@
+---
+- name: Add install.conf
+  ansible.builtin.copy:
+    src: install.conf
+    dest: /etc/kernel/install.conf
+    owner: root
+    group: root
+    mode: 0644

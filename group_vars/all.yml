@@ -44,6 +44,7 @@ my_roles:
   - firewalld
   - python_exec
   - ansible_pull
+  - kernel
   - podman_gentoo
   - dnsmasq
   - unbound
