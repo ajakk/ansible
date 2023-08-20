@@ -1,0 +1,13 @@
+---
+- name: Unmount filesystems
+  when: item.changed
+  loop: "{{ dirs_created.results }}"
+  ansible.posix.mount:
+    path: "{{ item.item.where }}"
+    state: unmounted
+- name: Start automount units
+  when: item.changed
+  loop: "{{ dirs_created.results }}"
+  ansible.builtin.service:
+    name: "{{ item.item.where | replace('/', '-') | regex_replace('^-', '') }}.automount"
+    state: started

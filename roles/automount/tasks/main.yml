@@ -10,7 +10,16 @@
     mode: 0644
   with_items: "{{ host_netmounts }}"
 - name: Add automount units
-  notify: Reload systemd
+  notify:
+    - Reload systemd
+    # some hackery is needed to get the unmount/start handlers to
+    # function properly, since we want to only operate on automount
+    # units which are newly added, so we register a var that captures
+    # the end state of this task and then parse it in the handler to
+    # see which items actually made a change
+    - Unmount filesystems
+    - Start automount units
+  register: dirs_created
   when: host_netmounts
   ansible.builtin.template:
     src: share.automount.j2
@@ -18,11 +27,10 @@
     owner: root
     group: root
     mode: 0644
-  with_items: "{{ host_netmounts }}"
+  loop: "{{ host_netmounts }}"
 - name: Enable and start automount units
   when: host_netmounts
   ansible.builtin.service:
     name: "{{ item.where | replace('/', '-') | regex_replace('^-', '') }}.automount"
-    state: started
     enabled: true
   with_items: "{{ host_netmounts }}"
