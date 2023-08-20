@@ -1,11 +1,14 @@
 ---
+# qa issues: https://github.com/ansible/ansible-lint/issues/3655
 - name: Unmount filesystems
+  # noqa no-handler
   when: item.changed
   loop: "{{ dirs_created.results }}"
   ansible.posix.mount:
     path: "{{ item.item.where }}"
     state: unmounted
 - name: Start automount units
+  # noqa no-handler
   when: item.changed
   loop: "{{ dirs_created.results }}"
   ansible.builtin.service:
