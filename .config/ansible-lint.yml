@@ -3,7 +3,7 @@ exclude_paths:
   # These files contains non-public secrets in a separate repository
   - ../../ansible-secrets
   # 'on:' should not be 'true:'
-  - ../.github
+  - .github
 
 warn_list:
   # Silence false positive in https://github.com/ajakk/ansible/runs/8059329138
