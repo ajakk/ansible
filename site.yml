@@ -1,15 +1,16 @@
 #!/usr/bin/ansible-playbook
 ---
-- name: site.yml
+- name: Site
   become: true
   hosts: all
   gather_facts: false
   pre_tasks:
-    - include_tasks: setup.yml
+    - name: Run setup tasks
+      ansible.builtin.include_tasks: setup.yml
       tags: always
   tasks:
     - name: Run host-specific early tasks
-      include_tasks: "{{ tasksfile }}"
+      ansible.builtin.include_tasks: "{{ tasksfile }}"
       with_fileglob:
         - "tasks/{{ ansible_hostname }}.yml"
       loop_control:
