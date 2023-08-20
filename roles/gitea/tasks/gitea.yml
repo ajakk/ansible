@@ -5,7 +5,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
   with_items:
     - "{{ gitea_confdir }}"
 - name: Create gitea's data volume
@@ -17,7 +17,7 @@
     dest: "{{ gitea_confdir }}/docker-compose.yml"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 # Set up handling for the host's openssh to pass through to the container's:
 # https://docs.gitea.io/en-us/install-with-docker/#ssh-shell-with-authorizedkeyscommand
 - name: Create git's ~/.ssh
@@ -27,7 +27,7 @@
     state: directory
     owner: "{{ git_uid }}"
     group: "{{ git_gid }}"
-    mode: 0700
+    mode: "0700"
 - name: Generate ssh key for git
   become_user: git
   community.crypto.openssh_keypair:
@@ -45,14 +45,14 @@
 #     line: "{{ ssh_key.public_key }}"
 #     owner: "{{ git_uid }}"
 #     group: "{{ git_gid }}"
-#     mode: 0600
+#     mode: "0600"
 - name: Create git ssh-shell
   ansible.builtin.copy:
     src: ssh-shell
     dest: "{{ git_home }}/ssh-shell"
     owner: "{{ git_uid }}"
     group: "{{ git_gid }}"
-    mode: 0755
+    mode: "0755"
 - name: Set git user's shell
   ansible.builtin.user:
     name: git

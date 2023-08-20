@@ -7,7 +7,7 @@
     dest: "/etc/systemd/system/{{ item.where | replace('/', '-') | regex_replace('^-', '') }}.mount"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   with_items: "{{ host_netmounts }}"
 - name: Add automount units
   notify:
@@ -26,7 +26,7 @@
     dest: "/etc/systemd/system/{{ item.where | replace('/', '-') | regex_replace('^-', '') }}.automount"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   loop: "{{ host_netmounts }}"
 - name: Enable and start automount units
   when: host_netmounts

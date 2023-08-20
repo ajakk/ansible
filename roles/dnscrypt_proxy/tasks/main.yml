@@ -9,7 +9,7 @@
         dest: /etc/dnscrypt-proxy/dnscrypt-proxy.toml
         owner: root
         group: root
-        mode: 0644
+        mode: "0644"
 - name: Start and enable dnscrypt-proxy
   when: dnscryptproxy
   ansible.builtin.service:

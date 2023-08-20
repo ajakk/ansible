@@ -14,7 +14,7 @@
     dest: /etc/portage/repos.conf/{{ item }}.conf
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   with_items: "{{ repos + host_repos }}"
 - name: Deploy portage configuration
   when: podman_gentoo or inventory_hostname in groups['vms']
@@ -26,7 +26,7 @@
     owner: root
     group: root
     mode: preserve
-    directory_mode: 0755
+    directory_mode: "0755"
     # required to copy the symlink as-is rather than copying the
     # symlink's target
     local_follow: false
@@ -39,4 +39,4 @@
     dest: /etc/podman-gentoo/base
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"

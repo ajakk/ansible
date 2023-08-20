@@ -15,7 +15,7 @@
     dest: "/etc/systemd/network/20-{{ item }}.network"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   with_items:
     - public
     - private

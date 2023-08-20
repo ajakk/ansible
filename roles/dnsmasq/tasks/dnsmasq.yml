@@ -7,7 +7,7 @@
     validate: dnsmasq --test --conf-file=%s
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 - name: Install authoritative records conf file
   notify: Restart dnsmasq
   ansible.builtin.template:
@@ -16,7 +16,7 @@
     validate: dnsmasq --test --conf-file=%s
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 - name: Install systemd service drop-in to support auth-server
   notify:
     - Restart dnsmasq
@@ -26,7 +26,7 @@
     dest: /etc/systemd/system/dnsmasq.service.d/override.conf
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 - name: Start and enable dnsmasq
   ansible.builtin.service:
     name: dnsmasq

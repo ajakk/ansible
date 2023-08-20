@@ -5,7 +5,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
   with_items:
     - "{{ grafana_confdir }}"
     - "{{ grafana_confdir }}/provisioning"
@@ -16,7 +16,7 @@
     dest: "{{ grafana_confdir }}/provisioning/datasources/datasource.yml"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   register: datasource_config
 - name: Add configuration
   ansible.builtin.copy:
@@ -24,7 +24,7 @@
     dest: "{{ grafana_confdir }}/grafana.ini"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   register: config
 - name: Create grafana volumes
   community.docker.docker_volume:

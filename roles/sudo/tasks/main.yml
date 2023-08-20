@@ -5,11 +5,11 @@
     state: directory
     owner: root
     group: root
-    mode: 0750
+    mode: "0750"
 - name: Allow users in wheel to sudo
   ansible.builtin.copy:
     src: sudoers.local
     dest: /etc/sudoers.d/local
     owner: root
     group: root
-    mode: 0440
+    mode: "0440"

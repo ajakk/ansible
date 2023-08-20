@@ -3,6 +3,6 @@
   ansible.builtin.copy:
     src: python-exec.conf
     dest: /etc/python-exec/python-exec.conf
-    mode: 0644
+    mode: "0644"
     owner: root
     group: root

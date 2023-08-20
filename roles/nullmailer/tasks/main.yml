@@ -9,7 +9,7 @@
         dest: /etc/nullmailer/remotes
         owner: root
         group: nullmail
-        mode: 0640
+        mode: "0640"
     # TODO If the host is sufficiently new, the original facts
     # gathering might not have gotten a hostname or domain, because
     # those are derived from /etc/hosts and /etc/hostname, which are
@@ -29,7 +29,7 @@
         create: true
         owner: root
         group: root
-        mode: 0644
+        mode: "0644"
     - name: Install nullmailer defaultdomain configuration
       ansible.builtin.lineinfile:
         line: "{{ ansible_domain }}"
@@ -38,21 +38,21 @@
         create: true
         owner: root
         group: root
-        mode: 0644
+        mode: "0644"
     - name: Install nullmailer metrics cronjob
       ansible.builtin.copy:
         src: usr/local/bin/nullmailer_exporter
         dest: /usr/local/bin/nullmailer_exporter
         owner: root
         group: root
-        mode: 0755
+        mode: "0755"
     - name: Install nullmailer metrics cronjob
       ansible.builtin.copy:
         src: etc/cron.d/nullmailer-metrics
         dest: /etc/cron.d/nullmailer-metrics
         owner: root
         group: root
-        mode: 0644
+        mode: "0644"
 
 - name: Start and enable nullmailer
   when: not postfix or postfix is not defined

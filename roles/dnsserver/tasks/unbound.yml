@@ -6,14 +6,14 @@
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
 - name: Install unbound configuration
   ansible.builtin.template:
     src: "{{ item }}.j2"
     dest: "{{ unbound_confdir }}/{{ item }}"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   with_items:
     - "{{ public_domain }}.zone"
     - "unbound.conf"

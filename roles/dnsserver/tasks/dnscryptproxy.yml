@@ -5,14 +5,14 @@
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
 - name: Add dnscrypt-proxy configuration
   ansible.builtin.copy:
     src: "dnscrypt-proxy.toml"
     dest: "{{ dnscryptproxy_confdir }}/dnscrypt-proxy.toml"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 - name: Deploy dnscrypt-proxy
   community.docker.docker_container:
     name: dnscrypt-proxy

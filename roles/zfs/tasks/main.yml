@@ -6,7 +6,7 @@
     dest: /etc
     owner: root
     group: root
-    mode: 0744
+    mode: "0744"
   with_items:
     - cron.d
     - cron.hourly

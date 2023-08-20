@@ -14,7 +14,7 @@
     dest: /var/lib/transmission/config/settings.json
     owner: transmission
     group: transmission
-    mode: 0600
+    mode: "0600"
 - name: Start transmission
   ansible.builtin.service:
     name: transmission-daemon

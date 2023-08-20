@@ -5,7 +5,7 @@
     dest: /etc/resolv.conf
     owner: systemd-resolve
     group: systemd-resolve
-    mode: 0644
+    mode: "0644"
     state: link
     force: true
 - name: Install resolved configuration
@@ -15,7 +15,7 @@
     dest: /etc/systemd/resolved.conf
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 - name: Start and enable resolved
   ansible.builtin.service:
     name: systemd-resolved

@@ -13,4 +13,4 @@
     dest: /etc/u2f_mappings
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"

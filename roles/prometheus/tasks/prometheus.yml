@@ -5,7 +5,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
   with_items:
     - "{{ prom_confdir }}"
     - "{{ prom_confdir }}/alerts"
@@ -17,7 +17,7 @@
     state: directory
     owner: nobody
     group: nobody
-    mode: 0755
+    mode: "0755"
 - name: Install prometheus.yml
   notify: Restart prometheus
   ansible.builtin.template:
@@ -25,7 +25,7 @@
     dest: "{{ prom_confdir }}/prometheus.yml"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
     # validate: promtool check config %s
 - name: Install prometheus alerts
   notify: Restart prometheus
@@ -34,7 +34,7 @@
     dest: "{{ prom_confdir }}/alerts/{{ item | basename }}"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
     # validate: promtool check config %s
   with_fileglob:
     - alerts/*
@@ -45,7 +45,7 @@
     dest: "{{ am_confdir }}/alertmanager.yml"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
     # validate: amtool check-config %s
 - name: Install docker-compose.yml
   ansible.builtin.template:
@@ -53,7 +53,7 @@
     dest: "{{ prom_confdir }}/docker-compose.yml"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 - name: Run prometheus and alertmanager
   community.docker.docker_compose:
     project_src: "{{ prom_confdir }}"

@@ -5,7 +5,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0700
+    mode: "0700"
 - name: Add traefik's traefik.toml
   notify: Restart traefik
   ansible.builtin.template:
@@ -13,7 +13,7 @@
     dest: "{{ traefik_confdir }}/traefik.toml"
     owner: root
     group: root
-    mode: 0600
+    mode: "0600"
 - name: Add traefik's extra configuration
   notify: Restart traefik
   when: traefik_proxy_for is defined
@@ -22,7 +22,7 @@
     dest: "{{ traefik_confdir }}/extra.toml"
     owner: root
     group: root
-    mode: 0600
+    mode: "0600"
 - name: Add traefik's docker-compose
   notify: Restart traefik
   ansible.builtin.template:
@@ -30,7 +30,7 @@
     dest: "{{ traefik_confdir }}/docker-compose.yml"
     owner: root
     group: root
-    mode: 0600
+    mode: "0600"
 - name: Create traefik network
   community.docker.docker_network:
     name: "{{ network_name }}"

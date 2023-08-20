@@ -6,14 +6,14 @@
     dest: /etc/tor/torrc
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
 - name: Create tor service drop-in directory
   ansible.builtin.file:
     path: /etc/systemd/system/tor.service.d
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
 - name: Add tor service drop-in
   notify:
     - Reload systemd
@@ -23,7 +23,7 @@
     dest: /etc/systemd/system/tor.service.d/override.conf
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 - name: Enable tor
   ansible.builtin.service:
     name: tor

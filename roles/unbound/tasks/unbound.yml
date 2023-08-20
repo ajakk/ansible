@@ -8,7 +8,7 @@
     dest: /etc/unbound/{{ public_domain }}.zone
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 - name: Install unbound.conf
   notify: Restart unbound
   ansible.builtin.template:
@@ -16,7 +16,7 @@
     dest: /etc/unbound/unbound.conf
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
     validate: unbound-checkconf %s
 - name: Disable other dns servers
   ansible.builtin.service:
