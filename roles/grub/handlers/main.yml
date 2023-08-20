@@ -1,4 +1,4 @@
 ---
 - name: Reconfigure grub
-  ansible.builtin.command:
+  ansible.builtin.command:  # noqa no-changed-when
     cmd: grub-mkconfig -o /boot/grub/grub.cfg

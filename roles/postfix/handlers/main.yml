@@ -1,9 +1,9 @@
 ---
 - name: Regenerate generic.db
-  ansible.builtin.command:
+  ansible.builtin.command:  # noqa no-changed-when
     cmd: postmap /etc/postfix/generic
 - name: Regenerate password.db
-  ansible.builtin.command:
+  ansible.builtin.command:  # noqa no-changed-when
     cmd: postmap /etc/postfix/password
 - name: Restart postfix_exporter
   ansible.builtin.service:
