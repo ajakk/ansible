@@ -3,7 +3,7 @@
   ansible.builtin.include_role:
     name: portage_package
   vars:
-    world_pkgs:
+    world_pkgs: # noqa var-naming
       - app-metrics/postfix_exporter
       - mail-mta/postfix
     now: true
