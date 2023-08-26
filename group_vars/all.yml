@@ -35,6 +35,7 @@ my_roles:
   - timezone
   - fstab
   - automount
+  - python_exec
   - networkd
   - resolved
   - zfs
@@ -42,7 +43,6 @@ my_roles:
   - portage
   - portage_update
   - firewalld
-  - python_exec
   - ansible_pull
   - kernel
   - podman_gentoo
