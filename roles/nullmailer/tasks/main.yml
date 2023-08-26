@@ -1,7 +1,7 @@
 ---
 - name: Install nullmailer configuration
   notify: Restart nullmailer
-  when: not postfix or postfix is not defined
+  when: not postfix
   block:
     - name: Install nullmailer remotes configuration
       ansible.builtin.copy:
@@ -55,7 +55,7 @@
         mode: "0644"
 
 - name: Start and enable nullmailer
-  when: not postfix or postfix is not defined
+  when: not postfix
   ansible.builtin.service:
     name: nullmailer
     enabled: true
