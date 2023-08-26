@@ -3,7 +3,7 @@
 - name: Deploy the consul client
   community.docker.docker_container:
     name: "{{ consul_client_container }}"
-    image: consul
+    image: hashicorp/consul
     network_mode: host
     pull: true
     state: started
