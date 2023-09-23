@@ -59,6 +59,7 @@ my_roles:
   - podman
   - transmission
   - speedtest_exporter
+  - nut
   - dotfiles
   - services
   - docker
