@@ -8,6 +8,7 @@
     mode: "0644"
     validate: smartd -q onecheck -c %s
 - name: Start and enable smartd
+  notify: Restart smartd
   ansible.builtin.service:
     name: smartd
     state: started
