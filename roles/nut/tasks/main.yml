@@ -1,17 +1,4 @@
 ---
-- name: Add nut ups configuration
-  notify: Restart nut-server
-  ansible.builtin.copy:
-    src: ups.conf
-    dest: /etc/nut/ups.conf
-    owner: root
-    group: root
-    mode: "0644"
-- name: Start and enable nut services
-  ansible.builtin.service:
-    name: "{{ item }}"
-    state: started
-    enabled: true
-  loop:
-    - nut-driver
-    - nut-server
+- name: Configure Network-UPS tools
+  when: nut
+  ansible.builtin.include_tasks: nut.yml
