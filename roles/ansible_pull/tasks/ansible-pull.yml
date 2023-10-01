@@ -19,7 +19,7 @@
     content: |
       PATH="/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 
-      0 0 * * 0 root gpg --keyserver hkps://keys.gentoo.org --recv-keys 39333C79B7BD85CD55C02E4C812BDFCB974B5783
+      0 0 * * 0 root gpg --quiet --keyserver hkps://keys.gentoo.org --recv-keys 39333C79B7BD85CD55C02E4C812BDFCB974B5783 >/dev/null
       0 */6 * * * root /usr/local/bin/ansiblepull 2>&1 >/dev/null
     dest: /etc/cron.d/ansible-pull
     mode: "0644"
