@@ -41,6 +41,7 @@ net-misc/socat
 net-misc/whois
 sys-apps/smartmontools
 sys-devel/gdb
+sys-kernel/gentoo-kernel
 sys-process/cronie
 sys-process/htop
 sys-process/lsof
