@@ -4,6 +4,7 @@ exclude_paths:
   - ../../ansible-secrets
   # 'on:' should not be 'true:'
   - .github
+  - venv
 
 warn_list:
   # Silence false positive in https://github.com/ajakk/ansible/runs/8059329138
