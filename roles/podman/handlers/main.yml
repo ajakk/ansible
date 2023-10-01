@@ -1,0 +1,4 @@
+---
+- name: Reset podman state
+  ansible.builtin.command:  # noqa no-changed-when
+    cmd: podman system reset -f

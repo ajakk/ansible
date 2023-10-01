@@ -1,8 +1,9 @@
 ---
 - name: Install podman's storage.conf
-  when: podman_zfs_dataset is defined
-  ansible.builtin.template:
-    src: storage.conf.j2
+  when: podman
+  notify: Reset podman state
+  ansible.builtin.copy:
+    src: storage.conf
     dest: /etc/containers/storage.conf
     owner: root
     group: root
