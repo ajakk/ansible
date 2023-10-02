@@ -13,3 +13,16 @@
     - cron.daily
     - cron.weekly
     - cron.monthly
+- name: Start and enable zfs services
+  when: zfs
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  loop:
+    - zfs-import-cache.service
+    - zfs-mount.service
+    - zfs-share.service
+    - zfs-zed.service
+    - zfs-volume-wait.service
+    - zfs.target
