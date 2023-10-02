@@ -13,3 +13,6 @@ warn_list:
 
 skip_list:
   - meta-no-info
+  # all of my roles are become'd, but the indirection in the playbook
+  # confuses ansible-lint
+  - partial-become
