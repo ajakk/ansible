@@ -3,26 +3,18 @@
   when: zfs
   ansible.builtin.copy:
     src: etc/{{ item }}
-    dest: /etc
+    dest: /etc/{{ item }}
     owner: root
     group: root
     mode: "0744"
-  with_items:
-    - cron.d
-    - cron.hourly
-    - cron.daily
-    - cron.weekly
-    - cron.monthly
+  with_items: "{{ zfs_cronjobs }}"
 - name: Start and enable zfs services
   when: zfs
   ansible.builtin.service:
     name: "{{ item }}"
     state: started
     enabled: true
-  loop:
-    - zfs-import-cache.service
-    - zfs-mount.service
-    - zfs-share.service
-    - zfs-zed.service
-    - zfs-volume-wait.service
-    - zfs.target
+  loop: "{{ zfs_services }}"
+- name: Remove zfs configuration
+  when: not zfs
+  ansible.builtin.include_tasks: remove.yml

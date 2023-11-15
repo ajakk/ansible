@@ -1,0 +1,12 @@
+---
+- name: Remove zfs cron jobs
+  ansible.builtin.file:
+    path: "/etc/{{ item }}"
+    state: absent
+  with_items: "{{ zfs_cronjobs }}"
+- name: Stop and disable zfs services
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+  loop: "{{ zfs_services }}"

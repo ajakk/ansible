@@ -1,2 +1,16 @@
 ---
+zfs_cronjobs:
+  - cron.d/zfs-auto-snapshot
+  - cron.hourly/zfs-auto-snapshot
+  - cron.daily/zfs-auto-snapshot
+  - cron.weekly/zpool-scrub
+  - cron.weekly/zfs-auto-snapshot
+  - cron.monthly/zfs-auto-snapshot
+zfs_services:
+  - zfs-import-cache.service
+  - zfs-mount.service
+  - zfs-share.service
+  - zfs-zed.service
+  - zfs-volume-wait.service
+  - zfs.target
 zfs: false
