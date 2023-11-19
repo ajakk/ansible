@@ -1,10 +1,13 @@
 ---
+- name: Populate service facts
+  ansible.builtin.service_facts:
 - name: Remove zfs cron jobs
   ansible.builtin.file:
     path: "/etc/{{ item }}"
     state: absent
   with_items: "{{ zfs_cronjobs }}"
 - name: Stop and disable zfs services
+  when: item in ansible_facts.services
   ansible.builtin.service:
     name: "{{ item }}"
     state: stopped
