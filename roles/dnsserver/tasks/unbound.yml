@@ -21,10 +21,10 @@
 - name: Update and start unbound
   community.docker.docker_container:
     name: unbound
-    image: ajak/unbound
+    image: mvance/unbound
     pull: true
     state: started
     network_mode: "{{ network_name }}"
     restart_policy: unless-stopped
     volumes:
-      - "{{ unbound_confdir }}:/etc/unbound:ro,Z"
+      - "{{ unbound_confdir }}/:/etc/unbound:ro,Z"
