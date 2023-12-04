@@ -695,7 +695,7 @@ smtp_sasl_auth_enable = yes
 smtp_sasl_password_maps = hash:/etc/postfix/password
 smtp_sasl_security_options = noanonymous
 
-mynetworks = 10.5.0.0/24, 192.168.122.0/24
+mynetworks = 192.168.0.0/24, 192.168.122.0/24
 
 smtpd_relay_restrictions = permit_mynetworks,reject_unauth_destination
 smtpd_recipient_restrictions = permit_mynetworks,reject_unauth_destination
