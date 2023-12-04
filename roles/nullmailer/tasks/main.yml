@@ -4,8 +4,8 @@
   when: not postfix
   block:
     - name: Install nullmailer remotes configuration
-      ansible.builtin.copy:
-        src: remotes
+      ansible.builtin.template:
+        src: remotes.j2
         dest: /etc/nullmailer/remotes
         owner: root
         group: nullmail
