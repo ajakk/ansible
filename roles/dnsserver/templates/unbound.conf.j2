@@ -589,7 +589,7 @@ server:
         # instead of SERVFAIL. It still performs the security checks, which
         # result in interesting log files and possibly the AD bit in
         # replies if the message is found secure. The default is off.
-        # val-permissive-mode: no
+        val-permissive-mode: yes
 
         # Ignore the CD flag in incoming queries and refuse them bogus data.
         # Enable it if the only clients of Unbound are legacy servers (w2008)
