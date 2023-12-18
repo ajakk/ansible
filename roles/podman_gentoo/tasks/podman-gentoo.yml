@@ -8,12 +8,12 @@
     mode: "0755"
 - name: Install update scripts per host
   ansible.builtin.copy:
-    src: "{{ ansible_hostname }}/usr/local/bin/update_images.sh"
+    src: update_images.sh
     dest: /usr/local/bin/update_images.sh
     owner: root
     group: root
     mode: "0744"
-- name: Install cronjobs per host
+- name: Install cronjob
   ansible.builtin.copy:
     src: update-images
     dest: /etc/cron.d/update-images
