@@ -2,4 +2,4 @@
 network: jellyfin
 jellyfin_volumes:
   - /etc/jellyfin:/config
-  - /var/cahe/jellyfin:/cache
+  - /var/cache/jellyfin:/cache
