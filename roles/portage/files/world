@@ -39,6 +39,7 @@ net-misc/mosh
 net-misc/openvswitch
 net-misc/socat
 net-misc/whois
+sys-apps/merge-usr
 sys-apps/smartmontools
 sys-devel/gdb
 sys-fs/zfs-kmod
