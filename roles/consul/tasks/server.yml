@@ -15,5 +15,8 @@
       - -data-dir=/consul/data
       - -bootstrap-expect=1
       - "-bind={{ consul_client_bind_ip }}"
+      # needs the client bind address set to something accessible for
+      # prometheus to access the its port 8500
+      - "-client={{ consul_client_bind_ip }}"
     volumes:
       - consul:/consul/data
