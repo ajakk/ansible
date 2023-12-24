@@ -2,6 +2,7 @@
 public_domain: ajak.xyz
 wg_domain: "wg.{{ public_domain }}"
 repo_root: https://git.ajak.xyz/ajak
+consul_api_root: "http://consul.{{ public_domain }}"
 this_repo: "{{ repo_root }}/ansible"
 secrets_repo: "{{ repo_root }}/ansible-secrets"
 timezone: US/Pacific
