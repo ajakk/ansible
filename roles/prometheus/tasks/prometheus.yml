@@ -10,10 +10,6 @@
     - "{{ prom_confdir }}"
     - "{{ prom_confdir }}/alerts"
     - "{{ am_confdir }}"
-- name: Remove old templates directory
-  ansible.builtin.file:
-    path: "{{ am_confdir }}/template"
-    state: absent
 - name: Create prometheus data directory
   ansible.builtin.file:
     path: "{{ prom_datadir }}"
