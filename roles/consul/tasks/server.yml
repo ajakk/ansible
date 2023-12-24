@@ -17,6 +17,8 @@
       - "-bind={{ consul_client_bind_ip }}"
       # needs the client bind address set to something accessible for
       # prometheus to access the its port 8500
-      - "-client={{ consul_client_bind_ip }}"
+      # FIXME: .. but consul_service makes requests over lo even if
+      # this is bound to a public interface! why?
+      - "-client={{ consul_client_bind_ip }} 127.0.0.1"
     volumes:
       - consul:/consul/data
