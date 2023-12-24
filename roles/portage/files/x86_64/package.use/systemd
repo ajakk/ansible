@@ -1,1 +1,1 @@
-sys-apps/systemd cryptsetup curl gnuefi elfutils tpm importd lzma
+sys-apps/systemd boot cryptsetup curl gnuefi elfutils kernel-install tpm importd lzma ukify
