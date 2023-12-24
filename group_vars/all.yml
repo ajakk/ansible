@@ -27,6 +27,7 @@ repos:
 
 world:
   - app-text/wgetpaste
+  - app-admin/eclean-kernel
 
 my_roles:
   - hosts
