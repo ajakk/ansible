@@ -6,6 +6,11 @@
 - name: Add homeassistant
   ansible.builtin.include_tasks: homeassistant.yml
   when: homeassistant
+- name: Remove old cronjob
+  when: mervin or homeassistant
+  ansible.builtin.file:
+    path: /etc/cron.daily/docker-system-prune
+    state: absent
 - name: Add cron job to prune Docker data
   # TODO: this is hacky, should put the above in their own roles (and
   # specify dependencies on traefik appropriately) then use this
@@ -13,7 +18,7 @@
   when: mervin or homeassistant
   ansible.builtin.copy:
     src: docker-system-prune
-    dest: /etc/cron.daily/docker-system-prune
-    mode: "0755"
+    dest: /etc/cron.d/docker-system-prune
+    mode: "0644"
     owner: root
     group: root
