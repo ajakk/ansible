@@ -32,3 +32,9 @@
 - name: Depclean
   portage: # noqa fqcn
     depclean: true
+- name: Install packages into @world
+  portage: # noqa fqcn
+    package: "{{ world }}"
+    state: present
+    getbinpkgonly: "{{ getpkg }}"
+    usepkgonly: "{{ not getpkg }}"
