@@ -1,0 +1,14 @@
+sys-auth/sssd sudo
+
+# required by sys-auth/sssd-2.9.1::gentoo
+# required by @selected
+# required by @world (argument)
+>=dev-libs/cyrus-sasl-2.1.28-r4 kerberos
+# required by sys-auth/sssd-2.9.1::gentoo
+# required by @selected
+# required by @world (argument)
+>=net-dns/bind-tools-9.16.42 gssapi
+# required by sys-auth/sssd-2.9.1::gentoo
+# required by @selected
+# required by @world (argument)
+>=net-nds/openldap-2.6.3-r7 sasl experimental
