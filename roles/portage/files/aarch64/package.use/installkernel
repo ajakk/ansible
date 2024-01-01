@@ -1,0 +1,9 @@
+# required by sys-kernel/installkernel-systemd-2-r5::gentoo
+# required by sys-apps/debianutils-5.14::gentoo[installkernel]
+# required by app-misc/ca-certificates-20230311.3.93::gentoo
+# required by dev-python/certifi-3021.3.16-r4::gentoo
+# required by dev-python/requests-2.31.0::gentoo
+# required by app-emulation/virt-manager-4.1.0-r1::gentoo[-test,python_single_target_python3_11]
+# required by @selected
+# required by @world (argument)
+sys-apps/systemd kernel-install

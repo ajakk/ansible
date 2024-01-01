@@ -1,0 +1,5 @@
+# required by app-containers/containers-common-0.56.0-r1::gentoo
+# required by app-containers/podman-4.7.2::gentoo
+# required by @selected
+# required by @world (argument)
+net-firewall/iptables nftables
