@@ -1,0 +1,2 @@
+# mostly for boot bits
+sys-apps/systemd boot gnuefi tpm ukify
