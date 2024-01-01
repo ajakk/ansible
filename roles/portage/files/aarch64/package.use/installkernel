@@ -7,3 +7,5 @@
 # required by @selected
 # required by @world (argument)
 sys-apps/systemd kernel-install
+
+sys-kernel/installkernel-gentoo grub
