@@ -9,6 +9,7 @@ app-containers/docker
 app-containers/docker-cli
 app-containers/docker-compose
 app-containers/podman
+app-crypt/lego
 app-crypt/sbsigntools
 app-crypt/tpm2-tools
 app-editors/emacs
