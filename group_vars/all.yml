@@ -22,6 +22,8 @@ gentoo_repos:
       volatile = no
   ajak:
     source: https://gitlab.com/ajak/ajak
+  guru:
+    source: https://github.com/gentoo-mirror/guru.git
 
 repos:
   - gentoo
