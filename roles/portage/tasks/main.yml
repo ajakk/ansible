@@ -16,6 +16,23 @@
     group: root
     mode: "0644"
   with_items: "{{ repos + host_repos }}"
+- name: Create repos.conf directory in binhost configuration
+  when: podman_gentoo
+  ansible.builtin.file:
+    state: directory
+    path: /etc/podman-gentoo/base/repos.conf
+    owner: root
+    group: root
+    mode: "0755"
+- name: Install repos to binhost
+  when: podman_gentoo
+  ansible.builtin.template:
+    src: repo.conf.j2
+    dest: /etc/podman-gentoo/base/repos.conf/{{ item }}.conf
+    owner: root
+    group: root
+    mode: "0644"
+  with_items: "{{ repos + host_repos }}"
 - name: Deploy portage configuration
   when: podman_gentoo or inventory_hostname in groups['vms']
   # annoyingly, copying directories doesn't actually output diffs for
