@@ -1,0 +1,42 @@
+---
+# NOTE: lego requires manual setup per domain! you need to set up the
+# domain in the DNS provider, and then do the first installation of
+# the certificate which can then be renewed
+- name: Ensure lego is installed
+  community.general.portage:
+    name: app-crypt/lego
+    state: present
+    getbinpkgonly: "{{ getpkg }}"
+    usepkgonly: "{{ not getpkg }}"
+- name: Create lego configuration directory
+  ansible.builtin.file:
+    path: /etc/lego
+    state: directory
+    owner: root
+    group: root
+    mode: "0600"
+- name: Add lego environment file
+  ansible.builtin.template:
+    src: lego.env.j2
+    dest: "/etc/lego/{{ lego_domain }}.lego.env"
+    owner: root
+    group: root
+    mode: "0600"
+- name: Add lego services
+  notify: Reload systemd
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/etc/systemd/system/{{ item }}"
+    owner: root
+    group: root
+    mode: "0644"
+  with_items:
+    - lego@.timer
+    - lego@.service
+- name: Flush handlers for systemd services
+  ansible.builtin.meta: flush_handlers
+- name: Enable lego timer service for domain
+  ansible.builtin.service:
+    name: "lego@{{ lego_domain }}.timer"
+    state: started
+    enabled: true

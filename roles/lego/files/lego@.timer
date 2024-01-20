@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily run of lego
+
+[Timer]
+OnBootSec=15m
+OnUnitActiveSec=1d
+Unit=lego@%i.service
+
+[Install]
+WantedBy=timers.target
