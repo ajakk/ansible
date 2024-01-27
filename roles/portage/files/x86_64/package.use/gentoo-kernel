@@ -1,2 +1,3 @@
 sys-kernel/gentoo-kernel hardened
 */* dist-kernel
+sys-kernel/installkernel dracut grub systemd

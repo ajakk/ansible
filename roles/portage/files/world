@@ -88,7 +88,7 @@ sys-fs/ntfs3g
 sys-fs/zfs
 sys-fs/zfs-kmod
 sys-kernel/gentoo-kernel
-sys-kernel/installkernel-systemd
+sys-kernel/installkernel
 sys-kernel/linux-firmware
 sys-power/nut
 sys-process/cronie
