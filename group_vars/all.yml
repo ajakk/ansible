@@ -29,8 +29,11 @@ repos:
   - gentoo
 
 world:
-  - app-text/wgetpaste
   - app-admin/eclean-kernel
+  - app-misc/tmux
+  - app-text/wgetpaste
+  - dev-debug/strace
+  - net-analyzer/tcpdump
 
 my_roles:
   - hosts
