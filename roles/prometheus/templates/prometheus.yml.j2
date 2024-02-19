@@ -48,7 +48,7 @@ scrape_configs:
         regex: .*speedtest_exporter.*
         action: replace
         target_label: __scrape_interval__
-        replacement: 30m
+        replacement: 1h
       - source_labels: [__meta_consul_tags]
         regex: .*speedtest_exporter.*
         action: replace
