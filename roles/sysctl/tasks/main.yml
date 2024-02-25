@@ -1,0 +1,16 @@
+---
+- name: Create sysctl.d directory
+  ansible.builtin.file:
+    path: /etc/sysctl.d
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+- name: Install sysctl rules
+  notify: Load new sysctl configuration
+  ansible.builtin.copy:
+    src: 99-sysctl.conf
+    dest: /etc/sysctl.d/
+    owner: root
+    group: root
+    mode: "0644"

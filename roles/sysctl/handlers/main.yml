@@ -1,0 +1,4 @@
+---
+- name: Load new sysctl configuration
+  # noqa: no-changed-when
+  ansible.builtin.command: sysctl -p /etc/sysctl.d/99-sysctl.conf
