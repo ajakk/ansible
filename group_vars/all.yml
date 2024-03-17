@@ -34,6 +34,7 @@ world:
   - app-text/wgetpaste
   - dev-debug/strace
   - net-analyzer/tcpdump
+  - sys-block/parted
 
 my_roles:
   - hosts
