@@ -11,6 +11,8 @@ whoami: jake
 gccarch: x86-64
 getpkg: true
 smtp_host: "sirius.{{ public_domain }}"
+consul_client: false
+consul_server: false
 
 # TODO: surely a way to grab these straight out of repositories.xml
 gentoo_repos:
