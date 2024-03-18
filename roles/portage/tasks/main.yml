@@ -52,8 +52,8 @@
 - name: Add world file to binhost
   when: podman_gentoo
   ansible.builtin.copy:
-    src: world
-    dest: /etc/podman-gentoo/base
+    content: "{{ binhost_world }}"
+    dest: /etc/podman-gentoo/base/world
     owner: root
     group: root
     mode: "0644"
