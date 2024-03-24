@@ -24,6 +24,10 @@ scrape_configs:
     static_configs:
       - targets: ["localhost:9090"]
 
+  - job_name: "opnsense"
+    static_configs:
+      - targets: ["router.{{ public_domain }}:9100"]
+
   # consul alone cannot be relied upon to ensure everything is up
   # because the consul agent can disappear without its associated
   # targets being treated as down, because the targets will disappear
