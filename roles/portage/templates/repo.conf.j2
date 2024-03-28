@@ -1,14 +1,10 @@
-{% if item == 'gentoo' %}
+{% if item.key == 'gentoo' %}
 [DEFAULT]
 main-repo = gentoo
 
 {% endif -%}
 
-[{{ item }}]
-location = {{ gentoo_repo_base }}/{{ item }}
-sync-type = git
-sync-depth = 1
-sync-uri = {{ gentoo_repos[item]['source'] }}
-{% if 'extra_lines' in gentoo_repos[item] %}
-{{ gentoo_repos[item]['extra_lines'] }}
-{%- endif -%}
+[{{ item.key }}]
+{% for val in item.value | dict2items %}
+{{ val.key }} = {{ val.value }}
+{% endfor %}

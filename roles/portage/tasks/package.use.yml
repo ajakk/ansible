@@ -1,0 +1,11 @@
+---
+- name: Write use file
+  ansible.builtin.template:
+    src: package.use.j2
+    dest: "/etc/portage/package.use/{{ use_file.key }}"
+    owner: root
+    group: root
+    mode: "0644"
+  loop: "{{ conf_type.value | dict2items }}"
+  loop_control:
+    loop_var: use_file

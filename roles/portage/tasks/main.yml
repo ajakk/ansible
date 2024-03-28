@@ -8,52 +8,9 @@
   ansible.builtin.file:
     path: "{{ gentoo_repo_base }}/gentoo"
     state: absent
-- name: Install repos
-  ansible.builtin.template:
-    src: repo.conf.j2
-    dest: /etc/portage/repos.conf/{{ item }}.conf
-    owner: root
-    group: root
-    mode: "0644"
-  with_items: "{{ repos }}"
-- name: Create repos.conf directory in binhost configuration
-  when: podman_gentoo
-  ansible.builtin.file:
-    state: directory
-    path: /etc/podman-gentoo/base/repos.conf
-    owner: root
-    group: root
-    mode: "0755"
-- name: Install repos to binhost
-  when: podman_gentoo
-  ansible.builtin.template:
-    src: repo.conf.j2
-    dest: /etc/podman-gentoo/base/repos.conf/{{ item }}.conf
-    owner: root
-    group: root
-    mode: "0644"
-  with_items: "{{ repos }}"
-- name: Deploy portage configuration
-  when: podman_gentoo or inventory_hostname in groups['vms']
-  # annoyingly, copying directories doesn't actually output diffs for
-  # files inside
-  ansible.builtin.copy:
-    src: "{{ ansible_architecture }}/"
-    dest: "{{ item }}"
-    owner: root
-    group: root
-    mode: preserve
-    directory_mode: "0755"
-    # required to copy the symlink as-is rather than copying the
-    # symlink's target
-    local_follow: false
-  with_items:
-    - "{{ ['/etc/portage'] + (['/etc/podman-gentoo/base'] if podman_gentoo else []) }}"
-- name: Add world file to binhost
-  when: podman_gentoo
-  ansible.builtin.copy:
-    content: "{{ binhost_world }}"
-    dest: /etc/podman-gentoo/base/world
-    owner: root
-    group: root
-    mode: "0644"
+- name: Apply portage configuration
+  when: conf_type.value
+  ansible.builtin.include_tasks: "{{ conf_type.key }}.yml"
+  loop: "{{ portage_configuration[ansible_architecture] | dict2items }}"
+  loop_control:
+    loop_var: conf_type

@@ -1,0 +1,8 @@
+---
+- name: Write accept_keywords file
+  ansible.builtin.template:
+    src: rich_portageconf.j2
+    dest: /etc/portage/package.accept_keywords
+    owner: root
+    group: root
+    mode: "0644"

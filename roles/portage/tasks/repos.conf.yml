@@ -1,0 +1,9 @@
+---
+- name: Write repo.conf files
+  ansible.builtin.template:
+    src: repo.conf.j2
+    dest: "/etc/portage/repos.conf/{{ item.key }}.conf"
+    owner: root
+    group: root
+    mode: "0644"
+  loop: "{{ conf_type.value | dict2items }}"

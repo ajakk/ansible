@@ -1,0 +1,8 @@
+---
+- name: Write mask file
+  ansible.builtin.template:
+    src: simple_portageconf.j2
+    dest: /etc/portage/package.mask
+    owner: root
+    group: root
+    mode: "0644"

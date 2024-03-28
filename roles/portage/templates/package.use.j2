@@ -1,0 +1,22 @@
+{#
+configuration structure like:
+
+foo:
+  - bar/baz
+      - dead
+      - beef
+
+is converted to files of name foo in configuration of conf_type.key
+with contents:
+
+bar/baz dead beef
+#}
+{% for item in use_file.value %}
+{% if item is mapping %}
+{% for dict_item in item | dict2items %}
+{{ dict_item.key }} {{ ' '.join(dict_item.value) }}
+{% endfor %}
+{% else %}
+{{ item }}
+{% endif %}
+{% endfor %}
