@@ -27,9 +27,6 @@ gentoo_repos:
   guru:
     source: https://github.com/gentoo-mirror/guru.git
 
-repos:
-  - gentoo
-
 world:
   - app-admin/eclean-kernel
   - app-misc/tmux
@@ -37,6 +34,101 @@ world:
   - dev-debug/strace
   - net-analyzer/tcpdump
   - sys-block/parted
+
+portage_configuration:
+  x86_64:
+    env:
+    make.profile: default/linux/amd64/17.1/systemd/merged-usr
+    package.accept_keywords:
+      - app-admin/ananicy  # bug 891629
+      - app-metrics/postfix_exporter
+      - app-admin/podman-gentoo::ajak:
+          - "**"
+      - app-crypt/lego::guru
+    package.env:
+    package.license:
+      - sys-kernel/linux-firmware:
+          - linux-fw-redistributable
+          - no-source-code
+      - sys-firmware/intel-microcode:
+          - intel-ucode
+      - sys-block/perccli:
+          - Avago
+    package.mask:
+      - "*/*::musl"
+      - "*/*::ajak"
+      - "*/*::pentoo"
+      - "*/*::guru"
+    package.unmask:
+      - app-crypt/lego::guru
+      - app-admin/podman-gentoo::ajak
+    package.use:  # todo: finish
+      firewalld:
+        - net-firewall/nftables:
+            - xtables
+            - json
+            - python
+      gentoo-kernel:
+        - "*/*":
+            - dist-kernel
+        - sys-kernel/gentoo-kernel:
+            - hardened
+        - sys-kernel/installkernel:
+            - dracut
+            - grub
+            - systemd
+      ldap:
+        - app-crypt/mit-krb5:
+            - openldap
+        - sys-auth/sssd:
+            - sudo
+        - dev-libs/cyrus-sasl:
+            - kerberos
+        - net-nds/openldap:
+            - experimental
+            - sasl
+        - net-dns/bind-tools:
+            - gssapi
+      libvirt:
+        - net-libs/gnutls:
+            - pkcs11
+            - tools
+      openvswitch:
+        - sys-apps/util-linux:
+            - caps
+      ossec:
+        - net-analyzer/ossec-hids:
+            - agent
+      podman:
+        - net-firewall/iptables:
+            - nftables
+      systemd:
+        - sys-apps/systemd:
+            - boot
+            - cryptsetup
+            - curl
+            - gnuefi
+            - elfutils
+            - kernel-install
+            - tpm
+            - importd
+            - lzma
+            - ukify
+    repos.conf:
+      gentoo:
+        sync-type: git
+        sync-depth: 1
+        location: "{{ gentoo_repo_base }}/gentoo"
+        sync-uri: https://github.com/gentoo-mirror/gentoo
+        auto-sync: "yes"
+        sync-git-verify-commit-signature: "yes"
+        volatile: "no"
+      guru:
+        sync-type: git
+        sync-depth: 1
+        location: "{{ gentoo_repo_base }}/guru"
+        sync-uri: https://github.com/gentoo-mirror/guru.git
+        volatile: "no"
 
 my_roles:
   - hosts
