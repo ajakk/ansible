@@ -9,12 +9,15 @@
     path: "{{ gentoo_repo_base }}/gentoo"
     state: absent
 - name: Add host portage configuration
+  when: inventory_hostname not in groups["desktop"]
   ansible.builtin.include_tasks: add_configuration.yml
   vars:
     prefix: /etc/portage
     _portage_configuration: "{{ portage_configuration }}"
 - name: Add host portage configuration
-  when: podman_gentoo
+  when:
+    - inventory_hostname not in groups["desktop"]
+    - podman_gentoo
   ansible.builtin.include_tasks: add_configuration.yml
   vars:
     prefix: /etc/podman-gentoo/base
