@@ -2,7 +2,7 @@
 - name: Write use file
   ansible.builtin.template:
     src: package.use.j2
-    dest: "/etc/portage/package.use/{{ use_file.key }}"
+    dest: "{{ prefix }}/package.use/{{ use_file.key }}"
     owner: root
     group: root
     mode: "0644"

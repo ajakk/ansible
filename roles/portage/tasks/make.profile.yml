@@ -2,7 +2,7 @@
 - name: Set make.profile symlink
   ansible.builtin.file:
     src: "/var/db/repos/gentoo/profiles/{{ conf_type.value }}"
-    dest: /etc/portage/make.profile
+    dest: "{{ prefix }}/make.profile"
     state: link
     owner: root
     group: root

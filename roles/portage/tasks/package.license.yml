@@ -2,7 +2,7 @@
 - name: Write license file
   ansible.builtin.template:
     src: rich_portageconf.j2
-    dest: /etc/portage/package.license
+    dest: "{{ prefix }}/package.license"
     owner: root
     group: root
     mode: "0644"
