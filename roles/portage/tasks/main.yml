@@ -14,7 +14,8 @@
   vars:
     prefix: /etc/portage
     _portage_configuration: "{{ portage_configuration }}"
-- name: Add host portage configuration
+    _world: "{{ world }}"
+- name: Add binhost portage configuration
   when:
     - inventory_hostname not in groups["desktop"]
     - podman_gentoo
@@ -22,3 +23,4 @@
   vars:
     prefix: /etc/podman-gentoo/base
     _portage_configuration: "{{ portage_configuration }}"
+    _world: "{{ binhost_world }}"

@@ -35,6 +35,9 @@ world:
   - net-analyzer/tcpdump
   - sys-block/parted
 
+binhost_world:
+  - "{{ world }}"
+
 portage_configuration:
   x86_64:
     env:

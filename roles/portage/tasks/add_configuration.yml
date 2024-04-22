@@ -6,6 +6,13 @@
     owner: root
     group: root
     mode: "0644"
+- name: Install world file
+  ansible.builtin.copy:
+    content: "{{ _world | unique | sort | join('\n') }}"
+    dest: "{{ prefix }}/world"
+    owner: root
+    group: root
+    mode: "0644"
 - name: Apply portage configuration
   when: conf_type.value
   ansible.builtin.include_tasks: "{{ conf_type.key }}.yml"
