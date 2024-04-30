@@ -35,8 +35,106 @@ world:
   - net-analyzer/tcpdump
   - sys-block/parted
 
-binhost_world:
-  - "{{ world }}"
+_binhost_world:
+  - app-admin/ananicy
+  - app-admin/ansible
+  - app-admin/consul
+  - app-admin/eclean-kernel
+  - app-admin/lib_users
+  - app-admin/podman-gentoo
+  - app-admin/spectre-meltdown-checker
+  - app-admin/stow
+  - app-admin/sudo
+  - app-antivirus/clamav
+  - app-containers/docker
+  - app-containers/docker-cli
+  - app-containers/docker-compose
+  - app-containers/podman
+  - app-crypt/lego
+  - app-crypt/sbctl
+  - app-crypt/sbsigntools
+  - app-crypt/tpm2-tools
+  - app-doc/eclass-manpages
+  - app-editors/emacs
+  - app-editors/vim
+  - app-emulation/libvirt
+  - app-emulation/qemu
+  - app-emulation/virt-manager
+  - app-eselect/eselect-repository
+  - app-forensics/rkhunter
+  - app-metrics/node_exporter
+  - app-metrics/postfix_exporter
+  - app-misc/jq
+  - app-misc/resolve-march-native
+  - app-misc/screen
+  - app-misc/tmux
+  - app-portage/cpuid2cpuflags
+  - app-portage/eix
+  - app-portage/gentoolkit
+  - app-portage/portage-utils
+  - app-portage/smart-live-rebuild
+  - app-shells/bash-completion
+  - app-text/wgetpaste
+  - dev-debug/gdb
+  - dev-debug/strace
+  - dev-python/docker
+  - dev-tcltk/expect
+  - dev-vcs/git
+  - dev-vcs/subversion
+  - mail-client/mutt
+  - mail-mta/postfix
+  - net-analyzer/fail2ban
+  - net-analyzer/iftop
+  - net-analyzer/mtr
+  - net-analyzer/nettop
+  - net-analyzer/nmap
+  - net-analyzer/ossec-hids
+  - net-analyzer/speedtest-cli
+  - net-analyzer/tcpdump
+  - net-analyzer/traceroute
+  - net-dns/bind-tools
+  - net-firewall/firewalld
+  - net-fs/nfs-utils
+  - net-misc/apt-cacher-ng
+  - net-misc/mosh
+  - net-misc/openvswitch
+  - net-misc/socat
+  - net-misc/whois
+  - net-misc/yt-dlp
+  - net-nds/openldap
+  - net-proxy/mitmproxy
+  - net-vpn/tor
+  - net-vpn/wireguard-tools
+  - sys-apps/edac-utils
+  - sys-apps/ipmitool
+  - sys-apps/iucode_tool
+  - sys-apps/lshw
+  - sys-apps/merge-usr
+  - sys-apps/pkgcore
+  - sys-apps/portage
+  - sys-apps/smartmontools
+  - sys-apps/usbutils
+  - sys-auth/sssd
+  - sys-block/nbd
+  - sys-block/perccli
+  - sys-boot/grub:2
+  - sys-firmware/intel-microcode
+  - sys-fs/btrfs-progs
+  - sys-fs/cryptsetup
+  - sys-fs/dosfstools
+  - sys-fs/ntfs3g
+  - sys-fs/zfs
+  - sys-fs/zfs-kmod
+  - sys-kernel/gentoo-kernel
+  - sys-kernel/installkernel
+  - sys-kernel/linux-firmware
+  - sys-power/nut
+  - sys-process/cronie
+  - sys-process/glances
+  - sys-process/htop
+  - sys-process/iotop
+  - sys-process/lsof
+binhost_world: "{{ _binhost_world + world }}"
 
 portage_configuration:
   x86_64:
