@@ -1,20 +1,25 @@
 ---
-- name: Copy zfs cron jobs
-  when: zfs
-  ansible.builtin.copy:
-    src: etc/{{ item }}
-    dest: /etc/{{ item }}
-    owner: root
-    group: root
-    mode: "0744"
-  with_items: "{{ zfs_cronjobs }}"
+- name: Remove zfs cron jobs
+  # unconditionally do this now that all of that functionality is
+  # handled by the systemd services/timers
+  ansible.builtin.file:
+    path: "/etc/{{ item }}"
+    state: absent
+  loop: "{{ zfs_cronjobs }}"
 - name: Start and enable zfs services
-  when: zfs
+  when: zfs_pools
   ansible.builtin.service:
     name: "{{ item }}"
     state: started
     enabled: true
   loop: "{{ zfs_services }}"
+- name: Start and enable zfs timers
+  when: zfs_pools
+  ansible.builtin.service:
+    name: "zfs-scrub-monthly@{{ item }}.timer"
+    state: started
+    enabled: true
+  loop: "{{ zfs_pools }}"
 - name: Remove zfs configuration
-  when: not zfs
+  when: not zfs_pools
   ansible.builtin.include_tasks: remove.yml
