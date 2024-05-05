@@ -200,6 +200,9 @@ portage_configuration:
       ossec:
         - net-analyzer/ossec-hids:
             - agent
+      mitmproxy:
+        - app-arch/brotli:
+            - python
       podman:
         - net-firewall/iptables:
             - nftables
