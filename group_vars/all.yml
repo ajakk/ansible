@@ -206,6 +206,9 @@ portage_configuration:
       podman:
         - net-firewall/iptables:
             - nftables
+      rkhunter:
+        - sys-process/lsof:
+            - rpc
       systemd:
         - sys-apps/systemd:
             - boot
