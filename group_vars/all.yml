@@ -28,12 +28,26 @@ gentoo_repos:
     source: https://github.com/gentoo-mirror/guru.git
 
 world:
+  - app-admin/consul
   - app-admin/eclean-kernel
+  - app-admin/sudo
+  - app-editors/emacs
+  - app-editors/vim
+  - app-metrics/node_exporter
   - app-misc/tmux
+  - app-portage/gentoolkit
+  - app-portage/portage-utils
+  - app-shells/bash-completion
   - app-text/wgetpaste
+  - dev-debug/gdb
   - dev-debug/strace
+  - net-analyzer/mtr
   - net-analyzer/tcpdump
+  - sys-apps/usbutils
   - sys-block/parted
+  - sys-kernel/gentoo-kernel
+  - sys-process/htop
+  - sys-process/lsof
 
 _binhost_world:
   - app-admin/ananicy
