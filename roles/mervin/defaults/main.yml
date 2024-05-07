@@ -1,0 +1,4 @@
+---
+mervin_repo: git@git.ajak.xyz:ajak/mervin.git
+mervin_confdir: /etc/mervin
+mervin: false
