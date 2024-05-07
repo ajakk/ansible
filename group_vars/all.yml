@@ -137,6 +137,7 @@ _binhost_world:
   - sys-fs/cryptsetup
   - sys-fs/dosfstools
   - sys-fs/ntfs3g
+  - sys-fs/xfsprogs
   - sys-fs/zfs
   - sys-fs/zfs-kmod
   - sys-kernel/gentoo-kernel
