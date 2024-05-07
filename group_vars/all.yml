@@ -298,3 +298,4 @@ my_roles:
   - consul
   - sysctl
   - mervin
+  - homeassistant

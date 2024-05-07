@@ -1,0 +1,4 @@
+---
+ha_repo: "{{ repo_root }}/homeassistant"
+ha_confdir: /var/lib/homeassistant
+homeassistant: false

@@ -1,0 +1,5 @@
+---
+dependencies:
+  - role: traefik
+    network_name: traefik
+    when: homeassistant

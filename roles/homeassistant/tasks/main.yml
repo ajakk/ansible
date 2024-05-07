@@ -1,0 +1,4 @@
+---
+- name: Add homeassistant
+  ansible.builtin.include_tasks: homeassistant.yml
+  when: homeassistant
