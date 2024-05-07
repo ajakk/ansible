@@ -14,7 +14,7 @@
   vars:
     prefix: /etc/portage
     _portage_configuration: "{{ portage_configuration }}"
-    _world: "{{ world }}"
+    _world: "{{ world + host_world }}"
 - name: Add binhost portage configuration
   when:
     - inventory_hostname not in groups["desktop"]
