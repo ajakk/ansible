@@ -1,0 +1,8 @@
+# only one login/shell per ssh connection
+MaxSessions 1
+
+# disable password authentication
+KbdInteractiveAuthentication no
+
+# remove exising unix sockets before forwarding again
+StreamLocalBindUnlink yes

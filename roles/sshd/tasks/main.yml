@@ -1,10 +1,18 @@
 ---
-- name: Install sshd configuration
+- name: Install site sshd configuration
   notify: Restart sshd
-  ansible.builtin.template:
-    src: sshd_config.j2
-    dest: /etc/ssh/sshd_config
-    validate: sshd -tf %s
+  ansible.builtin.copy:
+    src: site.sshd_config
+    dest: /etc/ssh/sshd_config.d/99-site.conf
+    owner: root
+    group: root
+    mode: "0600"
+- name: Install gitea config drop-in
+  when: gitea
+  notify: Restart sshd
+  ansible.builtin.copy:
+    src: gitea.sshd_config
+    dest: /etc/ssh/sshd_config.d/99-gitea.conf
     owner: root
     group: root
     mode: "0600"
