@@ -21,7 +21,7 @@
 - name: Update and build mervin's image
   community.docker.docker_container:
     name: limnoria
-    image: ghcr.io/linuxserver/limnoria
+    image: ghcr.io/linuxserver/limnoria:latest
     restart: "{{ conf.changed }}"
     pull: true
     state: started
