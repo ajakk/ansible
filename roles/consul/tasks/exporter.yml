@@ -2,7 +2,7 @@
 - name: Run consul exporter
   community.docker.docker_container:
     name: consul-exporter
-    image: prom/consul-exporter
+    image: prom/consul-exporter:latest
     pull: true
     state: started
     restart_policy: unless-stopped
