@@ -10,3 +10,5 @@ prom_datadir: /network/logs/prometheus
 am_confdir: /etc/alertmanager
 
 consul_exporter_port: 9107
+
+blackbox_tls_hosts: []

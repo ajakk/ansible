@@ -26,6 +26,12 @@ services:
       traefik.http.routers.alertmanager.rule: Host(`alertmanager.{{ public_domain }}`)
       traefik.http.routers.alertmanager.tls: "true"
       traefik.http.routers.alertmanager.tls.certresolver: myresolver
+  blackbox:
+    image: prom/blackbox-exporter:latest
+    container_name: blackbox
+    restart: unless-stopped
+    networks:
+      - traefik
 networks:
   traefik:
     external: true
