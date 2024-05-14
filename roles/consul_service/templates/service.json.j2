@@ -1,5 +1,7 @@
 {
   "name": "{{ service }}",
-  "tags": ["{{ service }}", "prometheus"],
+  "tags": ["prometheus-{{ service }}", "{{ service }}", "prometheus"],
+{% if port is defined %}
   "port": {{ port }}
+{% endif %}
 }
