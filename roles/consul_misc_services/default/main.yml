@@ -1,0 +1,3 @@
+---
+consul_server: false
+consul_client: false

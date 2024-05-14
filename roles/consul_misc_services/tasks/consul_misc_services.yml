@@ -1,0 +1,6 @@
+---
+- name: Register host for ICMP monitoring
+  ansible.builtin.include_role:
+    name: consul_service
+  vars:
+    service: icmp

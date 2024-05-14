@@ -295,6 +295,7 @@ my_roles:
   - firefox
   - tor
   - consul
+  - consul_misc_services
   - sysctl
   - mervin
   - homeassistant

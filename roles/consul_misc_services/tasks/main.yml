@@ -1,0 +1,8 @@
+---
+# note that it might make sense to run these tasks directly from the
+# consul role, but then we'd get an infinite loop via the circular
+# dependency from consul -> consul_service -> consul (via meta
+# dependency)
+- name: Register miscellaneous consul services
+  ansible.builtin.include_tasks: consul_misc_services.yml
+  when: consul_server or consul_client
