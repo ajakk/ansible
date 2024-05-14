@@ -70,6 +70,9 @@ scrape_configs:
       - source_labels: [__meta_consul_tags]
         regex: .*,prometheus,.*
         action: keep
+      - source_labels: [__meta_consul_tags]
+        regex: .*,icmp,.*
+        action: drop
       # speedtest-exporters should only be scraped rarely
       - source_labels: [__meta_consul_service]
         regex: .*speedtest_exporter.*
