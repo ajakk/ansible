@@ -28,6 +28,27 @@ scrape_configs:
     static_configs:
       - targets: ["router.{{ public_domain }}:9100"]
 
+  - job_name: 'blackbox_consul_icmp'
+    metrics_path: /probe
+    params:
+      module: [icmp]
+    consul_sd_configs:
+      - server: 'consul.{{ public_domain }}:8500'
+    relabel_configs:
+      - source_labels: [__meta_consul_tags]
+        regex: .*,prometheus-icmp.*
+        action: keep
+      - source_labels: [__meta_consul_address]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox:9115
+
+  - job_name: 'blackbox_exporter'
+    static_configs:
+      - targets: ['blackbox:9115']
+
   # consul alone cannot be relied upon to ensure everything is up
   # because the consul agent can disappear without its associated
   # targets being treated as down, because the targets will disappear
