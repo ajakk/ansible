@@ -1,0 +1,9 @@
+---
+- name: Run loki
+  community.docker.docker_container:
+    name: loki
+    image: grafana/loki:latest
+    pull: true
+    state: started
+    network_mode: traefik
+    restart_policy: unless-stopped

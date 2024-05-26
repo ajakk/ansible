@@ -1,0 +1,4 @@
+---
+- name: Run loki
+  when: loki
+  ansible.builtin.include_tasks: loki.yml

@@ -299,3 +299,4 @@ my_roles:
   - sysctl
   - mervin
   - homeassistant
+  - loki
