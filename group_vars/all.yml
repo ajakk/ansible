@@ -220,6 +220,9 @@ portage_configuration:
       podman:
         - net-firewall/iptables:
             - nftables
+      postfix:
+        - mail-mta/postfix:
+            - sasl
       rkhunter:
         - sys-process/lsof:
             - rpc
