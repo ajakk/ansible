@@ -4,17 +4,19 @@
     path: /var/db/repos/gentoo/
   register: repo_state
 - name: Register repository timestamp
-  ansible.builtin.shell: date -ud "$(cat /var/db/repos/gentoo/metadata/timestamp.chk)" +%s
+  ansible.builtin.shell:
+    date -ud "$(cat /var/db/repos/gentoo/metadata/timestamp.chk)" +%s
   register: repo_timestamp
   changed_when: false
 - name: Update repository
   # Only sync when the repo's timestamp is from more than an hour ago
   when: |-
-    (((ansible_date_time['epoch'] | int) - (repo_timestamp['stdout'] | int)) > 3600)
-  portage: # noqa fqcn
+    (((ansible_date_time['epoch'] | int) - (repo_timestamp['stdout'] | int))
+      > 3600)
+  portage:  # noqa fqcn
     sync: true
 - name: Update world (getpkg)
-  portage: # noqa fqcn
+  portage:  # noqa fqcn
     package: "@world"
     update: true
     deep: true
@@ -30,10 +32,10 @@
     # further backtracking.
     backtrack: 1000
 - name: Depclean
-  portage: # noqa fqcn
+  portage:  # noqa fqcn
     depclean: true
 - name: Install packages into @world
-  portage: # noqa fqcn
+  portage:  # noqa fqcn
     package: "{{ world }}"
     state: present
     getbinpkgonly: "{{ getpkg }}"
