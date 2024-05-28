@@ -2,4 +2,4 @@
 dependencies:
   - role: traefik
     network_name: traefik
-    when: prometheus
+    when: loki
