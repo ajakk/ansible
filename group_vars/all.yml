@@ -54,6 +54,7 @@ _binhost_world:
   - app-admin/consul
   - app-admin/eclean-kernel
   - app-admin/lib_users
+  - app-admin/opentofu
   - app-admin/podman-gentoo
   - app-admin/spectre-meltdown-checker
   - app-admin/stow
