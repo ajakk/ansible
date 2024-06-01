@@ -157,6 +157,7 @@ portage_configuration:
     make.profile: default/linux/amd64/17.1/systemd/merged-usr
     package.accept_keywords:
       - app-admin/ananicy  # bug 891629
+      - app-admin/opentofu
       - app-metrics/postfix_exporter
       - app-admin/podman-gentoo::ajak:
           - "**"
