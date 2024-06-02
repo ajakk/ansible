@@ -207,6 +207,8 @@ portage_configuration:
         - net-dns/bind-tools:
             - gssapi
       libvirt:
+        - app-emulation/libvirt:
+            - zfs
         - net-libs/gnutls:
             - pkcs11
             - tools
