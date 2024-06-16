@@ -54,6 +54,12 @@ options:
     type: bool
     default: false
 
+  emptytree:
+    description:
+      - Reinstall targets as though no packages are currently installed
+    type: bool
+    default: false
+
   newuse:
     description:
       - Include installed packages where USE flags have changed (--newuse)
@@ -337,6 +343,7 @@ def emerge_packages(module, packages):
     emerge_flags = {
         'update': '--update',
         'deep': '--deep',
+        'emptytree': '--emptytree',
         'newuse': '--newuse',
         'changed_use': '--changed-use',
         'oneshot': '--oneshot',
@@ -511,6 +518,7 @@ def main():
             deep=dict(default=False, type='bool'),
             newuse=dict(default=False, type='bool'),
             changed_use=dict(default=False, type='bool'),
+            emptytree=dict(default=False, type='bool'),
             oneshot=dict(default=False, type='bool'),
             noreplace=dict(default=True, type='bool'),
             nodeps=dict(default=False, type='bool'),
