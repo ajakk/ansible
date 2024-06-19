@@ -23,7 +23,7 @@
 - name: Create git's ~/.ssh
   become_user: git
   ansible.builtin.file:
-    path: ~/git/.ssh"
+    path: ~git/.ssh
     state: directory
     owner: "{{ git_uid }}"
     group: "{{ git_gid }}"
