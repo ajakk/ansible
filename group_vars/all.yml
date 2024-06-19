@@ -153,7 +153,7 @@ binhost_world: "{{ _binhost_world + world }}"
 portage_configuration:
   x86_64:
     env:
-    make.profile: default/linux/amd64/17.1/systemd/merged-usr
+    make.profile: default/linux/amd64/23.0/hardened/systemd
     package.accept_keywords:
       - app-admin/ananicy  # bug 891629
       - app-admin/opentofu

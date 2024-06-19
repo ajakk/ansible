@@ -8,6 +8,15 @@
   ansible.builtin.file:
     path: "{{ gentoo_repo_base }}/gentoo"
     state: absent
+- name: Store current profile
+  check_mode: false
+  # store so we know if we have to do migration tasks later
+  ansible.builtin.shell:
+    cmd: |
+      set -o pipefail
+      eselect profile show | xargs | cut -d':' -f2 | xargs
+  changed_when: false
+  register: portage_profile
 - name: Add host portage configuration
   when: inventory_hostname not in groups["desktop"]
   ansible.builtin.include_tasks: add_configuration.yml
@@ -15,6 +24,9 @@
     prefix: /etc/portage
     _portage_configuration: "{{ portage_configuration }}"
     _world: "{{ world + host_world }}"
+- name: Migrate host from 17.1 to 23.0 profiles
+  when: portage_profile.stdout is search("17.1")
+  ansible.builtin.include_tasks: 17.1_to_23.0.yml
 - name: Add binhost portage configuration
   when:
     - inventory_hostname not in groups["desktop"]

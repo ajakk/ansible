@@ -5,3 +5,4 @@ host_repos: []
 host_world: []
 podman_gentoo: false
 world: []
+old_profile: default/linux/amd64/17.1/systemd/merged-usr

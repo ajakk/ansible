@@ -1,0 +1,50 @@
+---
+# https://www.gentoo.org/support/news-items/2024-03-22-new-23-profiles.html
+- name: Ensure we're operating on the right profile
+  ansible.builtin.assert:
+    that:
+      portage_profile.stdout is search("{{ old_profile }}")
+- name: Emerge binutils
+  portage:  # noqa fqcn
+    package: sys-devel/binutils
+    oneshot: true
+    getbinpkgonly: "{{ getpkg }}"
+    usepkgonly: "{{ not getpkg }}"
+    noreplace: false
+    state: present
+- name: Emerge gcc
+  portage:  # noqa fqcn
+    package: sys-devel/gcc
+    oneshot: true
+    getbinpkgonly: "{{ getpkg }}"
+    usepkgonly: "{{ not getpkg }}"
+    state: present
+    noreplace: false
+    nodeps: true
+- name: Emerge glibc
+  portage:  # noqa fqcn
+    package: sys-libs/glibc
+    oneshot: true
+    getbinpkgonly: "{{ getpkg }}"
+    usepkgonly: "{{ not getpkg }}"
+    noreplace: false
+    state: present
+- name: Emerge libtool
+  portage:  # noqa fqcn
+    package: dev-build/libtool
+    oneshot: true
+    getbinpkgonly: "{{ getpkg }}"
+    usepkgonly: "{{ not getpkg }}"
+    noreplace: false
+    state: present
+- name: Reinstall everything
+  portage:  # noqa fqcn
+    package: "@world"
+    # getbinpkgonly: "{{ getpkg }}"
+    # usepkgonly: "{{ not getpkg }}"
+    getbinpkg: true
+    usepkg: true
+    jobs: 4
+    loadavg: 4
+    emptytree: true
+    noreplace: false
