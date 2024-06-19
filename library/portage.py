@@ -474,7 +474,8 @@ def cleanup_packages(module, packages):
 
     cmd, (rc, out, err) = run_emerge(module, packages, *args)
     if rc != 0:
-        module.fail_json(cmd=cmd, rc=rc, stdout=out, stderr=err)
+        module.fail_json(cmd=cmd, rc=rc, stdout=out, stderr=err,
+                         msg="emerge exited with error")
 
     removed = 0
     for line in out.splitlines():
