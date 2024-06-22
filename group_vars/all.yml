@@ -262,7 +262,6 @@ my_roles:
   - timezone
   - fstab
   - automount
-  - python_exec
   - networkd
   - resolved
   - zfs
