@@ -170,7 +170,7 @@ portage_configuration:
       - sys-firmware/intel-microcode:
           - intel-ucode
       - sys-block/perccli:
-          - Avago
+          - Dell-EULA
     package.mask:
       - "*/*::musl"
       - "*/*::ajak"
