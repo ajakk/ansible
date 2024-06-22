@@ -155,7 +155,6 @@ portage_configuration:
     env:
     make.profile: default/linux/amd64/23.0/hardened/systemd
     package.accept_keywords:
-      - app-admin/ananicy  # bug 891629
       - app-admin/opentofu
       - app-metrics/postfix_exporter
       - app-admin/podman-gentoo::ajak:
