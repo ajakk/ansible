@@ -160,6 +160,7 @@ portage_configuration:
       - app-admin/podman-gentoo::ajak:
           - "**"
       - app-crypt/lego::guru
+      - dev-python/docker
       - sys-block/perccli
     package.env:
     package.license:
