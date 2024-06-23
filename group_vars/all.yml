@@ -1,6 +1,7 @@
 ---
 public_domain: ajak.xyz
 wg_domain: "wg.{{ public_domain }}"
+ldap_search_base: dc=ajak,dc=xyz
 repo_root: https://git.ajak.xyz/ajak
 this_repo: "{{ repo_root }}/ansible"
 secrets_repo: "{{ repo_root }}/ansible-secrets"
