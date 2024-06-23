@@ -1,0 +1,4 @@
+---
+- name: Deploy lldap
+  when: lldap
+  ansible.builtin.include_tasks: lldap.yml

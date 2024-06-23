@@ -289,6 +289,7 @@ my_roles:
   - dotfiles
   - services
   - docker
+  - lldap
   - dnsserver
   - grafana
   - grub

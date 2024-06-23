@@ -1,0 +1,24 @@
+---
+- name: Create data directory
+  ansible.builtin.file:
+    path: "{{ lldap_datadir }}"
+    state: directory
+    owner: "{{ lldap_uid }}"
+    group: "{{ lldap_gid }}"
+    mode: "0755"
+- name: Run lldap
+  community.docker.docker_container:
+    name: lldap
+    image: lldap/lldap:stable
+    network_mode: "{{ network_name }}"
+    volumes:
+      - "{{ lldap_datadir }}:/data"
+    env:
+      UID: "{{ lldap_uid | string }}"
+      GID: "{{ lldap_gid | string }}"
+      LLDAP_LDAP_BASE_DN: "{{ ldap_search_base }}"
+    labels:
+      traefik.http.routers.lldap.rule: Host(`lldap.{{ public_domain }}`)
+      traefik.http.routers.lldap.tls: "true"
+      traefik.http.routers.lldap.tls.certresolver: myresolver
+      traefik.http.services.lldap.loadbalancer.server.port: "17170"

@@ -1,0 +1,10 @@
+---
+lldap: false
+
+lldap_datadir: /var/lib/lldap
+
+# same as gentoo's ldap user
+lldap_uid: 439
+lldap_gid: 439
+
+network_name: lldap
