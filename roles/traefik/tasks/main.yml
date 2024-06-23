@@ -35,8 +35,15 @@
   community.docker.docker_network:
     name: "{{ network_name }}"
 - name: Run traefik
+  when: not traefik_docker_compose_v2
   community.docker.docker_compose:
     project_src: "{{ traefik_confdir }}"
     pull: true
     build: true
+    state: present
+- name: Run traefik
+  when: traefik_docker_compose_v2
+  community.docker.docker_compose_v2:
+    project_src: "{{ traefik_confdir }}"
+    pull: always
     state: present
