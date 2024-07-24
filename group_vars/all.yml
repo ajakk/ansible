@@ -161,6 +161,9 @@ portage_configuration:
       - app-admin/podman-gentoo::ajak:
           - "**"
       - app-crypt/lego::guru
+      # need a sufficiently new community.docker,
+      # https://github.com/ansible-collections/community.docker/issues/860
+      - =app-admin/ansible-10.2.0
       - dev-python/docker
       - sys-block/perccli
     package.env:
