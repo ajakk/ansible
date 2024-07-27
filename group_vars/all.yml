@@ -164,6 +164,7 @@ portage_configuration:
       # need a sufficiently new community.docker,
       # https://github.com/ansible-collections/community.docker/issues/860
       - =app-admin/ansible-10.2.0
+      - =app-admin/ansible-core-2.17.2
       - dev-python/docker
       - sys-block/perccli
     package.env:
