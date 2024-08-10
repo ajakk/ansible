@@ -62,8 +62,7 @@
     group: root
     mode: "0644"
 - name: Run docker compose application stack
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ prom_confdir }}"
-    pull: true
-    build: true
+    pull: always
     state: present
