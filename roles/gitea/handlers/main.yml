@@ -1,8 +1,6 @@
 ---
 - name: Rebuild gitea
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ gitea_confdir }}"
-    pull: true
-    build: true
+    pull: always
     state: present
-    recreate: always

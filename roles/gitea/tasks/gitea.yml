@@ -58,8 +58,7 @@
     name: git
     shell: "{{ git_home }}/ssh-shell"
 - name: Pull and start gitea
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ gitea_confdir }}"
-    pull: true
-    build: true
+    pull: always
     state: present
