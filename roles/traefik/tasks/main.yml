@@ -7,9 +7,7 @@
     group: root
     mode: "0700"
 - name: Add traefik's traefik.toml
-  notify:
-    - Restart traefik
-    - Restart traefik v2
+  notify: Restart traefik
   ansible.builtin.template:
     src: traefik.toml.j2
     dest: "{{ traefik_confdir }}/traefik.toml"
@@ -17,9 +15,7 @@
     group: root
     mode: "0600"
 - name: Add traefik's extra configuration
-  notify:
-    - Restart traefik
-    - Restart traefik (v2)
+  notify: Restart traefik
   when: traefik_proxy_for is defined
   ansible.builtin.template:
     src: extra.toml.j2
@@ -28,9 +24,7 @@
     group: root
     mode: "0600"
 - name: Add traefik's docker-compose
-  notify:
-    - Restart traefik
-    - Restart traefik (v2)
+  notify: Restart traefik
   ansible.builtin.template:
     src: docker-compose.yml.j2
     dest: "{{ traefik_confdir }}/docker-compose.yml"
@@ -41,14 +35,6 @@
   community.docker.docker_network:
     name: "{{ network_name }}"
 - name: Run traefik
-  when: not traefik_docker_compose_v2
-  community.docker.docker_compose:
-    project_src: "{{ traefik_confdir }}"
-    pull: true
-    build: true
-    state: present
-- name: Run traefik
-  when: traefik_docker_compose_v2
   community.docker.docker_compose_v2:
     project_src: "{{ traefik_confdir }}"
     pull: always

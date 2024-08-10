@@ -1,13 +1,5 @@
 ---
 - name: Restart traefik
-  when: not traefik_docker_compose_v2
-  community.docker.docker_compose:
-    project_src: "{{ traefik_confdir }}"
-    build: true
-    state: present
-    restarted: true
-- name: Restart traefik (v2)
-  when: traefik_docker_compose_v2
   community.docker.docker_compose_v2:
     project_src: "{{ traefik_confdir }}"
     state: restarted

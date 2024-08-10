@@ -1,4 +1,4 @@
 ---
 traefik_confdir: /etc/traefik
 
-traefik_docker_compose_v2: false
+traefik_extra_entrypoints: []
