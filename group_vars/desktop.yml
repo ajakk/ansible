@@ -9,4 +9,3 @@ group_assignments:
       - usb
       - video
       - wheel
-portage_git: true
