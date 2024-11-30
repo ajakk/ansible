@@ -5,7 +5,6 @@ group_assignments:
       - cdrom
       - kvm
       - libvirt
-      - seat
       - usb
       - video
       - wheel
