@@ -1,8 +1,14 @@
 ---
 - name: Deploy fstab
+  when: filesystems | length > 0
   ansible.builtin.template:
     src: fstab.j2
     dest: /etc/fstab
     owner: root
     group: root
     mode: "0644"
+- name: Remove fstab
+  when: filesystems | length == 0
+  ansible.builtin.file:
+    path: /etc/fstab
+    state: absent
