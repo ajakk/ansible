@@ -3,8 +3,8 @@ group_system_services:
   - node_exporter
 
 internal_interfaces:
-  - enp1s0
+  - enp6s18
 trusted_interfaces:
-  - enp1s0
+  - enp6s18
 consul_client_bind_ip: |-
   {{ hostvars[inventory_hostname]['ansible_' + trusted_interfaces[0]].ipv4.address }}
