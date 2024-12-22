@@ -1,7 +1,7 @@
 ---
 - name: Link resolv.conf to resolved's stub
   ansible.builtin.file:
-    src: /run/systemd/resolve/resolv.conf
+    src: /run/systemd/resolve/stub-resolv.conf
     dest: /etc/resolv.conf
     owner: systemd-resolve
     group: systemd-resolve
