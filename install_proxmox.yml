@@ -23,10 +23,9 @@
         repo: deb [arch=amd64] http://download.proxmox.com/debian/pve bookworm pve-no-subscription
         # yamllint enable rule:line-length
         state: present
-    - name: Upgrade
+    - name: Update cache
       ansible.builtin.apt:
         update_cache: true
-        upgrade: full
     - name: Install proxmox kernel
       ansible.builtin.apt:
         name: proxmox-default-kernel
