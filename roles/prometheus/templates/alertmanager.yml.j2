@@ -1,8 +1,10 @@
+---
 global:
   # The smarthost and SMTP sender used for mail notifications.
   smtp_smarthost: '{{ smtp_host }}:25'
   smtp_from: 'alertmanager@{{ public_domain }}'
   smtp_require_tls: false
+
 
 # The root route on which each incoming alert enters.
 route:
@@ -15,7 +17,7 @@ route:
   # alerts as-is. This is unlikely to be what you want, unless you have
   # a very low alert volume or your upstream notification system performs
   # its own grouping. Example: group_by: [...]
-  group_by: ['alertname', 'cluster', 'service']
+  group_by: ['instance', 'severity']
 
   # When a new group of alerts is created by an incoming alert, wait at
   # least 'group_wait' to send the initial notification.
@@ -33,49 +35,14 @@ route:
   repeat_interval: 3h
 
   # A default receiver
-  receiver: ntfy
+  receiver: default
 
   # All the above attributes are inherited by all child routes and can
   # overwritten on each.
 
   # The child route trees.
-  routes:
-    # This routes performs a regular expression match on alert labels to
-    # catch alerts that are related to a list of services.
-    - matchers:
-        - service=~"foo1|foo2|baz"
-      receiver: team-X-mails
-      # The service has a sub-route for critical alerts, any alerts
-      # that do not match, i.e. severity != critical, fall-back to the
-      # parent node and are sent to 'team-X-mails'
-      routes:
-        - matchers:
-            - severity="critical"
-          receiver: team-X-pager
-    - matchers:
-        - service="files"
-      receiver: team-Y-mails
-
-      routes:
-        - matchers:
-            - severity="critical"
-          receiver: team-Y-pager
-
-    # This route handles all alerts coming from a database service. If there's
-    # no team to handle it, it defaults to the DB team.
-    - matchers:
-        - service="database"
-      receiver: team-DB-pager
-      # Also group alerts by affected database.
-      group_by: [alertname, cluster, database]
-      routes:
-        - matchers:
-            - owner="team-X"
-          receiver: team-X-pager
-          continue: true
-        - matchers:
-            - owner="team-Y"
-          receiver: team-Y-pager
+  # The default receiver is fine.
+  # routes:
 
 
 # Inhibition rules allow to mute a set of alerts given that another alert is
@@ -94,29 +61,10 @@ inhibit_rules:
 
 
 receivers:
-  - name: 'team-X-mails'
-    email_configs:
-      - to: '{{ my_email }}'
-        text: '{% raw %}{{ template "discord.default.message" . }}{% endraw %}'
-
-  - name: "ntfy"
+  - name: "default"
     webhook_configs:
       - url: "http://ntfy-alertmanager:8080"
 
-  - name: 'team-X-pager'
-    email_configs:
-      - to: 'team-X+alerts-critical@example.org'
-    pagerduty_configs:
-      - service_key: <team-X-key>
-
-  - name: 'team-Y-mails'
-    email_configs:
-      - to: 'team-Y+alerts@example.org'
-
-  - name: 'team-Y-pager'
-    pagerduty_configs:
-      - service_key: <team-Y-key>
-
-  - name: 'team-DB-pager'
-    pagerduty_configs:
-      - service_key: <team-DB-key>
+    # email_configs:
+    #   - to: '{{ my_email }}'
+    #     text: '{% raw %}{{ template "discord.default.message" . }}{% endraw %}'

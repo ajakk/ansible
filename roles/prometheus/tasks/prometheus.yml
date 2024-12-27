@@ -40,7 +40,7 @@
 - name: Install alertmanager config
   notify: Restart alertmanager
   ansible.builtin.template:
-    src: am_config.yml.j2
+    src: alertmanager.yml.j2
     dest: "{{ am_confdir }}/alertmanager.yml"
     owner: root
     group: root
