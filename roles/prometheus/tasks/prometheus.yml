@@ -46,6 +46,13 @@
     group: root
     mode: "0644"
     # validate: amtool check-config %s
+- name: Install ntfy-alertmanager config
+  ansible.builtin.template:
+    src: ntfy-alertmanager.cfg.j2
+    dest: "{{ am_confdir }}/ntfy-alertmanager.cfg"
+    owner: root
+    group: root
+    mode: "0644"
 - name: Install docker-compose.yml
   ansible.builtin.template:
     src: docker-compose.yml.j2

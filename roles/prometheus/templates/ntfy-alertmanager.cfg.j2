@@ -1,0 +1,23 @@
+http-address :8080
+log-level debug
+alert-mode single
+
+labels {
+    order "severity"
+
+    severity "critical" {
+        priority 4
+    }
+
+    severity "warning" {
+        priority 3
+    }
+
+    severity "info" {
+        priority 1
+    }
+}
+
+ntfy {
+    topic {{ ntfy_topic }}
+}

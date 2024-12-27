@@ -33,7 +33,7 @@ route:
   repeat_interval: 3h
 
   # A default receiver
-  receiver: team-X-mails
+  receiver: ntfy
 
   # All the above attributes are inherited by all child routes and can
   # overwritten on each.
@@ -98,6 +98,10 @@ receivers:
     email_configs:
       - to: '{{ my_email }}'
         text: '{% raw %}{{ template "discord.default.message" . }}{% endraw %}'
+
+  - name: "ntfy"
+    webhook_configs:
+      - url: "http://ntfy-alertmanager:8080"
 
   - name: 'team-X-pager'
     email_configs:

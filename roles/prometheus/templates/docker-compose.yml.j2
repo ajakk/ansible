@@ -26,6 +26,16 @@ services:
       traefik.http.routers.alertmanager.rule: Host(`alertmanager.{{ public_domain }}`)
       traefik.http.routers.alertmanager.tls: "true"
       traefik.http.routers.alertmanager.tls.certresolver: myresolver
+  ntfy-alertmanager:
+    image: xenrox/ntfy-alertmanager:latest
+    container_name: ntfy-alertmanager
+    volumes:
+      - "{{ am_confdir }}/ntfy-alertmanager.cfg:/etc/ntfy-alertmanager/config"
+    expose:
+      - 8080
+    restart: unless-stopped
+    networks:
+      - traefik
   blackbox:
     image: prom/blackbox-exporter:latest
     container_name: blackbox
