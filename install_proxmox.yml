@@ -59,8 +59,14 @@
           - ipmitool
           - ncdu
           - nut
+          - prometheus-node-exporter
           - python3
           - stress-ng
           - tmux
           - vim
         state: present
+    - name: Enable node-exporter
+      ansible.builtin.service:
+        name: prometheus-node-exporter
+        enabled: true
+        state: started
