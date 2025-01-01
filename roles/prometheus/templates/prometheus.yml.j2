@@ -24,9 +24,11 @@ scrape_configs:
     static_configs:
       - targets: ["localhost:9090"]
 
-  - job_name: "opnsense"
+  - job_name: "node-exporter"
     static_configs:
-      - targets: ["router.{{ public_domain }}:9100"]
+{% for host in node_exporters %}
+      - targets: ["{{ host }}.{{ public_domain }}:9100"]
+{% endfor %}
 
   - job_name: 'blackbox_consul_icmp'
     metrics_path: /probe
