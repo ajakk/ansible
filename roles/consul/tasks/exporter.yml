@@ -3,9 +3,10 @@
   community.docker.docker_container:
     name: consul-exporter
     image: prom/consul-exporter:latest
+    network_mode: host
     pull: true
     state: started
     restart_policy: unless-stopped
     command_handling: correct
-    ports:
-      - "{{ consul_client_bind_ip }}:{{ consul_exporter_port }}:9107"
+    command:
+      - --consul.server=http://localhost:8500
