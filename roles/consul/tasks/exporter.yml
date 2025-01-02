@@ -10,3 +10,9 @@
     command_handling: correct
     command:
       - --consul.server=http://localhost:8500
+- name: Register exporter service
+  ansible.builtin.include_role:
+    name: consul_service
+  vars:
+    service: consul-exporter
+    port: "{{ consul_exporter_port }}"
