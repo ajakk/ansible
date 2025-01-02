@@ -1,4 +1,18 @@
 ---
+- name: Create consul's configuration directory
+  ansible.builtin.file:
+    state: directory
+    path: /etc/consul.d
+    owner: root
+    group: root
+    mode: "0755"
+- name: Add consul configuration
+  ansible.builtin.copy:
+    src: 50config.hcl
+    dest: /etc/consul.d
+    owner: root
+    group: root
+    mode: "0644"
 # This doesn't fail if the service fails immediately afterwards
 - name: Deploy the consul client
   community.docker.docker_container:
@@ -15,5 +29,7 @@
       - -bind={{ consul_client_bind_ip }}
       - -retry-join={{ consul_server_hostname }}
       - -data-dir=/consul/data
+      - -config-dir=/consul/config
     volumes:
       - consul:/consul/data
+      - /etc/consul.d:/consul/config
