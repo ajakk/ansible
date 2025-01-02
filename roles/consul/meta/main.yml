@@ -17,8 +17,7 @@ dependencies:
     vars:
       service_file: consul-exporter.xml
       service: consul-exporter
-      zone: libvirt
-    when: consul_server
+    when: consul_server or consul_client
   - role: firewalld_service
     vars:
       service: prometheus-node-exporter
