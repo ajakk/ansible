@@ -1,4 +1,10 @@
 ---
+- name: Open firewall port
+  ansible.builtin.include_role:
+    name: firewalld_service
+  vars:
+    service_file: consul-exporter.xml
+    service: consul-exporter
 - name: Run consul exporter
   community.docker.docker_container:
     name: consul-exporter
