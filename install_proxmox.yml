@@ -57,6 +57,7 @@
           - btop
           - htop
           - ipmitool
+          - lm-sensors
           - ncdu
           - nut
           - prometheus-node-exporter
