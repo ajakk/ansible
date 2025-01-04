@@ -1,0 +1,7 @@
+---
+- name: Reload firewalld
+  when: true
+  # to pick up new firewalld services
+  ansible.builtin.systemd_service:
+    name: firewalld
+    state: reloaded

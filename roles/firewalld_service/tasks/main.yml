@@ -2,7 +2,9 @@
 # TODO: We maybe want to validate the vars passed here eventually,
 # but:
 # Bug: https://github.com/ansible/ansible/issues/74995
-# Workaround: https://stackoverflow.com/questions/51873965/check-that-only-one-of-several-ansible-variables-is-defined
+# Workaround:
+# yamllint disable-line
+# https://stackoverflow.com/questions/51873965/check-that-only-one-of-several-ansible-variables-is-defined
 # TODO: We also probably want a way to "reset" the firewall state to
 # properly handle removing services. Is there a way to start fresh
 # every run then make that configuration runtime+permanent at the end?
@@ -16,18 +18,15 @@
     mode: "0755"
 - name: Add firewalld service definition file
   when: service_file is defined
-  register: firewalld_service
+  notify: Reload firewalld
   ansible.builtin.copy:
     src: "{{ service_file }}"
     dest: /etc/firewalld/services
     owner: root
     group: root
     mode: "0644"
-- name: Reload firewalld to pick up new services
-  when: firewalld_service.changed
-  ansible.builtin.systemd_service:
-    name: firewalld
-    state: reloaded
+- name: Flush handlers (reload firewalld for changed services)
+  ansible.builtin.meta: flush_handlers
 - name: Add service to specified zone
   when: service is defined
   ansible.posix.firewalld:
