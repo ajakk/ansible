@@ -4,6 +4,7 @@ repos:
     rev: v24.12.2
     hooks:
       - id: ansible-lint
+        verbose: true
   - repo: https://github.com/adrienverge/yamllint.git
     rev: v1.35.1
     hooks:
