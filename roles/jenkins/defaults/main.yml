@@ -1,0 +1,2 @@
+---
+jenkins_nfs_dir: storage.{{ public_domain }}:/tank/data/jenkins

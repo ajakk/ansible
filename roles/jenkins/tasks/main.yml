@@ -1,0 +1,18 @@
+---
+- name: Create podman volume
+  containers.podman.podman_volume:
+    name: jenkins-home
+    options:
+      - type=nfs
+      - o=async
+      - device={{ jenkins_nfs_dir }}
+- name: Run jenkins
+  containers.podman.podman_container:
+    name: jenkins
+    image: docker.io/jenkins/jenkins:2.499-jdk17
+    volumes:
+      - jenkins-home:/var/jenkins_home
+    ports:
+      - 8080:8080
+      - 50000:50000
+    restart_policy: on-failure
