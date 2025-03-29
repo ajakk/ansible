@@ -24,7 +24,7 @@ scrape_configs:
     static_configs:
       - targets: ["localhost:9090"]
 
-  - job_name: "node-exporter"
+  - job_name: "node_exporter"
     static_configs:
 {% for host in node_exporters %}
       - targets: ["{{ host }}.{{ public_domain }}:9100"]
